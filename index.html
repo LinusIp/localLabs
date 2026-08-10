@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>localLabs — Spatial Agent IDE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #08080A;
+            --bg-elevated: #0E0E11;
+            --bg-hover: #16161A;
+            --border-default: #1F1F23;
+            --border-strong: #2A2A30;
+            --text-primary: #F5F5F7;
+            --text-secondary: #A1A1A6;
+            --text-tertiary: #6E6E73;
+            --accent-blue: #3B82F6;
+            --accent-green: #10B981;
+            --accent-red: #EF4444;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+        /* Nav */
+        nav { border-bottom: 1px solid var(--border-default); position: sticky; top: 0; background: rgba(8, 8, 10, 0.8); backdrop-filter: blur(12px); z-index: 100; }
+        .nav-inner { display: flex; justify-content: space-between; align-items: center; height: 56px; }
+        .logo { font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 14px; display: flex; align-items: center; gap: 8px; }
+        .logo-mark { width: 16px; height: 16px; border: 1px solid var(--text-primary); background: var(--text-primary); transform: rotate(45deg); }
+        .nav-links { display: flex; gap: 32px; align-items: center; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 13px; font-weight: 500; transition: color 0.15s; }
+        .nav-links a:hover { color: var(--text-primary); }
+        .btn { font-size: 13px; font-weight: 500; padding: 7px 14px; border: 1px solid var(--border-strong); background: var(--bg-elevated); color: var(--text-primary); border-radius: 6px; cursor: pointer; text-decoration: none; transition: background 0.15s; display: inline-flex; align-items: center; gap: 8px; }
+        .btn:hover { background: var(--bg-hover); }
+        .btn-primary { background: var(--text-primary); color: var(--bg-base); border-color: var(--text-primary); }
+        .btn-primary:hover { background: #DDD; }
+
+        /* Hero */
+        .hero { padding: 120px 0 80px; border-bottom: 1px solid var(--border-default); text-align: center; }
+        .hero-tag { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent-blue); border: 1px solid var(--accent-blue); padding: 4px 10px; border-radius: 4px; margin-bottom: 24px; display: inline-block; }
+        h1 { font-size: 52px; font-weight: 600; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 20px; max-width: 800px; margin-left: auto; margin-right: auto; }
+        .hero-subtitle { font-size: 18px; color: var(--text-secondary); margin-bottom: 32px; max-width: 620px; margin-left: auto; margin-right: auto; }
+        .hero-actions { display: flex; gap: 12px; justify-content: center; margin-bottom: 48px; }
+        .hero-meta { display: flex; gap: 24px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-tertiary); justify-content: center; }
+
+        /* Waitlist Form */
+        .waitlist-form { display: flex; gap: 8px; justify-content: center; margin-top: 24px; }
+        .waitlist-input { background: var(--bg-elevated); border: 1px solid var(--border-strong); color: var(--text-primary); padding: 10px 14px; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 13px; outline: none; width: 280px; transition: border-color 0.2s; }
+        .waitlist-input::placeholder { color: var(--text-tertiary); }
+        .waitlist-input:focus { border-color: var(--accent-blue); }
+        .waitlist-success { color: var(--accent-green); font-family: 'JetBrains Mono', monospace; font-size: 14px; margin-top: 16px; display: flex; align-items: center; gap: 8px; justify-content: center; }
+
+        /* Sections */
+        section { padding: 100px 0; border-bottom: 1px solid var(--border-default); }
+        .section-header { margin-bottom: 48px; max-width: 600px; }
+        .section-label { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent-blue); margin-bottom: 12px; display: block; }
+        h2 { font-size: 32px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 12px; }
+        .section-desc { color: var(--text-secondary); font-size: 16px; }
+
+        /* Demo 1: Visual Diff Viewport */
+        .viewport-mock { border: 1px solid var(--border-strong); border-radius: 8px; background: var(--bg-elevated); overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+        .vp-header { background: var(--bg-base); border-bottom: 1px solid var(--border-strong); padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; }
+        .vp-tabs { display: flex; gap: 16px; font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+        .vp-tab { color: var(--text-tertiary); cursor: pointer; padding: 4px 8px; border-radius: 4px; transition: all 0.2s; }
+        .vp-tab.active { color: var(--accent-blue); background: rgba(59, 130, 246, 0.1); }
+        .vp-canvas { height: 350px; position: relative; background-image: radial-gradient(var(--border-default) 1px, transparent 1px); background-size: 20px 20px; display: flex; align-items: center; justify-content: center; }
+        .vp-console { background: var(--bg-base); border-top: 1px solid var(--border-strong); padding: 12px 16px; height: 80px; overflow-y: auto; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-secondary); }
+        .vp-console div { margin-bottom: 4px; }
+        .vp-footer { background: var(--bg-base); border-top: 1px solid var(--border-strong); padding: 16px; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+        
+        .prompt-form { display: flex; flex: 1; gap: 8px; align-items: center; background: var(--bg-elevated); border: 1px solid var(--border-strong); border-radius: 6px; padding: 4px 12px; }
+        .prompt-prefix { color: var(--accent-green); font-family: 'JetBrains Mono', monospace; font-size: 13px; }
+        .prompt-input { flex: 1; background: none; border: none; outline: none; color: var(--text-primary); font-family: 'JetBrains Mono', monospace; font-size: 13px; padding: 8px 0; }
+        .prompt-input::placeholder { color: var(--text-tertiary); }
+        
+        .diff-btn { padding: 8px 14px; border-radius: 6px; font-size: 12px; font-weight: 500; cursor: pointer; border: 1px solid var(--border-strong); background: transparent; color: var(--text-primary); transition: all 0.2s; font-family: inherit; white-space: nowrap; }
+        .diff-btn:hover { background: var(--bg-hover); }
+        .diff-btn.discard { color: var(--accent-red); border-color: rgba(239, 68, 68, 0.3); }
+        .diff-btn.discard:hover { background: rgba(239, 68, 68, 0.1); }
+        .diff-btn.merge { color: var(--accent-green); border-color: rgba(16, 185, 129, 0.3); }
+        .diff-btn.merge:hover { background: rgba(16, 185, 129, 0.1); }
+        .diff-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+        /* SVG Styles */
+        .base-part { fill: none; stroke: var(--text-secondary); stroke-width: 2; transition: stroke 0.3s; }
+        .base-part.merged { stroke: var(--text-primary); }
+        .ai-proposal { fill: rgba(59, 130, 246, 0.1); stroke: var(--accent-blue); stroke-width: 2; stroke-dasharray: 6 3; transition: opacity 0.3s, fill 0.3s, stroke 0.3s; }
+        .ai-proposal.hidden { opacity: 0; }
+        .ai-proposal.merged { fill: rgba(16, 185, 129, 0.1); stroke: var(--accent-green); stroke-dasharray: none; }
+
+        /* Demo 2: Hardware Allocation */
+        .mem-container { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+        .mem-visual { background: var(--bg-elevated); border: 1px solid var(--border-strong); border-radius: 8px; padding: 24px; }
+        .mem-header { display: flex; justify-content: space-between; margin-bottom: 16px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-tertiary); }
+        .mem-bar-container { height: 40px; background: var(--bg-base); border-radius: 4px; display: flex; overflow: hidden; border: 1px solid var(--border-strong); position: relative; }
+        .mem-segment { height: 100%; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: white; transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1); white-space: nowrap; overflow: hidden; }
+        .mem-ai { background: var(--accent-blue); }
+        .mem-canvas { background: var(--text-tertiary); }
+        .mem-physics { background: var(--accent-red); }
+        .mem-legend { margin-top: 16px; display: flex; gap: 16px; font-size: 12px; color: var(--text-secondary); }
+        .legend-dot { width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; display: inline-block; vertical-align: middle; }
+
+        .mem-controls { margin-top: 24px; display: flex; flex-direction: column; gap: 16px; }
+        .tier-selector { display: flex; gap: 8px; }
+        .tier-btn { flex: 1; padding: 10px; background: var(--bg-base); border: 1px solid var(--border-strong); color: var(--text-secondary); border-radius: 6px; cursor: pointer; font-family: 'JetBrains Mono', monospace; font-size: 12px; transition: all 0.2s; }
+        .tier-btn:hover { border-color: var(--text-secondary); color: var(--text-primary); }
+        .tier-btn.active { border-color: var(--accent-blue); color: var(--accent-blue); background: rgba(59, 130, 246, 0.05); }
+        
+        .mem-btn { width: 100%; padding: 12px; background: var(--bg-base); border: 1px solid var(--border-strong); color: var(--text-primary); border-radius: 6px; cursor: pointer; font-family: 'JetBrains Mono', monospace; font-size: 13px; transition: all 0.2s; }
+        .mem-btn:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
+        .mem-btn.active { border-color: var(--accent-red); color: var(--accent-red); background: rgba(239, 68, 68, 0.05); }
+        
+        .mem-status { padding: 12px; background: var(--bg-base); border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-secondary); min-height: 60px; display: flex; flex-direction: column; justify-content: center; gap: 4px; }
+
+        /* Ecosystem */
+        .ecosystem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+        .eco-list { display: flex; flex-direction: column; gap: 24px; }
+        .eco-item { border-left: 2px solid var(--border-strong); padding-left: 20px; }
+        .eco-item.highlight { border-color: var(--accent-green); }
+        .eco-title { font-size: 16px; font-weight: 500; margin-bottom: 6px; display: flex; justify-content: space-between; }
+        .eco-badge { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent-green); border: 1px solid var(--accent-green); padding: 2px 6px; border-radius: 4px; }
+        .eco-desc { font-size: 14px; color: var(--text-secondary); }
+
+        /* CTA */
+        .cta-box { border: 1px solid var(--border-default); background: var(--bg-elevated); border-radius: 8px; padding: 48px; text-align: center; }
+        
+        /* Footer */
+        footer { padding: 48px 0; font-size: 13px; color: var(--text-tertiary); }
+        footer .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+        .legal-disclaimer { font-size: 11px; color: var(--text-tertiary); border-top: 1px solid var(--border-default); padding: 24px 0; margin-top: 48px; text-align: center; max-width: 800px; margin-left: auto; margin-right: auto; line-height: 1.6; }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 36px; }
+            .hero-actions { flex-direction: column; width: 100%; max-width: 300px; margin: 0 auto 32px; }
+            .waitlist-form { flex-direction: column; width: 100%; max-width: 300px; margin: 24px auto 0; }
+            .waitlist-input { width: 100%; }
+            .ecosystem-grid, .mem-container { grid-template-columns: 1fr; }
+            .vp-footer { flex-direction: column; align-items: stretch; }
+            .prompt-form { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container nav-inner">
+            <div class="logo"><div class="logo-mark"></div>localLabs</div>
+            <div class="nav-links">
+                <a href="#demo">Demos</a>
+                <a href="#hardware">Hardware</a>
+                <a href="#ecosystem">Ecosystem</a>
+                <a href="#waitlist" class="btn">Join Waitlist</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <div class="hero">
+        <div class="container">
+            <span class="hero-tag">100% LOCAL • ZERO API COSTS</span>
+            <h1>The Spatial IDE for AI-Driven Design</h1>
+            <p class="hero-subtitle">
+                Run powerful AI agents directly on your machine to generate, simulate, and validate CAD and physics workflows. No cloud. No subscriptions. Pure compute.
+            </p>
+            <div class="hero-actions">
+                <a href="#demo" class="btn btn-primary">Try Interactive Demo</a>
+            </div>
+            <div class="hero-meta">
+                <span>Windows 10/11 x64</span>
+                <span>•</span>
+                <span>Linux Native</span>
+                <span>•</span>
+                <span>Open Weights</span>
+            </div>
+            
+            <form class="waitlist-form" id="heroWaitlistForm" onsubmit="event.preventDefault(); joinWaitlist('heroWaitlistForm', 'heroWaitlistInput');">
+                <input type="email" id="heroWaitlistInput" class="waitlist-input" placeholder="engineer@localLabs.com" required>
+                <button type="submit" class="btn btn-primary">Join Waitlist</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Demo 1: Interactive Agent Loop -->
+    <section id="demo">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">// VERIFICATION_LOOP</span>
+                <h2>Zero hallucinations in the trunk</h2>
+                <p class="section-desc">
+                    AI makes mistakes. localLabs ensures those mistakes never reach your final design. Agents propose changes in an isolated shadow branch that you must visually verify before merging. Try it below.
+                </p>
+            </div>
+            
+            <div class="viewport-mock">
+                <div class="vp-header">
+                    <div class="vp-tabs">
+                        <div class="vp-tab active">Main Branch</div>
+                        <div class="vp-tab">Agent Shadow Branch</div>
+                    </div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-tertiary);">bracket_mount_v2.dsl</div>
+                </div>
+                <div class="vp-canvas">
+                    <svg width="400" height="300" viewBox="0 0 400 300">
+                        <!-- Base Part (Original) -->
+                        <path class="base-part" id="basePart" d="M100 150 L200 150 L200 100 L300 100 L300 200 L100 200 Z" />
+                        
+                        <!-- AI Proposal Elements -->
+                        <circle class="ai-proposal hidden" id="proposalHole" cx="200" cy="150" r="25" />
+                        <path class="ai-proposal hidden" id="proposalCutout" d="M120 170 L180 170 L180 190 L120 190 Z" />
+                        <path class="ai-proposal hidden" id="proposalSupport" d="M250 200 L250 240 L270 240 L270 200 Z" />
+                    </svg>
+                </div>
+                <div class="vp-console" id="vpConsole">
+                    <div>> System ready. Awaiting agent command...</div>
+                </div>
+                <div class="vp-footer">
+                    <form class="prompt-form" id="promptForm" onsubmit="event.preventDefault(); runAgent();">
+                        <span class="prompt-prefix">user@localLabs:~$</span>
+                        <input type="text" id="promptInput" class="prompt-input" placeholder="Try: 'reduce weight' or 'add support'" autocomplete="off">
+                    </form>
+                    <div style="display: flex; gap: 8px;">
+                        <button class="diff-btn discard" id="discardBtn" onclick="discardProposal()" disabled>Discard</button>
+                        <button class="diff-btn merge" id="mergeBtn" onclick="mergeProposal()" disabled>Merge to Trunk</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo 2: Interactive Hardware Switching -->
+    <section id="hardware" style="background: var(--bg-elevated);">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">// HARDWARE_ADAPTATION</span>
+                <h2>Instant AI on any machine</h2>
+                <p class="section-desc">
+                    localLabs automatically detects your system capabilities. To prevent crashes on lower-end hardware, the engine temporarily offloads the AI model when running heavy local physics simulations. Toggle between tiers to see the memory logic in action.
+                </p>
+            </div>
+
+            <div class="mem-container">
+                <div class="mem-visual">
+                    <div class="mem-header">
+                        <span id="memTierLabel">SYSTEM VRAM ALLOCATION (8GB LIMIT: 6GB VRAM)</span>
+                        <span id="memStateLabel" style="color: var(--text-tertiary);">STATE: IDLE</span>
+                    </div>
+                    <div class="mem-bar-container">
+                        <div class="mem-segment mem-ai" id="memAI" style="width: 41%;">AI (2.5GB)</div>
+                        <div class="mem-segment mem-canvas" id="memCanvas" style="width: 16%;">Canvas (1GB)</div>
+                        <div class="mem-segment mem-physics" id="memPhysics" style="width: 0%;">Physics</div>
+                    </div>
+                    <div class="mem-legend">
+                        <span><span class="legend-dot" style="background: var(--accent-blue);"></span>Local AI</span>
+                        <span><span class="legend-dot" style="background: var(--text-tertiary);"></span>Viewport</span>
+                        <span><span class="legend-dot" style="background: var(--accent-red);"></span>Physics Sim</span>
+                    </div>
+                    
+                    <div class="mem-controls">
+                        <div class="tier-selector">
+                            <button class="tier-btn active" onclick="selectTier('8gb', event)">8GB System</button>
+                            <button class="tier-btn" onclick="selectTier('16gb', event)">16GB System</button>
+                            <button class="tier-btn" onclick="selectTier('32gb', event)">32GB System</button>
+                        </div>
+                        <button class="mem-btn" id="simBtn" onclick="toggleSimulation()">Run Heavy Physics Simulation</button>
+                        <div class="mem-status" id="memStatus">
+                            <div>> System ready. AI model fully loaded in memory.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mem-container-text">
+                    <h3>Dynamic Process Switching</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 16px;">
+                        On 8GB RAM systems, running both an LLM and a high-fidelity physics solver simultaneously causes immediate out-of-memory crashes. 
+                    </p>
+                    <p style="color: var(--text-secondary); margin-bottom: 16px;">
+                        localLabs solves this by implementing intelligent context switching. When you trigger a local simulation, the host core temporarily pauses and offloads the AI model, freeing exact memory boundaries for the physics engine.
+                    </p>
+                    <p style="color: var(--text-secondary);">
+                        On 16GB+ systems, the models run concurrently without interruption. The user never feels the switch.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ecosystem & Business Model -->
+    <section id="ecosystem">
+        <div class="container">
+            <div class="ecosystem-grid">
+                <div>
+                    <span class="section-label">// OPEN_CORE_MODEL</span>
+                    <h2>Free platform.<br>Premium engines.</h2>
+                    <p class="section-desc" style="margin-bottom: 32px;">
+                        We believe in open access. The core IDE and local AI runtime are completely free, utilizing permissive Apache 2.0 and open-weight models. We sustain the business by offering specialized, proprietary plugins for professional engineers.
+                    </p>
+                    <a href="#" class="btn btn-primary">Browse Plugin Marketplace</a>
+                </div>
+                <div class="eco-list">
+                    <div class="eco-item highlight">
+                        <div class="eco-title">Core IDE & AI Runtime <span class="eco-badge">FREE</span></div>
+                        <div class="eco-desc">Full access to the spatial canvas, local inference engine, and branching system. Automatically pulls open-weights from Hugging Face.</div>
+                    </div>
+                    <div class="eco-item">
+                        <div class="eco-title">Advanced Physics Solver <span class="eco-badge">PRO</span></div>
+                        <div class="eco-desc">High-fidelity real-time fluid dynamics and stress testing simulations integrated directly into the agent workflow.</div>
+                    </div>
+                    <div class="eco-item">
+                        <div class="eco-title">3D Rendering Engine <span class="eco-badge">PRO</span></div>
+                        <div class="eco-desc">Photorealistic viewport rendering and advanced mesh manipulation algorithms for professional visualization.</div>
+                    </div>
+                    <div class="eco-item">
+                        <div class="eco-title">Specialized CAD SDKs <span class="eco-badge">PRO</span></div>
+                        <div class="eco-desc">Industry-specific structural drafting algorithms and compliance checkers for manufacturing standards.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA / Waitlist -->
+    <section id="waitlist" style="border-bottom: none;">
+        <div class="container">
+            <div class="cta-box">
+                <h2>Build without API limits.</h2>
+                <p>Join the local-first revolution. Get early access to the localLabs private beta and run unlimited AI simulations on your own hardware.</p>
+                <form class="waitlist-form" id="footerWaitlistForm" onsubmit="event.preventDefault(); joinWaitlist('footerWaitlistForm', 'footerWaitlistInput');" style="margin-top: 32px;">
+                    <input type="email" id="footerWaitlistInput" class="waitlist-input" placeholder="Enter your email address" required>
+                    <button type="submit" class="btn btn-primary">Join Private Beta</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="logo"><div class="logo-mark"></div>localLabs</div>
+            <div>© 2024 localLabs. Open Architecture Initiative.</div>
+        </div>
+        <div class="legal-disclaimer">
+            <strong>Legal Disclaimer:</strong> AI-generated outputs, simulations, and CAD recommendations are provided strictly "AS-IS". Users are fully responsible for validating structural integrity, physical properties, and safety compliance before manufacturing or deployment.
+        </div>
+    </footer>
+
+    <script>
+        // --- Waitlist Logic (Formspree Integration) ---
+        // REPLACE 'YOUR_FORM_ID' with your actual Formspree endpoint ID
+        const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xgawaneg';
+
+        async function joinWaitlist(formId, inputId) {
+            const form = document.getElementById(formId);
+            const emailInput = document.getElementById(inputId);
+            const email = emailInput.value;
+            
+            if (email && email.includes('@')) {
+                // Show loading state
+                form.innerHTML = `<div class="waitlist-success">> Transmitting data...</div>`;
+                
+                try {
+                    const response = await fetch(FORMSPREE_ENDPOINT, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify({ email: email, _subject: `New Waitlist Signup: ${email}` })
+                    });
+                    
+                    if (response.ok) {
+                        form.innerHTML = `<div class="waitlist-success">> Access granted. You are on the list.</div>`;
+                    } else {
+                        form.innerHTML = `<div class="waitlist-success" style="color: var(--accent-red);">> Server error. Please try again later.</div>`;
+                    }
+                } catch (error) {
+                    form.innerHTML = `<div class="waitlist-success" style="color: var(--accent-red);">> Network error. Check connection.</div>`;
+                }
+            }
+        }
+
+        // --- DEMO 1: Interactive Agent Loop ---
+        const consoleEl = document.getElementById('vpConsole');
+        const promptInput = document.getElementById('promptInput');
+        const mergeBtn = document.getElementById('mergeBtn');
+        const discardBtn = document.getElementById('discardBtn');
+        const basePart = document.getElementById('basePart');
+        
+        // Proposals
+        const proposalHole = document.getElementById('proposalHole');
+        const proposalCutout = document.getElementById('proposalCutout');
+        const proposalSupport = document.getElementById('proposalSupport');
+
+        let activeProposals = [];
+
+        function logConsole(text, color = 'var(--text-secondary)') {
+            const div = document.createElement('div');
+            div.style.color = color;
+            div.textContent = `> ${text}`;
+            consoleEl.appendChild(div);
+            consoleEl.scrollTop = consoleEl.scrollHeight;
+        }
+
+        function runAgent() {
+            const cmd = promptInput.value.toLowerCase().trim();
+            if (!cmd) return;
+            
+            promptInput.value = '';
+            logConsole(`user@localLabs:~$ ${cmd}`, 'var(--text-primary)');
+            logConsole('Agent_01: Processing request...', 'var(--accent-blue)');
+            
+            // Reset previous proposals if any
+            hideProposals();
+
+            setTimeout(() => {
+                if (cmd.includes('weight') || cmd.includes('hole') || cmd.includes('cut')) {
+                    proposalHole.classList.remove('hidden');
+                    proposalCutout.classList.remove('hidden');
+                    activeProposals = [proposalHole, proposalCutout];
+                    logConsole('Agent_01: Generated weight reduction cutouts. Structural integrity maintained.', 'var(--accent-blue)');
+                    enableActionButtons();
+                } else if (cmd.includes('support') || cmd.includes('beam')) {
+                    proposalSupport.classList.remove('hidden');
+                    activeProposals = [proposalSupport];
+                    logConsole('Agent_01: Added vertical structural support to base geometry.', 'var(--accent-blue)');
+                    enableActionButtons();
+                } else {
+                    logConsole('Agent_01: Command not recognized. Try "reduce weight" or "add support".', 'var(--accent-red)');
+                }
+            }, 1200);
+        }
+
+        function enableActionButtons() {
+            mergeBtn.disabled = false;
+            discardBtn.disabled = false;
+        }
+
+        function disableActionButtons() {
+            mergeBtn.disabled = true;
+            discardBtn.disabled = true;
+        }
+
+        function hideProposals() {
+            [proposalHole, proposalCutout, proposalSupport].forEach(p => {
+                p.classList.add('hidden');
+                p.classList.remove('merged');
+            });
+            basePart.classList.remove('merged');
+        }
+
+        function discardProposal() {
+            hideProposals();
+            disableActionButtons();
+            logConsole('System: Proposal discarded. Shadow branch deleted. Memory reclaimed.', 'var(--text-tertiary)');
+        }
+
+        function mergeProposal() {
+            activeProposals.forEach(p => {
+                p.classList.add('merged');
+            });
+            basePart.classList.add('merged');
+            disableActionButtons();
+            logConsole('System: Proposal merged into Main Trunk. DAG updated successfully.', 'var(--accent-green)');
+        }
+
+
+        // --- DEMO 2: Hardware Allocation Switching ---
+        const memAI = document.getElementById('memAI');
+        const memCanvas = document.getElementById('memCanvas');
+        const memPhysics = document.getElementById('memPhysics');
+        const memStatus = document.getElementById('memStatus');
+        const memStateLabel = document.getElementById('memStateLabel');
+        const memTierLabel = document.getElementById('memTierLabel');
+        const simBtn = document.getElementById('simBtn');
+
+        let currentTier = '8gb';
+        let simRunning = false;
+
+        // Memory configurations per tier (in GB, representing VRAM allocation)
+        const tiers = {
+            '8gb': {
+                label: '8GB LIMIT: 6GB VRAM',
+                ai: 2.5, canvas: 1.0, physics: 2.5,
+                needsOffload: true
+            },
+            '16gb': {
+                label: '16GB LIMIT: 8GB VRAM',
+                ai: 4.2, canvas: 1.6, physics: 2.0,
+                needsOffload: false
+            },
+            '32gb': {
+                label: '32GB LIMIT: 16GB VRAM',
+                ai: 8.0, canvas: 2.0, physics: 4.0,
+                needsOffload: false
+            }
+        };
+
+        function setMemBar(el, width, label) {
+            el.style.width = `${width}%`;
+            el.innerText = label;
+        }
+
+        function selectTier(tier, event) {
+            currentTier = tier;
+            simRunning = false;
+            simBtn.innerText = 'Run Heavy Physics Simulation';
+            simBtn.classList.remove('active');
+
+            document.querySelectorAll('.tier-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            const config = tiers[tier];
+            memTierLabel.innerText = `SYSTEM VRAM ALLOCATION (${config.label})`;
+            
+            // Reset to base state
+            setMemBar(memAI, 50, `AI Model (${config.ai}GB)`);
+            setMemBar(memCanvas, 20, `Canvas (${config.canvas}GB)`);
+            setMemBar(memPhysics, 0, '');
+            
+            memStateLabel.innerText = 'STATE: IDLE';
+            memStateLabel.style.color = 'var(--text-tertiary)';
+            memStatus.innerHTML = '<div>> System ready. AI model fully loaded in memory.</div>';
+        }
+
+        function toggleSimulation() {
+            const config = tiers[currentTier];
+            simRunning = !simRunning;
+
+            if (simRunning) {
+                simBtn.innerText = 'Stop Simulation';
+                simBtn.classList.add('active');
+                memStateLabel.innerText = 'STATE: SIMULATING';
+                memStateLabel.style.color = 'var(--accent-red)';
+
+                if (config.needsOffload) {
+                    // Must offload AI to fit physics
+                    setMemBar(memAI, 0, '');
+                    setMemBar(memCanvas, 20, `Canvas (${config.canvas}GB)`);
+                    setMemBar(memPhysics, 50, `Physics (${config.physics}GB)`);
+                    memStatus.innerHTML = `
+                        <div style="color: var(--accent-red);">> PAUSED AI CONTEXT. Offloaded model to disk.</div>
+                        <div>> ALLOCATING VRAM: Physics Solver initialized.</div>
+                    `;
+                } else {
+                    // Runs concurrently
+                    // Calculate percentages based on 100% total width
+                    const total = config.ai + config.canvas + config.physics;
+                    setMemBar(memAI, (config.ai/total)*100, `AI Model (${config.ai}GB)`);
+                    setMemBar(memCanvas, (config.canvas/total)*100, `Canvas (${config.canvas}GB)`);
+                    setMemBar(memPhysics, (config.physics/total)*100, `Physics (${config.physics}GB)`);
+                    memStatus.innerHTML = `
+                        <div style="color: var(--accent-green);">> SUFFICIENT VRAM DETECTED.</div>
+                        <div>> Running AI and Physics concurrently...</div>
+                    `;
+                }
+            } else {
+                // Stop simulation, restore AI
+                simBtn.innerText = 'Run Heavy Physics Simulation';
+                simBtn.classList.remove('active');
+                memStateLabel.innerText = 'STATE: IDLE';
+                memStateLabel.style.color = 'var(--text-tertiary)';
+                
+                setMemBar(memAI, 50, `AI Model (${config.ai}GB)`);
+                setMemBar(memCanvas, 20, `Canvas (${config.canvas}GB)`);
+                setMemBar(memPhysics, 0, '');
+                
+                if (config.needsOffload) {
+                    memStatus.innerHTML = `
+                        <div>> SIMULATION COMPLETE.</div>
+                        <div>> REHYDRATING AI CONTEXT. Model fully loaded in memory.</div>
+                    `;
+                } else {
+                    memStatus.innerHTML = `
+                        <div>> SIMULATION COMPLETE.</div>
+                        <div>> Physics memory released. AI context unaffected.</div>
+                    `;
+                }
+            }
+        }
+    </script>
+</body>
+</html>
