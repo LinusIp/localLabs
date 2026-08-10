@@ -69,18 +69,18 @@
         h2 { font-size: 32px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 12px; }
         .section-desc { color: var(--text-secondary); font-size: 16px; }
 
-        /* Demo 1: Visual Diff Viewport */
+        /* Generic Viewport Mock */
         .viewport-mock { border: 1px solid var(--border-strong); border-radius: 8px; background: var(--bg-elevated); overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
         .vp-header { background: var(--bg-base); border-bottom: 1px solid var(--border-strong); padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; }
         .vp-tabs { display: flex; gap: 16px; font-family: 'JetBrains Mono', monospace; font-size: 12px; }
         .vp-tab { color: var(--text-tertiary); cursor: pointer; padding: 4px 8px; border-radius: 4px; transition: all 0.2s; }
         .vp-tab.active { color: var(--accent-blue); background: rgba(59, 130, 246, 0.1); }
-        .vp-canvas { height: 350px; position: relative; background-image: radial-gradient(var(--border-default) 1px, transparent 1px); background-size: 20px 20px; display: flex; align-items: center; justify-content: center; }
+        .vp-canvas { height: 400px; position: relative; background-image: radial-gradient(var(--border-default) 1px, transparent 1px); background-size: 20px 20px; display: flex; align-items: center; justify-content: center; }
         .vp-console { background: var(--bg-base); border-top: 1px solid var(--border-strong); padding: 12px 16px; height: 80px; overflow-y: auto; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-secondary); }
         .vp-console div { margin-bottom: 4px; }
-        .vp-footer { background: var(--bg-base); border-top: 1px solid var(--border-strong); padding: 16px; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+        .vp-footer { background: var(--bg-base); border-top: 1px solid var(--border-strong); padding: 16px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
         
-        .prompt-form { display: flex; flex: 1; gap: 8px; align-items: center; background: var(--bg-elevated); border: 1px solid var(--border-strong); border-radius: 6px; padding: 4px 12px; }
+        .prompt-form { display: flex; flex: 1; gap: 8px; align-items: center; background: var(--bg-elevated); border: 1px solid var(--border-strong); border-radius: 6px; padding: 4px 12px; min-width: 200px; }
         .prompt-prefix { color: var(--accent-green); font-family: 'JetBrains Mono', monospace; font-size: 13px; }
         .prompt-input { flex: 1; background: none; border: none; outline: none; color: var(--text-primary); font-family: 'JetBrains Mono', monospace; font-size: 13px; padding: 8px 0; }
         .prompt-input::placeholder { color: var(--text-tertiary); }
@@ -94,11 +94,12 @@
         .diff-btn:disabled { opacity: 0.3; cursor: not-allowed; }
 
         /* SVG Styles */
-        .base-part { fill: none; stroke: var(--text-secondary); stroke-width: 2; transition: stroke 0.3s; }
-        .base-part.merged { stroke: var(--text-primary); }
-        .ai-proposal { fill: rgba(59, 130, 246, 0.1); stroke: var(--accent-blue); stroke-width: 2; stroke-dasharray: 6 3; transition: opacity 0.3s, fill 0.3s, stroke 0.3s; }
+        .base-part { fill: rgba(255, 255, 255, 0.05); stroke: var(--text-primary); stroke-width: 2; transition: stroke 0.3s; }
+        .ai-proposal { fill: rgba(59, 130, 246, 0.15); stroke: var(--accent-blue); stroke-width: 2; stroke-dasharray: 6 3; transition: opacity 0.3s, fill 0.3s, stroke 0.3s; }
         .ai-proposal.hidden { opacity: 0; }
-        .ai-proposal.merged { fill: rgba(16, 185, 129, 0.1); stroke: var(--accent-green); stroke-dasharray: none; }
+        .ai-proposal.merged { fill: rgba(16, 185, 129, 0.15); stroke: var(--accent-green); stroke-dasharray: none; }
+        .snap-point { fill: var(--accent-blue); stroke: none; }
+        #rubberBand { stroke: var(--accent-blue); stroke-width: 2; stroke-dasharray: 4 4; pointer-events: none; }
 
         /* Demo 2: Hardware Allocation */
         .mem-container { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
@@ -151,6 +152,13 @@
             .prompt-form { width: 100%; }
         }
     </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+        }
+      }
+    </script>
 </head>
 <body>
 
@@ -192,14 +200,14 @@
         </div>
     </div>
 
-    <!-- Demo 1: Interactive Agent Loop -->
+    <!-- Demo 1: Interactive AutoCAD-like Agent Loop -->
     <section id="demo">
         <div class="container">
             <div class="section-header">
-                <span class="section-label">// VERIFICATION_LOOP</span>
-                <h2>Zero hallucinations in the trunk</h2>
+                <span class="section-label">// CAD_AGENT_LOOP</span>
+                <h2>Draw, request, verify</h2>
                 <p class="section-desc">
-                    AI makes mistakes. localLabs ensures those mistakes never reach your final design. Agents propose changes in an isolated shadow branch that you must visually verify before merging. Try it below.
+                    Click on the grid to draw a custom part. Press 'Enter' to close the shape. Then, ask the AI to modify it. The agent proposes changes in an isolated shadow branch that you must visually verify before merging.
                 </p>
             </div>
             
@@ -209,28 +217,31 @@
                         <div class="vp-tab active">Main Branch</div>
                         <div class="vp-tab">Agent Shadow Branch</div>
                     </div>
-                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-tertiary);">bracket_mount_v2.dsl</div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-tertiary);">custom_part_v1.dsl</div>
                 </div>
-                <div class="vp-canvas">
-                    <svg width="400" height="300" viewBox="0 0 400 300">
-                        <!-- Base Part (Original) -->
-                        <path class="base-part" id="basePart" d="M100 150 L200 150 L200 100 L300 100 L300 200 L100 200 Z" />
+                <div class="vp-canvas" id="cadCanvasContainer">
+                    <svg width="100%" height="100%" viewBox="0 0 600 400" id="cadSvg" style="cursor: crosshair; display: block;">
+                        <!-- User drawing -->
+                        <polygon class="base-part" id="basePartPath" points="" />
+                        <line id="rubberBand" x1="0" y1="0" x2="0" y2="0" style="display:none;" />
+                        <g id="snapPoints"></g>
                         
                         <!-- AI Proposal Elements -->
-                        <circle class="ai-proposal hidden" id="proposalHole" cx="200" cy="150" r="25" />
-                        <path class="ai-proposal hidden" id="proposalCutout" d="M120 170 L180 170 L180 190 L120 190 Z" />
-                        <path class="ai-proposal hidden" id="proposalSupport" d="M250 200 L250 240 L270 240 L270 200 Z" />
+                        <circle class="ai-proposal hidden" id="proposalHole" cx="300" cy="200" r="40" />
+                        <path class="ai-proposal hidden" id="proposalSupport" d="M400 300 L400 350 L420 350 L420 300 Z" />
                     </svg>
+                    <div id="drawHint" style="position: absolute; top: 20px; left: 20px; color: var(--text-tertiary); font-family: 'JetBrains Mono', monospace; font-size: 12px; pointer-events: none;">Click to draw points. Press 'Enter' to close shape.</div>
                 </div>
                 <div class="vp-console" id="vpConsole">
-                    <div>> System ready. Awaiting agent command...</div>
+                    <div>> System ready. Draw a part on the grid.</div>
                 </div>
                 <div class="vp-footer">
                     <form class="prompt-form" id="promptForm" onsubmit="event.preventDefault(); runAgent();">
                         <span class="prompt-prefix">user@localLabs:~$</span>
-                        <input type="text" id="promptInput" class="prompt-input" placeholder="Try: 'reduce weight' or 'add support'" autocomplete="off">
+                        <input type="text" id="promptInput" class="prompt-input" placeholder="Try: 'add hole' or 'add support'" autocomplete="off">
                     </form>
                     <div style="display: flex; gap: 8px;">
+                        <button class="diff-btn" onclick="clearCanvas()" style="color: var(--text-secondary);">Clear Canvas</button>
                         <button class="diff-btn discard" id="discardBtn" onclick="discardProposal()" disabled>Discard</button>
                         <button class="diff-btn merge" id="mergeBtn" onclick="mergeProposal()" disabled>Merge to Trunk</button>
                     </div>
@@ -296,6 +307,39 @@
         </div>
     </section>
 
+    <!-- Demo 3: 3D Physics Sandbox -->
+    <section id="physics-demo">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">// 3D_PHYSICS_SANDBOX</span>
+                <h2>Real-time local physics</h2>
+                <p class="section-desc">
+                    Once an agent proposes a design, run it through the local physics engine. This sandbox demonstrates the real-time collision detection available in the PRO SDKs.
+                </p>
+            </div>
+            
+            <div class="viewport-mock">
+                <div class="vp-header">
+                    <div class="vp-tabs">
+                        <div class="vp-tab active">3D Viewport</div>
+                        <div class="vp-tab">Properties</div>
+                    </div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-tertiary);">physics_sandbox.scene</div>
+                </div>
+                <div id="threeCanvasContainer" style="width: 100%; height: 450px; background: var(--bg-base); background-image: radial-gradient(var(--border-default) 1px, transparent 1px); background-size: 30px 30px; position: relative;"></div>
+                <div class="vp-footer">
+                    <div class="agent-log" style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-secondary);">
+                        <span id="physLog">> Physics engine initialized. Gravity: -9.81 m/s^2</span>
+                    </div>
+                    <div style="display: flex; gap: 8px;">
+                        <button class="diff-btn" onclick="window.spawnBlock()" style="color: var(--accent-blue); border-color: rgba(59, 130, 246, 0.3);">Drop Block</button>
+                        <button class="diff-btn" onclick="window.resetPhysics()" style="color: var(--text-secondary);">Reset Scene</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Ecosystem & Business Model -->
     <section id="ecosystem">
         <div class="container">
@@ -354,9 +398,148 @@
         </div>
     </footer>
 
+    <script type="module">
+        import * as THREE from 'three';
+
+        // --- 3D Physics Sandbox (Three.js) ---
+        let scene, camera, renderer, blocks = [];
+        let physContainer = document.getElementById('threeCanvasContainer');
+
+        function init3D() {
+            if (!physContainer || physContainer.clientWidth === 0) {
+                // Fallback if DOM hasn't laid out yet
+                setTimeout(init3D, 100);
+                return;
+            }
+
+            scene = new THREE.Scene();
+            
+            const aspect = physContainer.clientWidth / physContainer.clientHeight;
+            camera = new THREE.PerspectiveCamera(50, aspect, 0.1, 1000);
+            camera.position.set(7, 5, 9);
+            camera.lookAt(0, 0, 0);
+
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(physContainer.clientWidth, physContainer.clientHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            physContainer.appendChild(renderer.domElement);
+
+            // Grid
+            const gridHelper = new THREE.GridHelper(20, 20, 0x2A2A30, 0x1F1F23);
+            scene.add(gridHelper);
+
+            // Base Platform
+            const planeGeo = new THREE.PlaneGeometry(20, 20);
+            const planeMat = new THREE.MeshBasicMaterial({ color: 0x0E0E11, side: THREE.DoubleSide, transparent: true, opacity: 0.5 });
+            const plane = new THREE.Mesh(planeGeo, planeMat);
+            plane.rotation.x = -Math.PI / 2;
+            plane.position.y = -0.01;
+            scene.add(plane);
+
+            // Lighting
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+            scene.add(ambientLight);
+            const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            dirLight.position.set(5, 10, 7);
+            scene.add(dirLight);
+
+            window.addEventListener('resize', onResize, false);
+            animate();
+        }
+
+        function onResize() {
+            if (!physContainer || physContainer.clientWidth === 0) return;
+            camera.aspect = physContainer.clientWidth / physContainer.clientHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(physContainer.clientWidth, physContainer.clientHeight);
+        }
+
+        function spawnBlock() {
+            const size = Math.random() * 0.8 + 0.4;
+            const geo = new THREE.BoxGeometry(size, size, size);
+            
+            const isPro = Math.random() > 0.5;
+            const color = isPro ? 0x3B82F6 : 0xF5F5F7;
+            
+            const mat = new THREE.MeshStandardMaterial({ color: color, roughness: 0.5, metalness: 0.1 });
+            const block = new THREE.Mesh(geo, mat);
+            
+            const edges = new THREE.EdgesGeometry(geo);
+            const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x000000 }));
+            block.add(line);
+
+            block.position.set(
+                (Math.random() - 0.5) * 4,
+                5,
+                (Math.random() - 0.5) * 4
+            );
+
+            block.rotation.set(
+                Math.random() * Math.PI,
+                Math.random() * Math.PI,
+                Math.random() * Math.PI
+            );
+
+            block.userData = {
+                velocity: { x: 0, y: 0, z: 0 },
+                size: size,
+                isResting: false
+            };
+
+            scene.add(block);
+            blocks.push(block);
+            document.getElementById('physLog').innerText = `> Spawned ${isPro ? 'PRO' : 'FREE'} block. Total objects: ${blocks.length}`;
+        }
+
+        function resetPhysics() {
+            blocks.forEach(b => scene.remove(b));
+            blocks = [];
+            document.getElementById('physLog').innerText = `> Scene cleared. Ready.`;
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            const gravity = -0.015;
+            const damping = 0.7;
+
+            blocks.forEach(block => {
+                if (block.userData.isResting) return;
+
+                block.userData.velocity.y += gravity;
+
+                block.position.x += block.userData.velocity.x;
+                block.position.y += block.userData.velocity.y;
+                block.position.z += block.userData.velocity.z;
+
+                const halfSize = block.userData.size / 2;
+                if (block.position.y - halfSize < 0) {
+                    block.position.y = halfSize;
+                    block.userData.velocity.y *= -damping;
+                    block.userData.velocity.x *= 0.9;
+                    block.userData.velocity.z *= 0.9;
+
+                    if (Math.abs(block.userData.velocity.y) < 0.02) {
+                        block.userData.velocity = { x: 0, y: 0, z: 0 };
+                        block.userData.isResting = true;
+                    }
+                }
+            });
+
+            renderer.render(scene, camera);
+        }
+
+        // Wait for DOM to be fully loaded and layout calculated
+        window.addEventListener('load', init3D);
+        
+        // Expose to global scope for HTML buttons
+        window.spawnBlock = spawnBlock;
+        window.resetPhysics = resetPhysics;
+
+    </script>
+
     <script>
-        // --- Waitlist Logic (Formspree Integration) ---
-        // REPLACE 'YOUR_FORM_ID' with your actual Formspree endpoint ID
+        // --- Waitlist Logic ---
         const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xgawaneg';
 
         async function joinWaitlist(formId, inputId) {
@@ -365,7 +548,6 @@
             const email = emailInput.value;
             
             if (email && email.includes('@')) {
-                // Show loading state
                 form.innerHTML = `<div class="waitlist-success">> Transmitting data...</div>`;
                 
                 try {
@@ -389,18 +571,22 @@
             }
         }
 
-        // --- DEMO 1: Interactive Agent Loop ---
+        // --- DEMO 1: AutoCAD-like Agent Loop ---
+        const cadSvg = document.getElementById('cadSvg');
+        const basePartPath = document.getElementById('basePartPath');
         const consoleEl = document.getElementById('vpConsole');
         const promptInput = document.getElementById('promptInput');
         const mergeBtn = document.getElementById('mergeBtn');
         const discardBtn = document.getElementById('discardBtn');
-        const basePart = document.getElementById('basePart');
-        
-        // Proposals
+        const drawHint = document.getElementById('drawHint');
+        const snapPointsGroup = document.getElementById('snapPoints');
+        const rubberBand = document.getElementById('rubberBand');
+
         const proposalHole = document.getElementById('proposalHole');
-        const proposalCutout = document.getElementById('proposalCutout');
         const proposalSupport = document.getElementById('proposalSupport');
 
+        let points = [];
+        let isDrawing = true;
         let activeProposals = [];
 
         function logConsole(text, color = 'var(--text-secondary)') {
@@ -411,31 +597,84 @@
             consoleEl.scrollTop = consoleEl.scrollHeight;
         }
 
+        function getMouseCoords(e) {
+            const rect = cadSvg.getBoundingClientRect();
+            const scaleX = 600 / rect.width;
+            const scaleY = 400 / rect.height;
+            const x = Math.round((e.clientX - rect.left) * scaleX / 20) * 20;
+            const y = Math.round((e.clientY - rect.top) * scaleY / 20) * 20;
+            return { x, y };
+        }
+
+        cadSvg.addEventListener('click', (e) => {
+            if (!isDrawing) return;
+            drawHint.style.display = 'none';
+            
+            const { x, y } = getMouseCoords(e);
+            points.push(`${x},${y}`);
+            basePartPath.setAttribute('points', points.join(' '));
+            
+            // Add visual snap point
+            const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            circle.setAttribute('cx', x);
+            circle.setAttribute('cy', y);
+            circle.setAttribute('r', '3');
+            circle.setAttribute('class', 'snap-point');
+            snapPointsGroup.appendChild(circle);
+        });
+
+        cadSvg.addEventListener('mousemove', (e) => {
+            if (!isDrawing || points.length === 0) return;
+            const { x, y } = getMouseCoords(e);
+            const lastPoint = points[points.length - 1].split(',');
+            rubberBand.setAttribute('x1', lastPoint[0]);
+            rubberBand.setAttribute('y1', lastPoint[1]);
+            rubberBand.setAttribute('x2', x);
+            rubberBand.setAttribute('y2', y);
+            rubberBand.style.display = 'block';
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && isDrawing && points.length > 2) {
+                isDrawing = false;
+                rubberBand.style.display = 'none';
+                promptInput.focus();
+                logConsole('Drawing complete. AI agent ready for commands.', 'var(--accent-green)');
+            }
+        });
+
         function runAgent() {
             const cmd = promptInput.value.toLowerCase().trim();
             if (!cmd) return;
             
+            if (isDrawing && points.length > 2) {
+                isDrawing = false;
+                rubberBand.style.display = 'none';
+            } else if (points.length < 3) {
+                logConsole('Agent_01: Please draw a closed shape on the grid first.', 'var(--accent-red)');
+                promptInput.value = '';
+                return;
+            }
+
             promptInput.value = '';
             logConsole(`user@localLabs:~$ ${cmd}`, 'var(--text-primary)');
-            logConsole('Agent_01: Processing request...', 'var(--accent-blue)');
+            logConsole('Agent_01: Processing geometry...', 'var(--accent-blue)');
             
-            // Reset previous proposals if any
             hideProposals();
 
             setTimeout(() => {
-                if (cmd.includes('weight') || cmd.includes('hole') || cmd.includes('cut')) {
+                if (cmd.includes('hole') || cmd.includes('cut')) {
                     proposalHole.classList.remove('hidden');
-                    proposalCutout.classList.remove('hidden');
-                    activeProposals = [proposalHole, proposalCutout];
-                    logConsole('Agent_01: Generated weight reduction cutouts. Structural integrity maintained.', 'var(--accent-blue)');
+                    activeProposals = [proposalHole];
+                    logConsole('Agent_01: Generated center cutout. Structural integrity maintained.', 'var(--accent-blue)');
                     enableActionButtons();
                 } else if (cmd.includes('support') || cmd.includes('beam')) {
                     proposalSupport.classList.remove('hidden');
                     activeProposals = [proposalSupport];
-                    logConsole('Agent_01: Added vertical structural support to base geometry.', 'var(--accent-blue)');
+                    logConsole('Agent_01: Added structural support to base geometry.', 'var(--accent-blue)');
                     enableActionButtons();
                 } else {
-                    logConsole('Agent_01: Command not recognized. Try "reduce weight" or "add support".', 'var(--accent-red)');
+                    logConsole('Agent_01: Command not recognized. Try "add hole" or "add support".', 'var(--accent-red)');
                 }
             }, 1200);
         }
@@ -451,28 +690,34 @@
         }
 
         function hideProposals() {
-            [proposalHole, proposalCutout, proposalSupport].forEach(p => {
+            [proposalHole, proposalSupport].forEach(p => {
                 p.classList.add('hidden');
                 p.classList.remove('merged');
             });
-            basePart.classList.remove('merged');
         }
 
         function discardProposal() {
             hideProposals();
             disableActionButtons();
-            logConsole('System: Proposal discarded. Shadow branch deleted. Memory reclaimed.', 'var(--text-tertiary)');
+            logConsole('System: Proposal discarded. Shadow branch deleted.', 'var(--text-tertiary)');
         }
 
         function mergeProposal() {
-            activeProposals.forEach(p => {
-                p.classList.add('merged');
-            });
-            basePart.classList.add('merged');
+            activeProposals.forEach(p => p.classList.add('merged'));
             disableActionButtons();
             logConsole('System: Proposal merged into Main Trunk. DAG updated successfully.', 'var(--accent-green)');
         }
 
+        function clearCanvas() {
+            points = [];
+            isDrawing = true;
+            basePartPath.setAttribute('points', '');
+            snapPointsGroup.innerHTML = '';
+            hideProposals();
+            disableActionButtons();
+            drawHint.style.display = 'block';
+            logConsole('Canvas cleared. Ready for new drawing.', 'var(--text-tertiary)');
+        }
 
         // --- DEMO 2: Hardware Allocation Switching ---
         const memAI = document.getElementById('memAI');
@@ -486,23 +731,10 @@
         let currentTier = '8gb';
         let simRunning = false;
 
-        // Memory configurations per tier (in GB, representing VRAM allocation)
         const tiers = {
-            '8gb': {
-                label: '8GB LIMIT: 6GB VRAM',
-                ai: 2.5, canvas: 1.0, physics: 2.5,
-                needsOffload: true
-            },
-            '16gb': {
-                label: '16GB LIMIT: 8GB VRAM',
-                ai: 4.2, canvas: 1.6, physics: 2.0,
-                needsOffload: false
-            },
-            '32gb': {
-                label: '32GB LIMIT: 16GB VRAM',
-                ai: 8.0, canvas: 2.0, physics: 4.0,
-                needsOffload: false
-            }
+            '8gb': { label: '8GB LIMIT: 6GB VRAM', ai: 2.5, canvas: 1.0, physics: 2.5, needsOffload: true },
+            '16gb': { label: '16GB LIMIT: 8GB VRAM', ai: 4.2, canvas: 1.6, physics: 2.0, needsOffload: false },
+            '32gb': { label: '32GB LIMIT: 16GB VRAM', ai: 8.0, canvas: 2.0, physics: 4.0, needsOffload: false }
         };
 
         function setMemBar(el, width, label) {
@@ -522,7 +754,6 @@
             const config = tiers[tier];
             memTierLabel.innerText = `SYSTEM VRAM ALLOCATION (${config.label})`;
             
-            // Reset to base state
             setMemBar(memAI, 50, `AI Model (${config.ai}GB)`);
             setMemBar(memCanvas, 20, `Canvas (${config.canvas}GB)`);
             setMemBar(memPhysics, 0, '');
@@ -543,7 +774,6 @@
                 memStateLabel.style.color = 'var(--accent-red)';
 
                 if (config.needsOffload) {
-                    // Must offload AI to fit physics
                     setMemBar(memAI, 0, '');
                     setMemBar(memCanvas, 20, `Canvas (${config.canvas}GB)`);
                     setMemBar(memPhysics, 50, `Physics (${config.physics}GB)`);
@@ -552,8 +782,6 @@
                         <div>> ALLOCATING VRAM: Physics Solver initialized.</div>
                     `;
                 } else {
-                    // Runs concurrently
-                    // Calculate percentages based on 100% total width
                     const total = config.ai + config.canvas + config.physics;
                     setMemBar(memAI, (config.ai/total)*100, `AI Model (${config.ai}GB)`);
                     setMemBar(memCanvas, (config.canvas/total)*100, `Canvas (${config.canvas}GB)`);
@@ -564,7 +792,6 @@
                     `;
                 }
             } else {
-                // Stop simulation, restore AI
                 simBtn.innerText = 'Run Heavy Physics Simulation';
                 simBtn.classList.remove('active');
                 memStateLabel.innerText = 'STATE: IDLE';
