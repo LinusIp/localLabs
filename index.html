@@ -315,6 +315,7 @@
                 <h2>Real-time local physics</h2>
                 <p class="section-desc">
                     Once an agent proposes a design, run it through the local physics engine. This sandbox demonstrates the real-time collision detection available in the PRO SDKs.
+                    <br><br><strong style="color: var(--text-primary);">Controls:</strong> <span style="font-family: 'JetBrains Mono', monospace; color: var(--accent-green);">Left-Click + Drag</span> to look. <span style="font-family: 'JetBrains Mono', monospace; color: var(--accent-green);">W A S D Q E</span> to move.</p>
                 </p>
             </div>
             
@@ -326,7 +327,7 @@
                     </div>
                     <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-tertiary);">physics_sandbox.scene</div>
                 </div>
-                <div id="threeCanvasContainer" style="width: 100%; height: 450px; background: var(--bg-base); background-image: radial-gradient(var(--border-default) 1px, transparent 1px); background-size: 30px 30px; position: relative;"></div>
+                <div id="threeCanvasContainer" style="width: 100%; height: 450px; background: var(--bg-base); background-image: radial-gradient(var(--border-default) 1px, transparent 1px); background-size: 30px 30px; position: relative; cursor: grab;"></div>
                 <div class="vp-footer">
                     <div class="agent-log" style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-secondary);">
                         <span id="physLog">> Physics engine initialized. Gravity: -9.81 m/s^2</span>
@@ -404,10 +405,16 @@
         // --- 3D Physics Sandbox (Three.js) ---
         let scene, camera, renderer, blocks = [];
         let physContainer = document.getElementById('threeCanvasContainer');
+        
+        // Custom Fly Controls State
+        let isDragging = false;
+        let prevMouse = { x: 0, y: 0 };
+        let yaw = -Math.PI / 4;
+        let pitch = -Math.PI / 6;
+        const keys = {};
 
         function init3D() {
             if (!physContainer || physContainer.clientWidth === 0) {
-                // Fallback if DOM hasn't laid out yet
                 setTimeout(init3D, 100);
                 return;
             }
@@ -417,18 +424,19 @@
             const aspect = physContainer.clientWidth / physContainer.clientHeight;
             camera = new THREE.PerspectiveCamera(50, aspect, 0.1, 1000);
             camera.position.set(7, 5, 9);
-            camera.lookAt(0, 0, 0);
+            camera.rotation.order = 'YXZ'; // Essential for FPS-style camera rotation
+            camera.rotation.y = yaw;
+            camera.rotation.x = pitch;
 
             renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
             renderer.setSize(physContainer.clientWidth, physContainer.clientHeight);
             renderer.setPixelRatio(window.devicePixelRatio);
             physContainer.appendChild(renderer.domElement);
 
-            // Grid
+            // Grid & Plane
             const gridHelper = new THREE.GridHelper(20, 20, 0x2A2A30, 0x1F1F23);
             scene.add(gridHelper);
 
-            // Base Platform
             const planeGeo = new THREE.PlaneGeometry(20, 20);
             const planeMat = new THREE.MeshBasicMaterial({ color: 0x0E0E11, side: THREE.DoubleSide, transparent: true, opacity: 0.5 });
             const plane = new THREE.Mesh(planeGeo, planeMat);
@@ -443,8 +451,70 @@
             dirLight.position.set(5, 10, 7);
             scene.add(dirLight);
 
+            // Listeners for custom controls
+            setupCameraControls();
             window.addEventListener('resize', onResize, false);
             animate();
+        }
+
+        function setupCameraControls() {
+            physContainer.addEventListener('mousedown', (e) => {
+                if (e.button === 0) { // Left click
+                    isDragging = true;
+                    prevMouse.x = e.clientX;
+                    prevMouse.y = e.clientY;
+                    physContainer.style.cursor = 'grabbing';
+                }
+            });
+
+            window.addEventListener('mouseup', () => {
+                isDragging = false;
+                physContainer.style.cursor = 'grab';
+            });
+
+            window.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                const deltaX = e.clientX - prevMouse.x;
+                const deltaY = e.clientY - prevMouse.y;
+                prevMouse.x = e.clientX;
+                prevMouse.y = e.clientY;
+
+                yaw -= deltaX * 0.005;
+                pitch -= deltaY * 0.005;
+                
+                // Clamp pitch to prevent flipping
+                pitch = Math.max(-Math.PI / 2 + 0.1, Math.min(Math.PI / 2 - 0.1, pitch));
+
+                camera.rotation.y = yaw;
+                camera.rotation.x = pitch;
+            });
+
+            window.addEventListener('keydown', (e) => {
+                // Don't trigger movement if typing in an input field
+                if (document.activeElement.tagName === 'INPUT') return;
+                keys[e.key.toLowerCase()] = true;
+            });
+
+            window.addEventListener('keyup', (e) => {
+                keys[e.key.toLowerCase()] = false;
+            });
+        }
+
+        function updateCameraMovement() {
+            const speed = 0.1;
+            const forward = new THREE.Vector3();
+            camera.getWorldDirection(forward);
+            forward.normalize();
+            
+            const right = new THREE.Vector3();
+            right.crossVectors(forward, camera.up).normalize();
+            
+            if (keys['w']) camera.position.addScaledVector(forward, speed);
+            if (keys['s']) camera.position.addScaledVector(forward, -speed);
+            if (keys['a']) camera.position.addScaledVector(right, -speed);
+            if (keys['d']) camera.position.addScaledVector(right, speed);
+            if (keys['e']) camera.position.y += speed;
+            if (keys['q']) camera.position.y -= speed;
         }
 
         function onResize() {
@@ -500,6 +570,8 @@
         function animate() {
             requestAnimationFrame(animate);
 
+            updateCameraMovement();
+
             const gravity = -0.015;
             const damping = 0.7;
 
@@ -529,13 +601,9 @@
             renderer.render(scene, camera);
         }
 
-        // Wait for DOM to be fully loaded and layout calculated
         window.addEventListener('load', init3D);
-        
-        // Expose to global scope for HTML buttons
         window.spawnBlock = spawnBlock;
         window.resetPhysics = resetPhysics;
-
     </script>
 
     <script>
@@ -614,7 +682,6 @@
             points.push(`${x},${y}`);
             basePartPath.setAttribute('points', points.join(' '));
             
-            // Add visual snap point
             const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
             circle.setAttribute('cx', x);
             circle.setAttribute('cy', y);
@@ -635,11 +702,15 @@
         });
 
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' && isDrawing && points.length > 2) {
-                isDrawing = false;
-                rubberBand.style.display = 'none';
-                promptInput.focus();
-                logConsole('Drawing complete. AI agent ready for commands.', 'var(--accent-green)');
+            // Ignore if typing in input
+            if (document.activeElement.tagName === 'INPUT') {
+                if (e.key === 'Enter' && isDrawing && points.length > 2) {
+                    isDrawing = false;
+                    rubberBand.style.display = 'none';
+                    promptInput.focus();
+                    logConsole('Drawing complete. AI agent ready for commands.', 'var(--accent-green)');
+                }
+                return;
             }
         });
 
