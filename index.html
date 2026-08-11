@@ -20,9 +20,11 @@
             --accent-blue: #3B82F6;
             --accent-green: #10B981;
             --accent-red: #EF4444;
+            --glow-blue: rgba(59, 130, 246, 0.15);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
 
         body {
             background-color: var(--bg-base);
@@ -30,80 +32,103 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             line-height: 1.5;
             -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            cursor: none; /* Hide default cursor for custom one */
         }
 
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+        /* Custom Cursor */
+        .cursor-dot, .cursor-outline {
+            position: fixed; top: 0; left: 0; pointer-events: none;
+            border-radius: 50%; transform: translate(-50%, -50%);
+            z-index: 9999; transition: opacity 0.3s, width 0.3s, height 0.3s, background 0.3s;
+        }
+        .cursor-dot { width: 6px; height: 6px; background: var(--accent-blue); }
+        .cursor-outline {
+            width: 32px; height: 32px; border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: transform 0.15s ease-out, width 0.3s, height 0.3s;
+        }
+        .cursor-outline.hover {
+            width: 50px; height: 50px; border-color: var(--accent-blue);
+            background: rgba(59, 130, 246, 0.05);
+        }
+
+        /* Background Ambient Orbs */
+        .orb {
+            position: absolute; border-radius: 50%; filter: blur(80px);
+            opacity: 0.4; z-index: 0; pointer-events: none;
+        }
+        .orb-1 { width: 400px; height: 400px; background: var(--accent-blue); top: -100px; left: -100px; animation: float 8s ease-in-out infinite; }
+        .orb-2 { width: 300px; height: 300px; background: purple; bottom: 10%; right: -50px; animation: float 12s ease-in-out infinite reverse; }
+        @keyframes float { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(50px, 30px); } }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
 
         /* Nav */
-        nav { border-bottom: 1px solid var(--border-default); position: sticky; top: 0; background: rgba(8, 8, 10, 0.8); backdrop-filter: blur(12px); z-index: 100; }
-        .nav-inner { display: flex; justify-content: space-between; align-items: center; height: 56px; }
-        .logo { font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 14px; display: flex; align-items: center; gap: 8px; }
-        .logo-mark { width: 16px; height: 16px; border: 1px solid var(--text-primary); background: var(--text-primary); transform: rotate(45deg); }
+        nav { border-bottom: 1px solid rgba(31, 31, 35, 0.5); position: sticky; top: 0; background: rgba(8, 8, 10, 0.6); backdrop-filter: blur(20px); z-index: 100; }
+        .nav-inner { display: flex; justify-content: space-between; align-items: center; height: 64px; }
+        .logo { font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 14px; display: flex; align-items: center; gap: 10px; }
+        .logo-mark { width: 16px; height: 16px; border: 1px solid var(--text-primary); background: var(--text-primary); transform: rotate(45deg); transition: transform 0.5s ease; }
+        .logo:hover .logo-mark { transform: rotate(135deg); }
         .nav-links { display: flex; gap: 32px; align-items: center; }
-        .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 13px; font-weight: 500; transition: color 0.15s; }
-        .nav-links a:hover { color: var(--text-primary); }
-        .btn { font-size: 13px; font-weight: 500; padding: 7px 14px; border: 1px solid var(--border-strong); background: var(--bg-elevated); color: var(--text-primary); border-radius: 6px; cursor: pointer; text-decoration: none; transition: background 0.15s; display: inline-flex; align-items: center; gap: 8px; }
-        .btn:hover { background: var(--bg-hover); }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 13px; font-weight: 500; transition: color 0.2s; position: relative; }
+        .nav-links a:not(.btn)::after { content: ''; position: absolute; width: 0; height: 1px; left: 0; bottom: -4px; background: var(--accent-blue); transition: width 0.3s ease; }
+        .nav-links a:not(.btn):hover { color: var(--text-primary); }
+        .nav-links a:not(.btn):hover::after { width: 100%; }
+        
+        .btn { font-size: 13px; font-weight: 500; padding: 8px 16px; border: 1px solid var(--border-strong); background: var(--bg-elevated); color: var(--text-primary); border-radius: 6px; cursor: none; text-decoration: none; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; position: relative; overflow: hidden; }
+        .btn:hover { background: var(--bg-hover); border-color: var(--text-secondary); }
         .btn-primary { background: var(--text-primary); color: var(--bg-base); border-color: var(--text-primary); }
-        .btn-primary:hover { background: #DDD; }
+        .btn-primary:hover { background: #FFF; box-shadow: 0 0 20px rgba(245, 245, 247, 0.3); }
+        .btn-primary::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: left 0.6s ease; }
+        .btn-primary:hover::before { left: 100%; }
 
         /* Hero */
-        .hero { padding: 120px 0 80px; border-bottom: 1px solid var(--border-default); text-align: center; }
-        .hero-tag { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent-blue); border: 1px solid var(--accent-blue); padding: 4px 10px; border-radius: 4px; margin-bottom: 24px; display: inline-block; }
-        h1 { font-size: 52px; font-weight: 600; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 20px; max-width: 800px; margin-left: auto; margin-right: auto; }
-        .hero-subtitle { font-size: 18px; color: var(--text-secondary); margin-bottom: 32px; max-width: 620px; margin-left: auto; margin-right: auto; }
-        .hero-actions { display: flex; gap: 12px; justify-content: center; margin-bottom: 48px; }
-        .hero-meta { display: flex; gap: 24px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-tertiary); justify-content: center; }
+        .hero { padding: 140px 0 100px; border-bottom: 1px solid var(--border-default); text-align: center; position: relative; overflow: hidden; }
+        .hero-tag { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent-blue); border: 1px solid rgba(59, 130, 246, 0.3); background: rgba(59, 130, 246, 0.05); padding: 6px 12px; border-radius: 100px; margin-bottom: 28px; display: inline-block; animation: fadeUp 0.8s ease forwards; opacity: 0; }
+        h1 { font-size: 56px; font-weight: 700; letter-spacing: -0.04em; line-height: 1.05; margin-bottom: 24px; max-width: 800px; margin-left: auto; margin-right: auto; background: linear-gradient(180deg, #FFF 0%, #A1A1A6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: fadeUp 0.8s ease 0.1s forwards; opacity: 0; }
+        .hero-subtitle { font-size: 18px; color: var(--text-secondary); margin-bottom: 40px; max-width: 620px; margin-left: auto; margin-right: auto; animation: fadeUp 0.8s ease 0.2s forwards; opacity: 0; }
+        .hero-actions { display: flex; gap: 12px; justify-content: center; margin-bottom: 48px; animation: fadeUp 0.8s ease 0.3s forwards; opacity: 0; }
+        .hero-meta { display: flex; gap: 24px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-tertiary); justify-content: center; animation: fadeUp 0.8s ease 0.4s forwards; opacity: 0; }
 
         /* Waitlist Form */
-        .waitlist-form { display: flex; gap: 8px; justify-content: center; margin-top: 24px; }
-        .waitlist-input { background: var(--bg-elevated); border: 1px solid var(--border-strong); color: var(--text-primary); padding: 10px 14px; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 13px; outline: none; width: 280px; transition: border-color 0.2s; }
+        .waitlist-form { display: flex; gap: 8px; justify-content: center; margin-top: 24px; animation: fadeUp 0.8s ease 0.5s forwards; opacity: 0; }
+        .waitlist-input { background: var(--bg-elevated); border: 1px solid var(--border-strong); color: var(--text-primary); padding: 12px 16px; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 13px; outline: none; width: 280px; transition: all 0.2s; cursor: none; }
         .waitlist-input::placeholder { color: var(--text-tertiary); }
-        .waitlist-input:focus { border-color: var(--accent-blue); }
+        .waitlist-input:focus { border-color: var(--accent-blue); box-shadow: 0 0 0 3px var(--glow-blue); }
         .waitlist-success { color: var(--accent-green); font-family: 'JetBrains Mono', monospace; font-size: 14px; margin-top: 16px; display: flex; align-items: center; gap: 8px; justify-content: center; }
 
-        /* Sections */
-        section { padding: 100px 0; border-bottom: 1px solid var(--border-default); }
-        .section-header { margin-bottom: 48px; max-width: 600px; }
-        .section-label { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent-blue); margin-bottom: 12px; display: block; }
-        h2 { font-size: 32px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 12px; }
-        .section-desc { color: var(--text-secondary); font-size: 16px; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Generic Viewport Mock */
-        .viewport-mock { border: 1px solid var(--border-strong); border-radius: 8px; background: var(--bg-elevated); overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
-        .vp-header { background: var(--bg-base); border-bottom: 1px solid var(--border-strong); padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; }
-        .vp-tabs { display: flex; gap: 16px; font-family: 'JetBrains Mono', monospace; font-size: 12px; }
-        .vp-tab { color: var(--text-tertiary); cursor: pointer; padding: 4px 8px; border-radius: 4px; transition: all 0.2s; }
-        .vp-tab.active { color: var(--accent-blue); background: rgba(59, 130, 246, 0.1); }
-        .vp-canvas { height: 400px; position: relative; background-image: radial-gradient(var(--border-default) 1px, transparent 1px); background-size: 20px 20px; display: flex; align-items: center; justify-content: center; }
-        .vp-console { background: var(--bg-base); border-top: 1px solid var(--border-strong); padding: 12px 16px; height: 80px; overflow-y: auto; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-secondary); }
-        .vp-console div { margin-bottom: 4px; }
-        .vp-footer { background: var(--bg-base); border-top: 1px solid var(--border-strong); padding: 16px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
-        
-        .prompt-form { display: flex; flex: 1; gap: 8px; align-items: center; background: var(--bg-elevated); border: 1px solid var(--border-strong); border-radius: 6px; padding: 4px 12px; min-width: 200px; }
-        .prompt-prefix { color: var(--accent-green); font-family: 'JetBrains Mono', monospace; font-size: 13px; }
-        .prompt-input { flex: 1; background: none; border: none; outline: none; color: var(--text-primary); font-family: 'JetBrains Mono', monospace; font-size: 13px; padding: 8px 0; }
-        .prompt-input::placeholder { color: var(--text-tertiary); }
-        
-        .diff-btn { padding: 8px 14px; border-radius: 6px; font-size: 12px; font-weight: 500; cursor: pointer; border: 1px solid var(--border-strong); background: transparent; color: var(--text-primary); transition: all 0.2s; font-family: inherit; white-space: nowrap; }
-        .diff-btn:hover { background: var(--bg-hover); }
-        .diff-btn.discard { color: var(--accent-red); border-color: rgba(239, 68, 68, 0.3); }
-        .diff-btn.discard:hover { background: rgba(239, 68, 68, 0.1); }
-        .diff-btn.merge { color: var(--accent-green); border-color: rgba(16, 185, 129, 0.3); }
-        .diff-btn.merge:hover { background: rgba(16, 185, 129, 0.1); }
-        .diff-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+        /* Sections & Scroll Reveal */
+        section { padding: 120px 0; border-bottom: 1px solid var(--border-default); position: relative; }
+        .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
 
-        /* SVG Styles */
-        .base-part { fill: rgba(255, 255, 255, 0.05); stroke: var(--text-primary); stroke-width: 2; transition: stroke 0.3s; }
-        .ai-proposal { fill: rgba(59, 130, 246, 0.15); stroke: var(--accent-blue); stroke-width: 2; stroke-dasharray: 6 3; transition: opacity 0.3s, fill 0.3s, stroke 0.3s; }
-        .ai-proposal.hidden { opacity: 0; }
-        .ai-proposal.merged { fill: rgba(16, 185, 129, 0.15); stroke: var(--accent-green); stroke-dasharray: none; }
-        .snap-point { fill: var(--accent-blue); stroke: none; }
-        #rubberBand { stroke: var(--accent-blue); stroke-width: 2; stroke-dasharray: 4 4; pointer-events: none; }
+        .section-header { margin-bottom: 56px; max-width: 650px; }
+        .section-label { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent-blue); margin-bottom: 16px; display: block; letter-spacing: 0.05em; }
+        h2 { font-size: 36px; font-weight: 600; letter-spacing: -0.03em; margin-bottom: 16px; line-height: 1.2; }
+        .section-desc { color: var(--text-secondary); font-size: 16px; line-height: 1.6; }
 
-        /* Demo 2: Hardware Allocation */
-        .mem-container { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
-        .mem-visual { background: var(--bg-elevated); border: 1px solid var(--border-strong); border-radius: 8px; padding: 24px; }
+        /* Screenshot Container (Premium Frame) */
+        .screenshot-container {
+            position: relative; border: 1px solid var(--border-strong);
+            border-radius: 12px; background: var(--bg-elevated); overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease, border-color 0.5s ease;
+        }
+        .screenshot-container:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255,255,255,0.2);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.5), 0 0 40px rgba(59, 130, 246, 0.1);
+        }
+        .screenshot-container img {
+            width: 100%; height: auto; display: block; object-fit: cover;
+        }
+
+        /* Hardware Allocation Demo */
+        .mem-container { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+        .mem-visual { background: var(--bg-elevated); border: 1px solid var(--border-strong); border-radius: 8px; padding: 24px; transition: box-shadow 0.3s; }
+        .mem-visual:hover { box-shadow: 0 0 30px rgba(59, 130, 246, 0.05); }
         .mem-header { display: flex; justify-content: space-between; margin-bottom: 16px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-tertiary); }
         .mem-bar-container { height: 40px; background: var(--bg-base); border-radius: 4px; display: flex; overflow: hidden; border: 1px solid var(--border-strong); position: relative; }
         .mem-segment { height: 100%; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: white; transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1); white-space: nowrap; overflow: hidden; }
@@ -115,11 +140,11 @@
 
         .mem-controls { margin-top: 24px; display: flex; flex-direction: column; gap: 16px; }
         .tier-selector { display: flex; gap: 8px; }
-        .tier-btn { flex: 1; padding: 10px; background: var(--bg-base); border: 1px solid var(--border-strong); color: var(--text-secondary); border-radius: 6px; cursor: pointer; font-family: 'JetBrains Mono', monospace; font-size: 12px; transition: all 0.2s; }
+        .tier-btn { flex: 1; padding: 10px; background: var(--bg-base); border: 1px solid var(--border-strong); color: var(--text-secondary); border-radius: 6px; cursor: none; font-family: 'JetBrains Mono', monospace; font-size: 12px; transition: all 0.2s; }
         .tier-btn:hover { border-color: var(--text-secondary); color: var(--text-primary); }
         .tier-btn.active { border-color: var(--accent-blue); color: var(--accent-blue); background: rgba(59, 130, 246, 0.05); }
         
-        .mem-btn { width: 100%; padding: 12px; background: var(--bg-base); border: 1px solid var(--border-strong); color: var(--text-primary); border-radius: 6px; cursor: pointer; font-family: 'JetBrains Mono', monospace; font-size: 13px; transition: all 0.2s; }
+        .mem-btn { width: 100%; padding: 12px; background: var(--bg-base); border: 1px solid var(--border-strong); color: var(--text-primary); border-radius: 6px; cursor: none; font-family: 'JetBrains Mono', monospace; font-size: 13px; transition: all 0.2s; }
         .mem-btn:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
         .mem-btn.active { border-color: var(--accent-red); color: var(--accent-red); background: rgba(239, 68, 68, 0.05); }
         
@@ -128,45 +153,57 @@
         /* Ecosystem */
         .ecosystem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
         .eco-list { display: flex; flex-direction: column; gap: 24px; }
-        .eco-item { border-left: 2px solid var(--border-strong); padding-left: 20px; }
+        .eco-item { border-left: 2px solid var(--border-strong); padding-left: 20px; transition: border-color 0.3s; }
+        .eco-item:hover { border-color: var(--accent-blue); }
         .eco-item.highlight { border-color: var(--accent-green); }
         .eco-title { font-size: 16px; font-weight: 500; margin-bottom: 6px; display: flex; justify-content: space-between; }
         .eco-badge { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent-green); border: 1px solid var(--accent-green); padding: 2px 6px; border-radius: 4px; }
         .eco-desc { font-size: 14px; color: var(--text-secondary); }
 
         /* CTA */
-        .cta-box { border: 1px solid var(--border-default); background: var(--bg-elevated); border-radius: 8px; padding: 48px; text-align: center; }
+        .cta-box { border: 1px solid var(--border-default); background: linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg-base) 100%); border-radius: 12px; padding: 64px 48px; text-align: center; position: relative; overflow: hidden; }
+        .cta-box::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 1px; background: linear-gradient(90deg, transparent, var(--accent-blue), transparent); }
         
         /* Footer */
         footer { padding: 48px 0; font-size: 13px; color: var(--text-tertiary); }
         footer .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
         .legal-disclaimer { font-size: 11px; color: var(--text-tertiary); border-top: 1px solid var(--border-default); padding: 24px 0; margin-top: 48px; text-align: center; max-width: 800px; margin-left: auto; margin-right: auto; line-height: 1.6; }
 
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-base); }
+        ::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-tertiary); }
+        ::selection { background: var(--accent-blue); color: white; }
+
         @media (max-width: 768px) {
-            h1 { font-size: 36px; }
+            body { cursor: auto; }
+            .cursor-dot, .cursor-outline { display: none; }
+            .btn, .waitlist-input, .mem-btn, .tier-btn { cursor: pointer; }
+            h1 { font-size: 40px; }
+            .hero { padding: 80px 0 60px; }
             .hero-actions { flex-direction: column; width: 100%; max-width: 300px; margin: 0 auto 32px; }
             .waitlist-form { flex-direction: column; width: 100%; max-width: 300px; margin: 24px auto 0; }
             .waitlist-input { width: 100%; }
             .ecosystem-grid, .mem-container { grid-template-columns: 1fr; }
-            .vp-footer { flex-direction: column; align-items: stretch; }
-            .prompt-form { width: 100%; }
         }
     </style>
-    <script type="importmap">
-      {
-        "imports": {
-          "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
-        }
-      }
-    </script>
 </head>
 <body>
+
+    <!-- Custom Cursor Elements -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- Background Ambient Orbs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
 
     <nav>
         <div class="container nav-inner">
             <div class="logo"><div class="logo-mark"></div>localLabs</div>
             <div class="nav-links">
-                <a href="#demo">Demos</a>
+                <a href="#demo">Showcase</a>
                 <a href="#hardware">Hardware</a>
                 <a href="#ecosystem">Ecosystem</a>
                 <a href="#waitlist" class="btn">Join Waitlist</a>
@@ -183,7 +220,7 @@
                 Run powerful AI agents directly on your machine to generate, simulate, and validate CAD and physics workflows. No cloud. No subscriptions. Pure compute.
             </p>
             <div class="hero-actions">
-                <a href="#demo" class="btn btn-primary">Try Interactive Demo</a>
+                <a href="#demo" class="btn btn-primary">View Showcase</a>
             </div>
             <div class="hero-meta">
                 <span>Windows 10/11 x64</span>
@@ -200,60 +237,27 @@
         </div>
     </div>
 
-    <!-- Demo 1: Interactive AutoCAD-like Agent Loop -->
+    <!-- Demo 1: Collaborative AI Canvas Showcase -->
     <section id="demo">
         <div class="container">
-            <div class="section-header">
-                <span class="section-label">// CAD_AGENT_LOOP</span>
-                <h2>Draw, request, verify</h2>
+            <div class="section-header reveal">
+                <span class="section-label">// SPATIAL_CANVAS</span>
+                <h2>A unified workspace for design</h2>
                 <p class="section-desc">
-                    Click on the grid to draw a custom part. Press 'Enter' to close the shape. Then, ask the AI to modify it. The agent proposes changes in an isolated shadow branch that you must visually verify before merging.
+                    localLabs provides an infinite spatial canvas where AI agents and humans collaborate in real-time. From user journey mapping and wireframing to analytics, organize your entire project vision and iterate visually without leaving the workspace.
                 </p>
             </div>
             
-            <div class="viewport-mock">
-                <div class="vp-header">
-                    <div class="vp-tabs">
-                        <div class="vp-tab active">Main Branch</div>
-                        <div class="vp-tab">Agent Shadow Branch</div>
-                    </div>
-                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-tertiary);">custom_part_v1.dsl</div>
-                </div>
-                <div class="vp-canvas" id="cadCanvasContainer">
-                    <svg width="100%" height="100%" viewBox="0 0 600 400" id="cadSvg" style="cursor: crosshair; display: block;">
-                        <!-- User drawing -->
-                        <polygon class="base-part" id="basePartPath" points="" />
-                        <line id="rubberBand" x1="0" y1="0" x2="0" y2="0" style="display:none;" />
-                        <g id="snapPoints"></g>
-                        
-                        <!-- AI Proposal Elements -->
-                        <circle class="ai-proposal hidden" id="proposalHole" cx="300" cy="200" r="40" />
-                        <path class="ai-proposal hidden" id="proposalSupport" d="M400 300 L400 350 L420 350 L420 300 Z" />
-                    </svg>
-                    <div id="drawHint" style="position: absolute; top: 20px; left: 20px; color: var(--text-tertiary); font-family: 'JetBrains Mono', monospace; font-size: 12px; pointer-events: none;">Click to draw points. Press 'Enter' to close shape.</div>
-                </div>
-                <div class="vp-console" id="vpConsole">
-                    <div>> System ready. Draw a part on the grid.</div>
-                </div>
-                <div class="vp-footer">
-                    <form class="prompt-form" id="promptForm" onsubmit="event.preventDefault(); runAgent();">
-                        <span class="prompt-prefix">user@localLabs:~$</span>
-                        <input type="text" id="promptInput" class="prompt-input" placeholder="Try: 'add hole' or 'add support'" autocomplete="off">
-                    </form>
-                    <div style="display: flex; gap: 8px;">
-                        <button class="diff-btn" onclick="clearCanvas()" style="color: var(--text-secondary);">Clear Canvas</button>
-                        <button class="diff-btn discard" id="discardBtn" onclick="discardProposal()" disabled>Discard</button>
-                        <button class="diff-btn merge" id="mergeBtn" onclick="mergeProposal()" disabled>Merge to Trunk</button>
-                    </div>
-                </div>
+            <div class="screenshot-container reveal">
+                <img src="canvas.png" alt="localLabs Collaborative E-Commerce Redesign Canvas">
             </div>
         </div>
     </section>
 
     <!-- Demo 2: Interactive Hardware Switching -->
-    <section id="hardware" style="background: var(--bg-elevated);">
+    <section id="hardware" style="background: linear-gradient(180deg, var(--bg-base) 0%, var(--bg-elevated) 100%);">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header reveal">
                 <span class="section-label">// HARDWARE_ADAPTATION</span>
                 <h2>Instant AI on any machine</h2>
                 <p class="section-desc">
@@ -262,7 +266,7 @@
             </div>
 
             <div class="mem-container">
-                <div class="mem-visual">
+                <div class="mem-visual reveal">
                     <div class="mem-header">
                         <span id="memTierLabel">SYSTEM VRAM ALLOCATION (8GB LIMIT: 6GB VRAM)</span>
                         <span id="memStateLabel" style="color: var(--text-tertiary);">STATE: IDLE</span>
@@ -291,8 +295,8 @@
                     </div>
                 </div>
 
-                <div class="mem-container-text">
-                    <h3>Dynamic Process Switching</h3>
+                <div class="mem-container-text reveal">
+                    <h3 style="font-size: 24px; margin-bottom: 20px; letter-spacing: -0.02em;">Dynamic Process Switching</h3>
                     <p style="color: var(--text-secondary); margin-bottom: 16px;">
                         On 8GB RAM systems, running both an LLM and a high-fidelity physics solver simultaneously causes immediate out-of-memory crashes. 
                     </p>
@@ -307,36 +311,19 @@
         </div>
     </section>
 
-    <!-- Demo 3: 3D Physics Sandbox -->
+    <!-- Demo 3: 3D Physics Sandbox Showcase -->
     <section id="physics-demo">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header reveal">
                 <span class="section-label">// 3D_PHYSICS_SANDBOX</span>
                 <h2>Real-time local physics</h2>
                 <p class="section-desc">
-                    Once an agent proposes a design, run it through the local physics engine. This sandbox demonstrates the real-time collision detection available in the PRO SDKs.
-                    <br><br><strong style="color: var(--text-primary);">Controls:</strong> <span style="font-family: 'JetBrains Mono', monospace; color: var(--accent-green);">Left-Click + Drag</span> to look. <span style="font-family: 'JetBrains Mono', monospace; color: var(--accent-green);">W A S D Q E</span> to move.</p>
+                    Run high-fidelity physics simulations directly in the 3D viewport. With built-in rigid body dynamics, colliders, and gravity, you can test how objects interact in real-time. Use the AI assistant to spawn objects, set bounce, and adjust physical properties using natural language.
                 </p>
             </div>
             
-            <div class="viewport-mock">
-                <div class="vp-header">
-                    <div class="vp-tabs">
-                        <div class="vp-tab active">3D Viewport</div>
-                        <div class="vp-tab">Properties</div>
-                    </div>
-                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-tertiary);">physics_sandbox.scene</div>
-                </div>
-                <div id="threeCanvasContainer" style="width: 100%; height: 450px; background: var(--bg-base); background-image: radial-gradient(var(--border-default) 1px, transparent 1px); background-size: 30px 30px; position: relative; cursor: grab;"></div>
-                <div class="vp-footer">
-                    <div class="agent-log" style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-secondary);">
-                        <span id="physLog">> Physics engine initialized. Gravity: -9.81 m/s^2</span>
-                    </div>
-                    <div style="display: flex; gap: 8px;">
-                        <button class="diff-btn" onclick="window.spawnBlock()" style="color: var(--accent-blue); border-color: rgba(59, 130, 246, 0.3);">Drop Block</button>
-                        <button class="diff-btn" onclick="window.resetPhysics()" style="color: var(--text-secondary);">Reset Scene</button>
-                    </div>
-                </div>
+            <div class="screenshot-container reveal">
+                <img src="physics.png" alt="localLabs 3D Physics Simulation Interface">
             </div>
         </div>
     </section>
@@ -345,31 +332,16 @@
     <section id="ecosystem">
         <div class="container">
             <div class="ecosystem-grid">
-                <div>
+                <div class="reveal">
                     <span class="section-label">// OPEN_CORE_MODEL</span>
                     <h2>Free platform.<br>Premium engines.</h2>
                     <p class="section-desc" style="margin-bottom: 32px;">
-                        We believe in open access. The core IDE and local AI runtime are completely free, utilizing permissive Apache 2.0 and open-weight models. We sustain the business by offering specialized, proprietary plugins for professional engineers.
+                        We believe in open access. The core IDE and local AI runtime are completely free. Browse our marketplace for specialized, proprietary plugins and SDKs tailored for professional engineers.
                     </p>
                     <a href="#" class="btn btn-primary">Browse Plugin Marketplace</a>
                 </div>
-                <div class="eco-list">
-                    <div class="eco-item highlight">
-                        <div class="eco-title">Core IDE & AI Runtime <span class="eco-badge">FREE</span></div>
-                        <div class="eco-desc">Full access to the spatial canvas, local inference engine, and branching system. Automatically pulls open-weights from Hugging Face.</div>
-                    </div>
-                    <div class="eco-item">
-                        <div class="eco-title">Advanced Physics Solver <span class="eco-badge">PRO</span></div>
-                        <div class="eco-desc">High-fidelity real-time fluid dynamics and stress testing simulations integrated directly into the agent workflow.</div>
-                    </div>
-                    <div class="eco-item">
-                        <div class="eco-title">3D Rendering Engine <span class="eco-badge">PRO</span></div>
-                        <div class="eco-desc">Photorealistic viewport rendering and advanced mesh manipulation algorithms for professional visualization.</div>
-                    </div>
-                    <div class="eco-item">
-                        <div class="eco-title">Specialized CAD SDKs <span class="eco-badge">PRO</span></div>
-                        <div class="eco-desc">Industry-specific structural drafting algorithms and compliance checkers for manufacturing standards.</div>
-                    </div>
+                <div class="screenshot-container reveal">
+                    <img src="marketplace.png" alt="localLabs Marketplace and AI Tools">
                 </div>
             </div>
         </div>
@@ -378,10 +350,10 @@
     <!-- CTA / Waitlist -->
     <section id="waitlist" style="border-bottom: none;">
         <div class="container">
-            <div class="cta-box">
-                <h2>Build without API limits.</h2>
-                <p>Join the local-first revolution. Get early access to the localLabs private beta and run unlimited AI simulations on your own hardware.</p>
-                <form class="waitlist-form" id="footerWaitlistForm" onsubmit="event.preventDefault(); joinWaitlist('footerWaitlistForm', 'footerWaitlistInput');" style="margin-top: 32px;">
+            <div class="cta-box reveal">
+                <h2 style="margin-bottom: 16px;">Build without API limits.</h2>
+                <p style="color: var(--text-secondary); max-width: 500px; margin: 0 auto 32px;">Join the local-first revolution. Get early access to the localLabs private beta and run unlimited AI simulations on your own hardware.</p>
+                <form class="waitlist-form" id="footerWaitlistForm" onsubmit="event.preventDefault(); joinWaitlist('footerWaitlistForm', 'footerWaitlistInput');" style="margin-top: 0; animation: none; opacity: 1;">
                     <input type="email" id="footerWaitlistInput" class="waitlist-input" placeholder="Enter your email address" required>
                     <button type="submit" class="btn btn-primary">Join Private Beta</button>
                 </form>
@@ -399,214 +371,43 @@
         </div>
     </footer>
 
-    <script type="module">
-        import * as THREE from 'three';
-
-        // --- 3D Physics Sandbox (Three.js) ---
-        let scene, camera, renderer, blocks = [];
-        let physContainer = document.getElementById('threeCanvasContainer');
-        
-        // Custom Fly Controls State
-        let isDragging = false;
-        let prevMouse = { x: 0, y: 0 };
-        let yaw = -Math.PI / 4;
-        let pitch = -Math.PI / 6;
-        const keys = {};
-
-        function init3D() {
-            if (!physContainer || physContainer.clientWidth === 0) {
-                setTimeout(init3D, 100);
-                return;
-            }
-
-            scene = new THREE.Scene();
-            
-            const aspect = physContainer.clientWidth / physContainer.clientHeight;
-            camera = new THREE.PerspectiveCamera(50, aspect, 0.1, 1000);
-            camera.position.set(7, 5, 9);
-            camera.rotation.order = 'YXZ'; // Essential for FPS-style camera rotation
-            camera.rotation.y = yaw;
-            camera.rotation.x = pitch;
-
-            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-            renderer.setSize(physContainer.clientWidth, physContainer.clientHeight);
-            renderer.setPixelRatio(window.devicePixelRatio);
-            physContainer.appendChild(renderer.domElement);
-
-            // Grid & Plane
-            const gridHelper = new THREE.GridHelper(20, 20, 0x2A2A30, 0x1F1F23);
-            scene.add(gridHelper);
-
-            const planeGeo = new THREE.PlaneGeometry(20, 20);
-            const planeMat = new THREE.MeshBasicMaterial({ color: 0x0E0E11, side: THREE.DoubleSide, transparent: true, opacity: 0.5 });
-            const plane = new THREE.Mesh(planeGeo, planeMat);
-            plane.rotation.x = -Math.PI / 2;
-            plane.position.y = -0.01;
-            scene.add(plane);
-
-            // Lighting
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
-            scene.add(ambientLight);
-            const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
-            dirLight.position.set(5, 10, 7);
-            scene.add(dirLight);
-
-            // Listeners for custom controls
-            setupCameraControls();
-            window.addEventListener('resize', onResize, false);
-            animate();
-        }
-
-        function setupCameraControls() {
-            physContainer.addEventListener('mousedown', (e) => {
-                if (e.button === 0) { // Left click
-                    isDragging = true;
-                    prevMouse.x = e.clientX;
-                    prevMouse.y = e.clientY;
-                    physContainer.style.cursor = 'grabbing';
-                }
-            });
-
-            window.addEventListener('mouseup', () => {
-                isDragging = false;
-                physContainer.style.cursor = 'grab';
-            });
-
-            window.addEventListener('mousemove', (e) => {
-                if (!isDragging) return;
-                const deltaX = e.clientX - prevMouse.x;
-                const deltaY = e.clientY - prevMouse.y;
-                prevMouse.x = e.clientX;
-                prevMouse.y = e.clientY;
-
-                yaw -= deltaX * 0.005;
-                pitch -= deltaY * 0.005;
-                
-                // Clamp pitch to prevent flipping
-                pitch = Math.max(-Math.PI / 2 + 0.1, Math.min(Math.PI / 2 - 0.1, pitch));
-
-                camera.rotation.y = yaw;
-                camera.rotation.x = pitch;
-            });
-
-            window.addEventListener('keydown', (e) => {
-                // Don't trigger movement if typing in an input field
-                if (document.activeElement.tagName === 'INPUT') return;
-                keys[e.key.toLowerCase()] = true;
-            });
-
-            window.addEventListener('keyup', (e) => {
-                keys[e.key.toLowerCase()] = false;
-            });
-        }
-
-        function updateCameraMovement() {
-            const speed = 0.1;
-            const forward = new THREE.Vector3();
-            camera.getWorldDirection(forward);
-            forward.normalize();
-            
-            const right = new THREE.Vector3();
-            right.crossVectors(forward, camera.up).normalize();
-            
-            if (keys['w']) camera.position.addScaledVector(forward, speed);
-            if (keys['s']) camera.position.addScaledVector(forward, -speed);
-            if (keys['a']) camera.position.addScaledVector(right, -speed);
-            if (keys['d']) camera.position.addScaledVector(right, speed);
-            if (keys['e']) camera.position.y += speed;
-            if (keys['q']) camera.position.y -= speed;
-        }
-
-        function onResize() {
-            if (!physContainer || physContainer.clientWidth === 0) return;
-            camera.aspect = physContainer.clientWidth / physContainer.clientHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(physContainer.clientWidth, physContainer.clientHeight);
-        }
-
-        function spawnBlock() {
-            const size = Math.random() * 0.8 + 0.4;
-            const geo = new THREE.BoxGeometry(size, size, size);
-            
-            const isPro = Math.random() > 0.5;
-            const color = isPro ? 0x3B82F6 : 0xF5F5F7;
-            
-            const mat = new THREE.MeshStandardMaterial({ color: color, roughness: 0.5, metalness: 0.1 });
-            const block = new THREE.Mesh(geo, mat);
-            
-            const edges = new THREE.EdgesGeometry(geo);
-            const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x000000 }));
-            block.add(line);
-
-            block.position.set(
-                (Math.random() - 0.5) * 4,
-                5,
-                (Math.random() - 0.5) * 4
-            );
-
-            block.rotation.set(
-                Math.random() * Math.PI,
-                Math.random() * Math.PI,
-                Math.random() * Math.PI
-            );
-
-            block.userData = {
-                velocity: { x: 0, y: 0, z: 0 },
-                size: size,
-                isResting: false
-            };
-
-            scene.add(block);
-            blocks.push(block);
-            document.getElementById('physLog').innerText = `> Spawned ${isPro ? 'PRO' : 'FREE'} block. Total objects: ${blocks.length}`;
-        }
-
-        function resetPhysics() {
-            blocks.forEach(b => scene.remove(b));
-            blocks = [];
-            document.getElementById('physLog').innerText = `> Scene cleared. Ready.`;
-        }
-
-        function animate() {
-            requestAnimationFrame(animate);
-
-            updateCameraMovement();
-
-            const gravity = -0.015;
-            const damping = 0.7;
-
-            blocks.forEach(block => {
-                if (block.userData.isResting) return;
-
-                block.userData.velocity.y += gravity;
-
-                block.position.x += block.userData.velocity.x;
-                block.position.y += block.userData.velocity.y;
-                block.position.z += block.userData.velocity.z;
-
-                const halfSize = block.userData.size / 2;
-                if (block.position.y - halfSize < 0) {
-                    block.position.y = halfSize;
-                    block.userData.velocity.y *= -damping;
-                    block.userData.velocity.x *= 0.9;
-                    block.userData.velocity.z *= 0.9;
-
-                    if (Math.abs(block.userData.velocity.y) < 0.02) {
-                        block.userData.velocity = { x: 0, y: 0, z: 0 };
-                        block.userData.isResting = true;
-                    }
-                }
-            });
-
-            renderer.render(scene, camera);
-        }
-
-        window.addEventListener('load', init3D);
-        window.spawnBlock = spawnBlock;
-        window.resetPhysics = resetPhysics;
-    </script>
-
     <script>
+        // --- Custom Cursor Logic ---
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+            
+            // Smooth follow effect for outline
+            cursorOutline.animate({
+                left: `${posX}px`,
+                top: `${posY}px`
+            }, { duration: 200, fill: 'forwards' });
+        });
+
+        // Cursor hover effect on interactive elements
+        document.querySelectorAll('a, button, input').forEach(el => {
+            el.addEventListener('mouseenter', () => cursorOutline.classList.add('hover'));
+            el.addEventListener('mouseleave', () => cursorOutline.classList.remove('hover'));
+        });
+
+        // --- Scroll Reveal Logic ---
+        const revealElements = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // Stop observing once visible
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        revealElements.forEach(el => observer.observe(el));
+
         // --- Waitlist Logic ---
         const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xgawaneg';
 
@@ -637,157 +438,6 @@
                     form.innerHTML = `<div class="waitlist-success" style="color: var(--accent-red);">> Network error. Check connection.</div>`;
                 }
             }
-        }
-
-        // --- DEMO 1: AutoCAD-like Agent Loop ---
-        const cadSvg = document.getElementById('cadSvg');
-        const basePartPath = document.getElementById('basePartPath');
-        const consoleEl = document.getElementById('vpConsole');
-        const promptInput = document.getElementById('promptInput');
-        const mergeBtn = document.getElementById('mergeBtn');
-        const discardBtn = document.getElementById('discardBtn');
-        const drawHint = document.getElementById('drawHint');
-        const snapPointsGroup = document.getElementById('snapPoints');
-        const rubberBand = document.getElementById('rubberBand');
-
-        const proposalHole = document.getElementById('proposalHole');
-        const proposalSupport = document.getElementById('proposalSupport');
-
-        let points = [];
-        let isDrawing = true;
-        let activeProposals = [];
-
-        function logConsole(text, color = 'var(--text-secondary)') {
-            const div = document.createElement('div');
-            div.style.color = color;
-            div.textContent = `> ${text}`;
-            consoleEl.appendChild(div);
-            consoleEl.scrollTop = consoleEl.scrollHeight;
-        }
-
-        function getMouseCoords(e) {
-            const rect = cadSvg.getBoundingClientRect();
-            const scaleX = 600 / rect.width;
-            const scaleY = 400 / rect.height;
-            const x = Math.round((e.clientX - rect.left) * scaleX / 20) * 20;
-            const y = Math.round((e.clientY - rect.top) * scaleY / 20) * 20;
-            return { x, y };
-        }
-
-        cadSvg.addEventListener('click', (e) => {
-            if (!isDrawing) return;
-            drawHint.style.display = 'none';
-            
-            const { x, y } = getMouseCoords(e);
-            points.push(`${x},${y}`);
-            basePartPath.setAttribute('points', points.join(' '));
-            
-            const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-            circle.setAttribute('cx', x);
-            circle.setAttribute('cy', y);
-            circle.setAttribute('r', '3');
-            circle.setAttribute('class', 'snap-point');
-            snapPointsGroup.appendChild(circle);
-        });
-
-        cadSvg.addEventListener('mousemove', (e) => {
-            if (!isDrawing || points.length === 0) return;
-            const { x, y } = getMouseCoords(e);
-            const lastPoint = points[points.length - 1].split(',');
-            rubberBand.setAttribute('x1', lastPoint[0]);
-            rubberBand.setAttribute('y1', lastPoint[1]);
-            rubberBand.setAttribute('x2', x);
-            rubberBand.setAttribute('y2', y);
-            rubberBand.style.display = 'block';
-        });
-
-        document.addEventListener('keydown', (e) => {
-            // Ignore if typing in input
-            if (document.activeElement.tagName === 'INPUT') {
-                if (e.key === 'Enter' && isDrawing && points.length > 2) {
-                    isDrawing = false;
-                    rubberBand.style.display = 'none';
-                    promptInput.focus();
-                    logConsole('Drawing complete. AI agent ready for commands.', 'var(--accent-green)');
-                }
-                return;
-            }
-        });
-
-        function runAgent() {
-            const cmd = promptInput.value.toLowerCase().trim();
-            if (!cmd) return;
-            
-            if (isDrawing && points.length > 2) {
-                isDrawing = false;
-                rubberBand.style.display = 'none';
-            } else if (points.length < 3) {
-                logConsole('Agent_01: Please draw a closed shape on the grid first.', 'var(--accent-red)');
-                promptInput.value = '';
-                return;
-            }
-
-            promptInput.value = '';
-            logConsole(`user@localLabs:~$ ${cmd}`, 'var(--text-primary)');
-            logConsole('Agent_01: Processing geometry...', 'var(--accent-blue)');
-            
-            hideProposals();
-
-            setTimeout(() => {
-                if (cmd.includes('hole') || cmd.includes('cut')) {
-                    proposalHole.classList.remove('hidden');
-                    activeProposals = [proposalHole];
-                    logConsole('Agent_01: Generated center cutout. Structural integrity maintained.', 'var(--accent-blue)');
-                    enableActionButtons();
-                } else if (cmd.includes('support') || cmd.includes('beam')) {
-                    proposalSupport.classList.remove('hidden');
-                    activeProposals = [proposalSupport];
-                    logConsole('Agent_01: Added structural support to base geometry.', 'var(--accent-blue)');
-                    enableActionButtons();
-                } else {
-                    logConsole('Agent_01: Command not recognized. Try "add hole" or "add support".', 'var(--accent-red)');
-                }
-            }, 1200);
-        }
-
-        function enableActionButtons() {
-            mergeBtn.disabled = false;
-            discardBtn.disabled = false;
-        }
-
-        function disableActionButtons() {
-            mergeBtn.disabled = true;
-            discardBtn.disabled = true;
-        }
-
-        function hideProposals() {
-            [proposalHole, proposalSupport].forEach(p => {
-                p.classList.add('hidden');
-                p.classList.remove('merged');
-            });
-        }
-
-        function discardProposal() {
-            hideProposals();
-            disableActionButtons();
-            logConsole('System: Proposal discarded. Shadow branch deleted.', 'var(--text-tertiary)');
-        }
-
-        function mergeProposal() {
-            activeProposals.forEach(p => p.classList.add('merged'));
-            disableActionButtons();
-            logConsole('System: Proposal merged into Main Trunk. DAG updated successfully.', 'var(--accent-green)');
-        }
-
-        function clearCanvas() {
-            points = [];
-            isDrawing = true;
-            basePartPath.setAttribute('points', '');
-            snapPointsGroup.innerHTML = '';
-            hideProposals();
-            disableActionButtons();
-            drawHint.style.display = 'block';
-            logConsole('Canvas cleared. Ready for new drawing.', 'var(--text-tertiary)');
         }
 
         // --- DEMO 2: Hardware Allocation Switching ---
