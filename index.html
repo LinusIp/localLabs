@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://www.google.com/recaptcha/api.js?render=YOUR_RECAPTCHA_SITE_KEY"></script>
+<script src="https://www.google.com/recaptcha/api.js?render=6Ld_2I8qAAAAAA...YOUR_SITE_KEY..."></script>
 <title>localSpace — a self-hosted AI workstation, built in Rust</title>
 <meta name="description" content="A local-first AI workstation where every capability is a sandboxed harness: its own UI, typed tools the agent can call, and a context provider. Every agent action is permission-checked and lands as an undoable commit. One Rust binary, desktop or server. No telemetry.">
 <link rel="canonical" href="https://localspace.dev/">
@@ -819,34 +820,30 @@ function wire(formId) {
   }
 
   form.addEventListener('submit', function (ev) {
-  ev.preventDefault();
-  if (trap.value) return; // bot detection
+    ev.preventDefault();
+    if (trap.value) return; // bot
 
-  var value = email.value.trim();
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value)) {
-    say('That email address does not look right — mind checking it?', 'err');
-    email.focus();
-    return;
-  }
+    var value = email.value.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value)) {
+      say('That email address does not look right — mind checking it?', 'err');
+      email.focus();
+      return;
+    }
 
-  var label = submit.textContent;
-  submit.disabled = true;
-  submit.textContent = 'Sending…';
-  say('Sending…', '');
+    var label = submit.textContent;
+    submit.disabled = true;
+    submit.textContent = 'Sending…';
+    say('Sending…', '');
 
-  // Execute reCAPTCHA to get token before making fetch call
-  grecaptcha.ready(function() {
-    grecaptcha.execute('YOUR_RECAPTCHA_SITE_KEY', { action: 'submit' }).then(function(token) {
-      fetch(ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-          email: value,
-          use_case: (pick && pick.value) ? pick.value : 'unspecified',
-          _subject: 'localSpace preview request: ' + value,
-          'g-recaptcha-response': token // Attach the captcha token here
-        })
+    fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        email: value,
+        use_case: (pick && pick.value) ? pick.value : 'unspecified',
+        _subject: 'localSpace preview request: ' + value
       })
+    })
       .then(function (res) {
         if (!res.ok) throw new Error('http ' + res.status);
         Array.prototype.forEach.call(
@@ -860,9 +857,7 @@ function wire(formId) {
         submit.textContent = label;
         say('That did not go through. Try again, or email hello@localspace.dev directly.', 'err');
       });
-    });
   });
-});
 }
 
 wire('wl-hero');
