@@ -31,8 +31,12 @@ by accident. Newest first.
   app's own colour tokens under the app's names, the shadow and radii of its
   first-run card, the avatars of its chat, and its own lockup image rather
   than a second logo made of the mark and typed text.
-- **Screens are cropped to what matters and never shown larger than their own
-  pixels**, so their words stay readable.
+- **The three screens in "How it works" are the app as it was on 19 September
+  2026**, on a laptop with a 4 GB RTX 3050 Ti and 16 GB, as the first screen
+  itself says: that first screen, the list of models, and a conversation whose
+  two answers are Qwen2.5 7B's own. Each is cropped to what matters, never cut
+  or joined inside, and shown at the app's own size, so its words stay
+  readable.
 - **The contact address is locallabs.io@gmail.com**, written plainly in
   `index.html` (the company card and the footer) so it reads without scripts.
   `script.js` takes it from the page for the form's fallback, so a new address
