@@ -612,10 +612,9 @@ h3 {
 /* Screens are cropped to what matters and never shown larger than their own
    pixels, so their words stay readable. */
 .shot {
-  width: 100%;
-  max-width: 580px;
+  display: block;
+  max-width: 100%;
   height: auto;
-  aspect-ratio: 580 / 588;
   border: 1px solid var(--ls-line);
   border-radius: var(--radius-card);
   background: var(--ls-surface);
@@ -626,6 +625,9 @@ h3 {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  max-width: 580px;
+  aspect-ratio: 580 / 588;
   padding: 24px;
   border: 1px dashed var(--ls-line-strong);
   box-shadow: none;
