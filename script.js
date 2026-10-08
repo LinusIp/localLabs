@@ -39,7 +39,7 @@
      rise once as they arrive. Nothing already on screen is ever hidden. */
 
   (function entrances() {
-    if (reduceMotion.matches || !('IntersectionObserver' in window)) return;
+    if (reduceMotion.matches || !('IntersectionObserver' in window) || document.body.hasAttribute('data-own-motion')) return;
     var groups = [];
     document.querySelectorAll('main h2:not(.vh)').forEach(function (heading) { groups.push([heading]); });
     groups.push(Array.prototype.slice.call(document.querySelectorAll('.claims li'), 0, 3));
