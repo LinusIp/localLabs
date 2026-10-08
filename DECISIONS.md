@@ -3,6 +3,46 @@
 Why the page is the way it is, so that a later change does not undo a choice
 by accident. Newest first.
 
+## 2026-10-08: "Who it's for" (`use-cases/`)
+
+- **Nine worlds, in this order:** the bank, the clinic, the law office, the
+  distributor, the ministry, the classroom, the student, the lab, the control
+  room. They are composite pictures of kinds of work, not customers: no
+  names, no quotes, no logos, no figures.
+- **Two tags, and what they mean.** *Works today*: it works in the app as it
+  is built today. *Coming soon*: it is being built. Server mode and
+  everything that rests on it is *Coming soon*, and so are answers in Russian
+  and Uzbek, until the next default models pass the Russian and Uzbek
+  messages of the message script.
+- **Every answer in a small window is real.** Qwen2.5 7B on the laptop the
+  main page's speeds were measured on (4 GB graphics card), all six taken in
+  one sitting on 2026-10-08, through the app's own interface to the model,
+  from the package of commit 5d2772a (the same chat code as `main`). Each is
+  cut only at the end of a sentence, and says so when it is. The texts
+  pasted with the requests are examples written for the page, and each
+  window shows what was pasted. The lab's answer is shown as the person saw
+  it, the four notes it put on the board included. The windows in Russian
+  and Uzbek show their request, then the *Coming soon* tag where the answer
+  would be: never a written answer made to look real.
+- **Words that were ruled:** "several chats; while one answers, the next
+  waits its turn"; "an equipment distributor"; "Start with one laptop and see
+  how it runs"; and, about the server, "No admin screen shows anyone's
+  conversations, and because whoever controls the server's disk could read
+  them, localSpace will ask for an encrypted disk."
+- **The mark moves only as a whole**, its three nodes pulsing in turn as the
+  app's thinking indicator does; never stretched, rotated or recoloured. The
+  small windows' avatars follow the app's chat, as on the main page.
+- **Mint (`#9fd3b8`) is in the drawings only**, never on text. The
+  whiteboard's notes use the canvas's own blue.
+- **No library, no external request.** CSS scroll-driven animations where the
+  browser has them, a small observer and animation-frame script otherwise.
+  Under reduced motion, or with no script, every world is a still picture
+  beside its text and nothing is pinned. On a phone the stage is a slim band
+  pinned above the text; if a mid-range Android drops frames, it becomes a
+  still picture per world.
+- **The preview lives in a separate repository**, not indexed, linked from
+  nowhere, and deleted after the merge.
+
 ## 2026-09-19: the rebuild
 
 - **Every speed on the page is our own measurement.** One laptop (Ryzen 7
