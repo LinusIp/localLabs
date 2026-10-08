@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Who it's for — localSpace</title>
+<meta name="description" content="Nine kinds of work localSpace is built for, from banks and clinics to classrooms and labs. In each one the AI runs inside your own walls, and nothing crosses them.">
+<link rel="canonical" href="https://linusip.github.io/localLabs/use-cases/">
+<meta name="theme-color" content="#faf9f8">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="localSpace">
+<meta property="og:url" content="https://linusip.github.io/localLabs/use-cases/">
+<meta property="og:title" content="AI that stays inside your walls">
+<meta property="og:description" content="Nine kinds of work localSpace is built for, from banks and clinics to classrooms and labs. In each one the AI runs inside your own walls, and nothing crosses them.">
+<meta property="og:image" content="https://linusip.github.io/localLabs/og-use-cases.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The localSpace mark with nine small pictures around it: a vault, a clinic, a law office, a warehouse, a ministry, a classroom, a desk lamp, a lab flask and a server rack, and the words: AI that stays inside your walls.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI that stays inside your walls">
+<meta name="twitter:description" content="Nine kinds of work localSpace is built for. In each one the AI runs inside your own walls.">
+<meta name="twitter:image" content="https://linusip.github.io/localLabs/og-use-cases.png">
+<meta name="twitter:image:alt" content="The localSpace mark with nine small pictures around it, and the words: AI that stays inside your walls.">
+
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="preload" href="../fonts/figtree-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="worlds.css">
+<script src="../script.js" defer></script>
+<script src="worlds.js" defer></script>
+</head>
+<body class="uc-page" data-own-motion>
+<a class="skip" href="#main">Skip to the content</a>
+
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <symbol id="figure" viewBox="70 86 116 126">
+    <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="9.1"><path d="M88.5 105.3 128 131.2 167.5 105.3"/><path d="M128 131.2V208.3"/></g>
+    <g fill="currentColor"><circle cx="88.5" cy="105.3" r="15.5"/><circle cx="167.5" cy="105.3" r="15.5"/><circle cx="128" cy="168.2" r="15.5"/></g>
+  </symbol>
+  <symbol id="mark-full" viewBox="0 0 256 256">
+    <g fill="none" stroke="#1c1e20" stroke-linecap="round" stroke-linejoin="round"><path d="M136.4 40.85 199.27 77.15A16.8 16.8 0 0 1 207.67 91.7V164.3A16.8 16.8 0 0 1 199.27 178.85L136.4 215.15A16.8 16.8 0 0 1 119.6 215.15L56.73 178.85A16.8 16.8 0 0 1 48.33 164.3V91.7A16.8 16.8 0 0 1 56.73 77.15L119.6 40.85A16.8 16.8 0 0 1 136.4 40.85Z" stroke-width="23.3"/><path d="M88.5 105.3 128 131.2 167.5 105.3" stroke-width="9.1"/><path d="M128 131.2V208.3" stroke-width="9.1"/></g>
+    <g fill="#1c1e20"><circle cx="88.5" cy="105.3" r="15.5"/><circle cx="167.5" cy="105.3" r="15.5"/><circle cx="128" cy="168.2" r="15.5"/></g>
+  </symbol>
+  <symbol id="i-bank" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3"/><path d="M12 3.5v3M12 17.5v3M3.5 12h3M17.5 12h3"/></symbol>
+  <symbol id="i-clinic" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M12 8v8M8 12h8"/></symbol>
+  <symbol id="i-law" viewBox="0 0 24 24"><path d="M12 4v15M8 20h8M5 7h14"/><path d="M5 7l-2.6 6a2.6 2.6 0 0 0 5.2 0zM19 7l-2.6 6a2.6 2.6 0 0 0 5.2 0z"/></symbol>
+  <symbol id="i-distributor" viewBox="0 0 24 24"><path d="M4 8l8-4 8 4v8l-8 4-8-4z"/><path d="M4 8l8 4 8-4M12 12v8"/></symbol>
+  <symbol id="i-ministry" viewBox="0 0 24 24"><path d="M3 9l9-5 9 5z"/><path d="M5.5 9v9M9.8 9v9M14.2 9v9M18.5 9v9M3 20h18"/></symbol>
+  <symbol id="i-classroom" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M7 20l2-4M17 20l-2-4M7 8.5h6M7 11.5h9"/></symbol>
+  <symbol id="i-student" viewBox="0 0 24 24"><path d="M8.5 4h7l2 5.5h-11z"/><path d="M12 9.5V19M7.5 20h9"/></symbol>
+  <symbol id="i-lab" viewBox="0 0 24 24"><path d="M10 3.5V9l-5 8.6A2 2 0 0 0 6.7 20.5h10.6a2 2 0 0 0 1.7-2.9L14 9V3.5"/><path d="M8.5 3.5h7M7.6 15.5h8.8"/></symbol>
+  <symbol id="i-control" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M5 9h14M5 15h14M15.5 6h.01M15.5 12h.01M15.5 18h.01"/></symbol>
+</svg>
+
+<header class="site-head" id="top">
+  <div class="wrap head-in">
+    <a class="brand" href="../"><img src="../brand/localspace-lockup.png" width="102" height="30" alt="localSpace"></a>
+    <nav class="nav-links" aria-label="Sections">
+      <a href="../#how">How it works</a>
+      <a href="./" aria-current="page">Who it's for</a>
+      <a href="../#companies">For companies</a>
+    </nav>
+    <a class="btn btn-primary head-cta" href="#join">Join the waitlist</a>
+    <details class="menu">
+      <summary>Menu</summary>
+      <nav class="menu-sheet" aria-label="Sections">
+        <a href="../#how">How it works</a>
+        <a href="./" aria-current="page">Who it's for</a>
+        <a href="../#companies">For companies</a>
+        <a href="#join">Join the waitlist</a>
+      </nav>
+    </details>
+  </div>
+</header>
+
+<nav class="switcher" aria-label="The nine worlds">
+  <ol>
+    <li><a href="#bank"><svg aria-hidden="true"><use href="#i-bank"/></svg>Bank</a></li>
+    <li><a href="#clinic"><svg aria-hidden="true"><use href="#i-clinic"/></svg>Clinic</a></li>
+    <li><a href="#law"><svg aria-hidden="true"><use href="#i-law"/></svg>Law office</a></li>
+    <li><a href="#distributor"><svg aria-hidden="true"><use href="#i-distributor"/></svg>Distributor</a></li>
+    <li><a href="#ministry"><svg aria-hidden="true"><use href="#i-ministry"/></svg>Ministry</a></li>
+    <li><a href="#classroom"><svg aria-hidden="true"><use href="#i-classroom"/></svg>Classroom</a></li>
+    <li><a href="#student"><svg aria-hidden="true"><use href="#i-student"/></svg>Student</a></li>
+    <li><a href="#lab"><svg aria-hidden="true"><use href="#i-lab"/></svg>Lab</a></li>
+    <li><a href="#control"><svg aria-hidden="true"><use href="#i-control"/></svg>Control room</a></li>
+  </ol>
+</nav>
+
+<main id="main" tabindex="-1">
+<div class="worlds" data-worlds>
+  <div class="stage" aria-hidden="true"></div>
+  <div class="world-list">
+
+  <section class="world world-intro" data-world="intro" aria-labelledby="uc-title">
+    <div class="wrap world-inner">
+      <svg class="scene" viewBox="0 0 400 300" aria-hidden="true" data-mark="200,151,0.22" data-anchors="200,151 133,206 269,128 276,209">
+        <polygon class="inside" points="200,32 302.2,91 302.2,209 200,268 97.8,209 97.8,91"/>
+        <g class="things">
+          <path class="cloud" d="M318 46a15 15 0 0 1 28-5 12 12 0 0 1 17 11 10 10 0 0 1-3 20h-40a12 12 0 0 1-2-26z"/>
+          <rect class="ob" x="165" y="128" width="70" height="46" rx="4"/>
+          <rect class="mt" x="171" y="134" width="58" height="34" rx="2"/>
+          <path class="ob" d="M155 180h90l-6 8h-78z"/>
+          <g><rect class="ob" x="120" y="190" width="26" height="32" rx="3"/><path class="ln thin" d="M126 199h14M126 206h14M126 213h9"/></g>
+          <g><rect class="ob" x="256" y="112" width="26" height="32" rx="3"/><path class="ln thin" d="M262 121h14M262 128h14M262 135h9"/></g>
+          <path class="ob" d="M262 196h30a6 6 0 0 1 6 6v12a6 6 0 0 1-6 6h-20l-8 7v-7h-2a6 6 0 0 1-6-6v-12a6 6 0 0 1 6-6z"/>
+        </g>
+        <polygon class="wall" points="200,32 302.2,91 302.2,209 200,268 97.8,209 97.8,91"/>
+        <use href="#figure" x="187" y="137" width="26" height="28"/>
+        <g class="still-dots"><circle class="dot" cx="150" cy="120" r="3.5"/><circle class="dot" cx="236" cy="226" r="3.5"/><circle class="dot" cx="250" cy="160" r="3.5"/></g>
+      </svg>
+      <div class="world-text">
+        <p class="uc-eyebrow">Who it's for</p>
+        <h1 id="uc-title">AI that stays inside your walls.</h1>
+        <p class="lede">Nine kinds of work localSpace is built for. In each one, documents, messages and answers move freely inside, and nothing crosses the wall.</p>
+        <p class="uc-opening">Without a wall, what you type goes off to someone else's computer. localSpace keeps it inside yours.</p>
+        <p class="uc-legend"><span class="pair"><span class="tag tag-now">Works today</span> in the app as it is now</span> <span class="pair"><span class="tag tag-soon">Coming soon</span> being built</span></p>
+      </div>
+    </div>
+  </section>
+
+  <article class="world" id="bank" data-world="bank" aria-labelledby="bank-name">
+    <div class="wrap world-inner">
+      <svg class="scene" viewBox="0 0 400 300" aria-hidden="true" data-mark="200,150,0.26" data-anchors="200,98 252,150 200,202 148,150 200,150">
+        <polygon class="inside" points="200,34 222.6,36.2 244.4,42.8 264.4,53.5 282,68 296.5,85.6 307.2,105.6 313.8,127.4 316,150 313.8,172.6 307.2,194.4 296.5,214.4 282,232 264.4,246.5 244.4,257.2 222.6,263.8 200,266 177.4,263.8 155.6,257.2 135.6,246.5 118,232 103.5,214.4 92.8,194.4 86.2,172.6 84,150 86.2,127.4 92.8,105.6 103.5,85.6 118,68 135.6,53.5 155.6,42.8 177.4,36.2"/>
+        <g class="things">
+          <circle class="ring" cx="200" cy="150" r="92"/>
+          <g><circle class="ob" cx="304" cy="150" r="6"/><circle class="ob" cx="273.5" cy="223.5" r="6"/><circle class="ob" cx="200" cy="254" r="6"/><circle class="ob" cx="126.5" cy="223.5" r="6"/><circle class="ob" cx="96" cy="150" r="6"/><circle class="ob" cx="126.5" cy="76.5" r="6"/><circle class="ob" cx="200" cy="46" r="6"/><circle class="ob" cx="273.5" cy="76.5" r="6"/></g>
+          <path class="ln" d="M200 120V98M230 150h22M200 180v22M170 150h-22"/>
+          <g><circle class="mt" cx="200" cy="98" r="7"/><circle class="mt" cx="252" cy="150" r="7"/><circle class="mt" cx="200" cy="202" r="7"/><circle class="mt" cx="148" cy="150" r="7"/></g>
+          <circle class="ob" cx="200" cy="150" r="30"/>
+          <circle class="tn" cx="200" cy="150" r="22"/>
+        </g>
+        <polygon class="wall" points="200,34 222.6,36.2 244.4,42.8 264.4,53.5 282,68 296.5,85.6 307.2,105.6 313.8,127.4 316,150 313.8,172.6 307.2,194.4 296.5,214.4 282,232 264.4,246.5 244.4,257.2 222.6,263.8 200,266 177.4,263.8 155.6,257.2 135.6,246.5 118,232 103.5,214.4 92.8,194.4 86.2,172.6 84,150 86.2,127.4 92.8,105.6 103.5,85.6 118,68 135.6,53.5 155.6,42.8 177.4,36.2"/>
+        <use href="#figure" x="185" y="134" width="30" height="33"/>
+        <g class="still-dots"><circle class="dot" cx="226" cy="120" r="3.5"/><circle class="dot" cx="171" cy="186" r="3.5"/><circle class="dot" cx="240" cy="178" r="3.5"/></g>
+      </svg>
+      <div class="world-text">
+        <h2 class="world-name" id="bank-name">The bank</h2>
+        <p class="world-who">Banks, payment companies and other regulated organisations</p>
+        <p class="voice">Our staff want AI help. Our customers' data can't leave the country.</p>
+        <ul class="does">
+          <li><span>Summarise a regulation or contract pasted into the chat</span> <span class="tag tag-now">Works today</span></li>
+          <li><span>Draft replies to customers and check a notice's wording</span> <span class="tag tag-now">Works today</span></li>
+          <li><span>Every employee on the bank's own server, with IT choosing the models</span> <span class="tag tag-soon">Coming soon</span></li>
+        </ul>
+        <p class="why"><strong>Why local:</strong> customer and transaction data stays on the bank's own machines.</p>
+        <figure class="mini" data-mini>
+          <div class="mini-bar"><span class="mini-title"><svg aria-hidden="true"><use href="#figure"/></svg>localSpace</span><span class="mini-model">Qwen2.5 7B</span></div>
+          <div class="mini-rows">
+            <div class="mini-row">
+              <span class="avatar" aria-hidden="true">Y</span>
+              <div class="mini-body">
+                <p class="mini-q" data-type>Summarise the changes in this regulation in five points.</p>
+                <details class="mini-paste"><summary>What was pasted with it</summary><p>Amendments to the Rules on Opening and Keeping Customer Accounts
+
+1. Section 2.3 is replaced: a customer's identity is checked again every three years instead of every five.
+2. Section 3.1 now allows accounts to be opened remotely, by a video call with a bank employee, for adults with a national identity card.
+3. In Section 4.2, the period for answering a customer's written complaint is shortened from 30 days to 15 days.
+4. A new Section 5.4 requires the bank to tell customers in writing, at least 30 days in advance, of any change to account fees.
+5. Section 6.1 is deleted: paper statements are sent only to customers who ask for them.
+6. These amendments take effect three months after publication.</p></details>
+              </div>
+            </div>
+            <div class="mini-row">
+              <span class="avatar avatar-model" aria-hidden="true"><svg><use href="#figure"/></svg></span>
+              <div class="mini-body mini-a" data-stream>
+                <ol>
+                  <li>Customer identity checks every three years instead of five.</li>
+                  <li>Remote account opening via video call for adults with a national ID card.</li>
+                  <li>Complaint response time reduced from 30 to 15 days.</li>
+                  <li>Written notice of account fee changes at least 30 days in advance.</li>
+                  <li>Paper statements sent only on request, Section 6.1 removed.</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+          <figcaption class="mini-note">The model's real answer, in full. Qwen2.5 7B on a laptop with a 4 GB graphics card, 8 October 2026.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  <article class="world" id="clinic" data-world="clinic" aria-labelledby="clinic-name">
+    <div class="wrap world-inner">
+      <svg class="scene" viewBox="0 0 400 300" aria-hidden="true" data-mark="200,96,0.24" data-anchors="123,144 277,140 121,215 274,228 200,96">
+        <polygon class="inside" points="70,262 70,102 200,44 330,102 330,262"/>
+        <g class="things">
+          <circle class="tn" cx="200" cy="96" r="22"/>
+          <g><rect class="ob" x="92" y="122" width="62" height="44" rx="3"/><path class="ln" d="M100 156h46M104 156v-10h18v10"/></g>
+          <g><rect class="ob" x="246" y="122" width="62" height="44" rx="3"/><rect class="mt" x="268" y="129" width="18" height="24" rx="2"/></g>
+          <g><rect class="ob" x="180" y="200" width="40" height="62" rx="3"/><path class="cross" d="M200 214v18M191 223h18"/></g>
+          <g><path class="ob" d="M92 236h70v-14H92z"/><rect class="ob" x="110" y="206" width="22" height="14" rx="2"/></g>
+          <g><rect class="ob" x="252" y="214" width="44" height="28" rx="3"/><path class="ln" d="M252 216l22 14 22-14"/></g>
+        </g>
+        <polygon class="wall" points="70,262 70,102 200,44 330,102 330,262"/>
+        <use href="#figure" x="186" y="81" width="28" height="31"/>
+        <g class="still-dots"><circle class="dot" cx="166" cy="140" r="3.5"/><circle class="dot" cx="236" cy="190" r="3.5"/><circle class="dot" cx="130" cy="186" r="3.5"/></g>
+      </svg>
+      <div class="world-text">
+        <h2 class="world-name" id="clinic-name">The clinic</h2>
+        <p class="world-who">Clinics and medical offices</p>
+        <p class="voice">Patient letters all day, and the patients' details never leave this building.</p>
+        <ul class="does">
+          <li><span>Referral notes, patient letters and appointment reminders, from the doctor's own notes</span> <span class="tag tag-now">Works today</span></li>
+          <li><span>Answers in Russian and Uzbek, for translations</span> <span class="tag tag-soon">Coming soon</span></li>
+          <li><span>One office computer serving the whole team</span> <span class="tag tag-soon">Coming soon</span></li>
+        </ul>
+        <p class="why"><strong>Why local:</strong> patient information stays in the building.</p>
+        <figure class="mini" data-mini>
+          <div class="mini-bar"><span class="mini-title"><svg aria-hidden="true"><use href="#figure"/></svg>localSpace</span></div>
+          <div class="mini-rows">
+            <div class="mini-row">
+              <span class="avatar" aria-hidden="true">Y</span>
+              <div class="mini-body"><p class="mini-q" data-type lang="ru">Переведи это направление на узбекский.</p></div>
+            </div>
+            <div class="mini-row">
+              <span class="avatar avatar-model" aria-hidden="true"><svg><use href="#figure"/></svg></span>
+              <div class="mini-body"><p class="mini-soon" data-soon><span class="tag tag-soon">Coming soon</span> Answers in Russian and Uzbek</p></div>
+            </div>
+          </div>
+          <figcaption class="mini-note">The request, in Russian: "Translate this referral into Uzbek."</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  <article class="world" id="law" data-world="law" aria-labelledby="law-name">
+    <div class="wrap world-inner">
+      <svg class="scene" viewBox="0 0 400 300" aria-hidden="true" data-mark="211,140,0.24" data-anchors="128,100 128,185 284,196 207,200 211,140">
+        <polygon class="inside" points="76,56 324,56 324,264 76,264"/>
+        <g class="things">
+          <g><rect class="ob" x="96" y="76" width="64" height="168" rx="3"/><path class="ln" d="M96 118h64M96 160h64M96 202h64"/></g>
+          <path class="spines" d="M106 86v26M115 90v22M124 86v26M142 88v24M151 86v26M106 128v26M115 132v22M133 128v26M142 130v24M106 170v26M124 172v24M133 170v26M151 174v22M106 212v26M115 214v24M142 212v26M151 216v22"/>
+          <circle class="tn" cx="211" cy="140" r="22"/>
+          <g><rect class="ob" x="262" y="150" width="44" height="94" rx="3"/><path class="ln" d="M262 181h44M262 212h44"/><circle class="ac" cx="284" cy="166" r="3.5"/></g>
+          <path class="ln" d="M178 214h66M186 214v30M236 214v30"/>
+          <g><rect class="ob" x="194" y="188" width="24" height="26" rx="2"/><path class="ln thin" d="M199 196h14M199 202h14M199 208h8"/><path class="pen" d="M226 210l14-18"/></g>
+        </g>
+        <polygon class="wall" points="76,56 324,56 324,264 76,264"/>
+        <use href="#figure" x="197" y="125" width="28" height="31"/>
+        <g class="still-dots"><circle class="dot" cx="180" cy="100" r="3.5"/><circle class="dot" cx="250" cy="120" r="3.5"/><circle class="dot" cx="190" cy="250" r="3.5"/></g>
+      </svg>
+      <div class="world-text">
+        <h2 class="world-name" id="law-name">The law office</h2>
+        <p class="world-who">Lawyers, notaries and in-house legal teams</p>
+        <p class="voice">Client files are confidential. They don't go into anyone's chatbot.</p>
+        <ul class="does">
+          <li><span>Read a clause and say in plain words who it favours</span> <span class="tag tag-now">Works today</span></li>
+          <li><span>Draft letters to clients and to the other side</span> <span class="tag tag-now">Works today</span></li>
+          <li><span>Open a contract's PDF or Word file directly</span> <span class="tag tag-soon">Coming soon</span></li>
+        </ul>
+        <p class="why"><strong>Why local:</strong> confidentiality is the job itself, and the text never leaves the office's computer.</p>
+        <figure class="mini" data-mini>
+          <div class="mini-bar"><span class="mini-title"><svg aria-hidden="true"><use href="#figure"/></svg>localSpace</span><span class="mini-model">Qwen2.5 7B</span></div>
+          <div class="mini-rows">
+            <div class="mini-row">
+              <span class="avatar" aria-hidden="true">Y</span>
+              <div class="mini-body">
+                <p class="mini-q" data-type>Does this clause favour the landlord? Explain in plain words.</p>
+                <details class="mini-paste"><summary>What was pasted with it</summary><p>The Tenant shall be responsible for all repairs to the Premises, including structural repairs, regardless of cause. The Landlord may enter the Premises at any time and without notice for the purpose of inspection. Should the Tenant fail to complete any repair within seven days of written notice, the Landlord may terminate this Agreement immediately and retain the deposit in full.</p></details>
+              </div>
+            </div>
+            <div class="mini-row">
+              <span class="avatar avatar-model" aria-hidden="true"><svg><use href="#figure"/></svg></span>
+              <div class="mini-body mini-a" data-stream>
+                <p>Yes, this clause definitely favors the landlord. Here’s why:</p>
+                <ol>
+                  <li><strong>Repair Responsibility</strong>: The tenant is responsible for all repairs, even structural ones, no matter what caused the damage. This means the tenant has to pay for any repairs, which can be expensive.</li>
+                  <li><strong>Landlord’s Access</strong>: The landlord can enter the premises anytime without notice for inspections. This gives the landlord a lot of control and can be intrusive for the tenant.</li>
+                </ol>
+                <p class="mini-more">… <span class="vh">The answer goes on.</span></p>
+              </div>
+            </div>
+          </div>
+          <figcaption class="mini-note">The model's real answer, shortened at the end of a sentence. Qwen2.5 7B on a laptop with a 4 GB graphics card, 8 October 2026.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  <article class="world" id="distributor" data-world="distributor" aria-labelledby="distributor-name">
+    <div class="wrap world-inner">
+      <svg class="scene" viewBox="0 0 400 300" aria-hidden="true" data-mark="226,168,0.24" data-anchors="100,157 128,200 224,214 306,214 226,168">
+        <polygon class="inside" points="50,262 50,104 114,74 114,104 178,74 178,104 242,74 242,104 306,74 306,104 350,104 350,262"/>
+        <g class="things">
+          <path class="ln" d="M68 262V128M174 262V128M68 170h106M68 214h106"/>
+          <g><rect class="ob" x="76" y="144" width="26" height="26"/><rect class="mt" x="106" y="150" width="20" height="20"/><rect class="ob" x="130" y="140" width="36" height="30"/></g>
+          <g><rect class="mt" x="76" y="190" width="32" height="24"/><rect class="ob" x="112" y="186" width="26" height="28"/><rect class="ob" x="142" y="192" width="24" height="22"/></g>
+          <g><rect class="ob" x="80" y="236" width="40" height="26"/><rect class="ob" x="124" y="242" width="30" height="20"/></g>
+          <circle class="tn" cx="226" cy="168" r="22"/>
+          <g><path class="ln" d="M196 232h62M204 232v30M250 232v30"/><rect class="ob" x="214" y="206" width="24" height="26" rx="2"/><path class="ln thin" d="M219 214h14M219 220h14M219 226h8"/></g>
+          <g><rect class="ob" x="282" y="168" width="52" height="94" rx="2"/><path class="ln" d="M282 186h52M282 204h52M282 222h52M282 240h52"/></g>
+        </g>
+        <polygon class="wall" points="50,262 50,104 114,74 114,104 178,74 178,104 242,74 242,104 306,74 306,104 350,104 350,262"/>
+        <use href="#figure" x="212" y="153" width="28" height="31"/>
+        <g class="still-dots"><circle class="dot" cx="190" cy="130" r="3.5"/><circle class="dot" cx="270" cy="150" r="3.5"/><circle class="dot" cx="180" cy="200" r="3.5"/></g>
+      </svg>
+      <div class="world-text">
+        <h2 class="world-name" id="distributor-name">The distributor</h2>
+        <p class="world-who">Small and mid-size businesses, such as an equipment distributor</p>
+        <p class="voice">Prices, contracts and supplier terms are exactly what we won't paste into a chatbot online.</p>
+        <ul class="does">
+          <li><span>Write to foreign suppliers and prepare commercial offers</span> <span class="tag tag-now">Works today</span></li>
+          <li><span>Translate technical documents into English</span> <span class="tag tag-now">Works today</span></li>
+          <li><span>Answer staff questions from the company's own documents</span> <span class="tag tag-soon">Coming soon</span></li>
+        </ul>
+        <p class="why"><strong>Why local:</strong> prices and terms stay on the company's own computer.</p>
+        <figure class="mini" data-mini>
+          <div class="mini-bar"><span class="mini-title"><svg aria-hidden="true"><use href="#figure"/></svg>localSpace</span><span class="mini-model">Qwen2.5 7B</span></div>
+          <div class="mini-rows">
+            <div class="mini-row">
+              <span class="avatar" aria-hidden="true">Y</span>
+              <div class="mini-body"><p class="mini-q" data-type>Write a polite reply asking the supplier for 10% off.</p></div>
+            </div>
+            <div class="mini-row">
+              <span class="avatar avatar-model" aria-hidden="true"><svg><use href="#figure"/></svg></span>
+              <div class="mini-body mini-a" data-stream>
+                <p>Certainly! Here’s a polite reply you could use:</p>
+                <p>"Hello [Supplier's Name],</p>
+                <p>I hope this message finds you well. I wanted to inquire about the possibility of receiving a 10% discount on our recent order. We have been very satisfied with the quality of your products and have been a loyal customer for some time now.</p>
+                <p class="mini-more">… <span class="vh">The answer goes on.</span></p>
+              </div>
+            </div>
+          </div>
+          <figcaption class="mini-note">The model's real answer, shortened at the end of a sentence. Qwen2.5 7B on a laptop with a 4 GB graphics card, 8 October 2026.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  <article class="world" id="ministry" data-world="ministry" aria-labelledby="ministry-name">
+    <div class="wrap world-inner">
+      <svg class="scene" viewBox="0 0 400 300" aria-hidden="true" data-mark="200,100,0.24" data-anchors="108,190 284,190 200,192 200,100">
+        <polygon class="inside" points="60,262 60,126 44,126 200,52 356,126 340,126 340,262"/>
+        <g class="things">
+          <path class="ln" d="M90 118 200 68l110 50z"/>
+          <g><rect class="tn" x="80" y="132" width="26" height="7"/><rect class="ob" x="84" y="139" width="18" height="102"/><rect class="tn" x="128" y="132" width="26" height="7"/><rect class="ob" x="132" y="139" width="18" height="102"/></g>
+          <g><rect class="tn" x="246" y="132" width="26" height="7"/><rect class="ob" x="250" y="139" width="18" height="102"/><rect class="tn" x="294" y="132" width="26" height="7"/><rect class="ob" x="298" y="139" width="18" height="102"/></g>
+          <g><rect class="ob" x="166" y="158" width="40" height="54" rx="3"/><path class="ln thin" d="M173 170h26M173 180h20M173 190h24M173 200h16"/></g>
+          <g><rect class="ob" x="190" y="170" width="40" height="54" rx="3"/><path class="ln thin" d="M197 182q4-4 8 0t8 0 8 0M197 194q4-4 8 0t8 0M197 206q4-4 8 0t8 0 8 0"/></g>
+          <path class="ln" d="M66 246h268M60 254h280"/>
+        </g>
+        <polygon class="wall" points="60,262 60,126 44,126 200,52 356,126 340,126 340,262"/>
+        <use href="#figure" x="186" y="85" width="28" height="31"/>
+        <g class="still-dots"><circle class="dot" cx="118" cy="226" r="3.5"/><circle class="dot" cx="282" cy="226" r="3.5"/><circle class="dot" cx="240" cy="150" r="3.5"/></g>
+      </svg>
+      <div class="world-text">
+        <h2 class="world-name" id="ministry-name">The ministry</h2>
+        <p class="world-who">Government bodies and public institutions</p>
+        <p class="voice">We work in Uzbek and Russian, and our documents stay on our own machines.</p>
+        <ul class="does">
+          <li><span>Draft official replies and summarise long reports</span> <span class="tag tag-now">Works today</span></li>
+          <li><span>Answers in Russian and Uzbek</span> <span class="tag tag-soon">Coming soon</span></li>
+          <li><span>Works with the internet off, on computers they already own</span> <span class="tag tag-now">Works today</span></li>
+        </ul>
+        <p class="why"><strong>Why local:</strong> nothing goes abroad, and nothing needs a connection.</p>
+        <figure class="mini" data-mini>
+          <div class="mini-bar"><span class="mini-title"><svg aria-hidden="true"><use href="#figure"/></svg>localSpace</span></div>
+          <div class="mini-rows">
+            <div class="mini-row">
+              <span class="avatar" aria-hidden="true">Y</span>
+              <div class="mini-body"><p class="mini-q" data-type lang="uz">Fuqaroning murojaatiga rasmiy javob loyihasini tayyorlab bering.</p></div>
+            </div>
+            <div class="mini-row">
+              <span class="avatar avatar-model" aria-hidden="true"><svg><use href="#figure"/></svg></span>
+              <div class="mini-body"><p class="mini-soon" data-soon><span class="tag tag-soon">Coming soon</span> Answers in Russian and Uzbek</p></div>
+            </div>
+          </div>
+          <figcaption class="mini-note">The request, in Uzbek: "Draft an official reply to a citizen's letter."</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  <article class="world" id="classroom" data-world="classroom" aria-labelledby="classroom-name">
+    <div class="wrap world-inner">
+      <svg class="scene" viewBox="0 0 400 300" aria-hidden="true" data-mark="250,114,0.22" data-anchors="170,114 116,190 200,190 284,232 310,120">
+        <polygon class="inside" points="56,64 344,64 344,256 56,256"/>
+        <g class="things">
+          <g><rect class="board" x="104" y="84" width="176" height="62" rx="4"/><path class="chalk" d="M118 102h56M118 116h80M118 130h40"/></g>
+          <g><rect class="ob" x="294" y="104" width="30" height="20" rx="2"/><path class="ob" d="M290 126h38l-4 6h-30z"/></g>
+          <g><rect class="ob" x="96" y="180" width="44" height="20" rx="2"/><rect class="ob" x="178" y="180" width="44" height="20" rx="2"/><rect class="ob" x="260" y="180" width="44" height="20" rx="2"/></g>
+          <g><rect class="ob" x="96" y="222" width="44" height="20" rx="2"/><rect class="ob" x="178" y="222" width="44" height="20" rx="2"/><rect class="ob" x="260" y="222" width="44" height="20" rx="2"/></g>
+        </g>
+        <polygon class="wall" points="56,64 344,64 344,256 56,256"/>
+        <use href="#figure" x="237" y="100" width="26" height="28"/>
+        <g class="still-dots"><circle class="dot" cx="160" cy="160" r="3.5"/><circle class="dot" cx="240" cy="210" r="3.5"/><circle class="dot" cx="90" cy="120" r="3.5"/></g>
+      </svg>
+      <div class="world-text">
+        <h2 class="world-name" id="classroom-name">The classroom</h2>
+        <p class="world-who">Teachers and schools</p>
+        <p class="voice">Lessons to plan, pupils' work to read, and a connection we can't count on.</p>
+        <ul class="does">
+          <li><span>Quiz questions from a text, at the pupils' level</span> <span class="tag tag-now">Works today</span></li>
+          <li><span>Explain a hard passage three different ways</span> <span class="tag tag-now">Works today</span></li>
+          <li><span>Runs offline on the school's own computers. Without a graphics card it is slower, and the app says how slow first.</span> <span class="tag tag-now">Works today</span></li>
+        </ul>
+        <p class="why"><strong>Why local:</strong> pupils' names and work stay on the school's computer, and it works when the connection doesn't.</p>
+        <figure class="mini" data-mini>
+          <div class="mini-bar"><span class="mini-title"><svg aria-hidden="true"><use href="#figure"/></svg>localSpace</span></div>
+          <div class="mini-rows">
+            <div class="mini-row">
+              <span class="avatar" aria-hidden="true">Y</span>
+              <div class="mini-body"><p class="mini-q" data-type lang="ru">Составь пять вопросов по этому тексту для учеников 8 класса.</p></div>
+            </div>
+            <div class="mini-row">
+              <span class="avatar avatar-model" aria-hidden="true"><svg><use href="#figure"/></svg></span>
+              <div class="mini-body"><p class="mini-soon" data-soon><span class="tag tag-soon">Coming soon</span> Answers in Russian and Uzbek</p></div>
+            </div>
+          </div>
+          <figcaption class="mini-note">The request, in Russian: "Make five questions on this text for year-8 pupils."</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  <article class="world" id="student" data-world="student" aria-labelledby="student-name">
+    <div class="wrap world-inner">
+      <svg class="scene" viewBox="0 0 400 300" aria-hidden="true" data-mark="200,189,0.22" data-anchors="200,189 118,209 279,209 167,112">
+        <polygon class="inside" points="172,42 228,42 336,262 64,262"/>
+        <g class="things">
+          <g><path class="ob" d="M176 42h48l-10-16h-28z"/><path class="ln" d="M200 26V14h44"/></g>
+          <path class="ln" d="M64 228h272"/>
+          <g><rect class="ob" x="168" y="166" width="64" height="42" rx="4"/><rect class="mt" x="174" y="172" width="52" height="30" rx="2"/><path class="ob" d="M158 212h84l-6 8h-72z"/></g>
+          <g><rect class="ob" x="94" y="216" width="48" height="10" rx="2"/><rect class="mt" x="96" y="206" width="44" height="10" rx="2"/><rect class="ob" x="100" y="196" width="38" height="10" rx="2"/></g>
+          <g><path class="ob" d="M266 198h22v24a4 4 0 0 1-4 4h-14a4 4 0 0 1-4-4z"/><path class="ln" d="M288 204h4a5 5 0 0 1 0 10h-4"/></g>
+          <g><path class="ln" d="M150 106a24 24 0 0 1 34 0M156 114a14 14 0 0 1 22 0"/><circle class="ac" cx="167" cy="121" r="2.5"/><path class="ln" d="M150 124l34-26"/></g>
+        </g>
+        <polygon class="wall" points="172,42 228,42 336,262 64,262"/>
+        <use href="#figure" x="187" y="175" width="26" height="28"/>
+        <g class="still-dots"><circle class="dot" cx="200" cy="120" r="3.5"/><circle class="dot" cx="240" cy="246" r="3.5"/><circle class="dot" cx="150" cy="246" r="3.5"/></g>
+      </svg>
+      <div class="world-text">
+        <h2 class="world-name" id="student-name">The student</h2>
+        <p class="world-who">Students, freelancers, writers, and gamers with a good graphics card</p>
+        <p class="voice">I want an AI that's mine: free, private, and working with the Wi-Fi off.</p>
+        <ul class="does">
+          <li><span>Explain, summarise and rewrite</span> <span class="tag tag-now">Works today</span></li>
+          <li><span>Several chats; while one answers, the next waits its turn. Stop and Continue.</span> <span class="tag tag-now">Works today</span></li>
+          <li><span>It checks the computer, picks a model and says how fast it will be before anything downloads</span> <span class="tag tag-now">Works today</span></li>
+        </ul>
+        <p class="why"><strong>Why local:</strong> free, with no account, and nothing sent anywhere.</p>
+        <figure class="mini" data-mini>
+          <div class="mini-bar"><span class="mini-title"><svg aria-hidden="true"><use href="#figure"/></svg>localSpace</span><span class="mini-model">Qwen2.5 7B</span></div>
+          <div class="mini-rows">
+            <div class="mini-row">
+              <span class="avatar" aria-hidden="true">Y</span>
+              <div class="mini-body">
+                <p class="mini-q" data-type>Explain this paragraph in simpler words.</p>
+                <details class="mini-paste"><summary>What was pasted with it</summary><p>Opportunity cost refers to the value of the next-best alternative forgone when a decision is made. Because resources such as time and money are scarce, every choice entails a trade-off, and the true cost of an action comprises not only its explicit monetary outlay but also the benefits that would have accrued from the most valuable alternative use of those same resources.</p></details>
+              </div>
+            </div>
+            <div class="mini-row">
+              <span class="avatar avatar-model" aria-hidden="true"><svg><use href="#figure"/></svg></span>
+              <div class="mini-body mini-a" data-stream>
+                <p>Opportunity cost is the benefit you miss out on when you choose one option over another. Since time and money are limited, every decision means you're giving up something else. The full cost of a choice includes both the money spent and the value of the best alternative you didn't choose.</p>
+              </div>
+            </div>
+          </div>
+          <figcaption class="mini-note">The model's real answer, in full. Qwen2.5 7B on a laptop with a 4 GB graphics card, 8 October 2026.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  <article class="world" id="lab" data-world="lab" aria-labelledby="lab-name">
+    <div class="wrap world-inner">
+      <svg class="scene" viewBox="0 0 400 300" aria-hidden="true" data-mark="172,120,0.22" data-anchors="118,198 175,200 242,106 274,138 172,120">
+        <polygon class="inside" points="200,58 252,58 282.9,62.9 310.8,77.1 332.9,99.2 347.1,127.1 352,158 347.1,188.9 332.9,216.8 310.8,238.9 282.9,253.1 252,258 148,258 117.1,253.1 89.2,238.9 67.1,216.8 52.9,188.9 48,158 52.9,127.1 67.1,99.2 89.2,77.1 117.1,62.9 148,58"/>
+        <g class="things">
+          <path class="ln" d="M74 222h252M90 222v30M310 222v30"/>
+          <g><path class="ob" d="M110 168v18l-14 30a4 4 0 0 0 4 6h36a4 4 0 0 0 4-6l-14-30v-18z"/><path class="mt" d="M101 206h34l4 8a3 3 0 0 1-3 4H100a3 3 0 0 1-3-4z"/></g>
+          <path class="ln" d="M160 178v38a6 6 0 0 0 12 0v-38M180 186v30a6 6 0 0 0 12 0v-30"/>
+          <rect class="ob" x="220" y="84" width="104" height="96" rx="4"/>
+          <g><rect class="note-blue" x="230" y="94" width="38" height="34" rx="2"/><rect class="note-blue" x="276" y="94" width="38" height="34" rx="2"/><rect class="note-blue" x="230" y="136" width="38" height="34" rx="2"/><rect class="note-blue" x="276" y="136" width="38" height="34" rx="2"/></g>
+        </g>
+        <polygon class="wall" points="200,58 252,58 282.9,62.9 310.8,77.1 332.9,99.2 347.1,127.1 352,158 347.1,188.9 332.9,216.8 310.8,238.9 282.9,253.1 252,258 148,258 117.1,253.1 89.2,238.9 67.1,216.8 52.9,188.9 48,158 52.9,127.1 67.1,99.2 89.2,77.1 117.1,62.9 148,58"/>
+        <use href="#figure" x="159" y="106" width="26" height="28"/>
+        <g class="still-dots"><circle class="dot" cx="200" cy="90" r="3.5"/><circle class="dot" cx="250" cy="206" r="3.5"/><circle class="dot" cx="110" cy="130" r="3.5"/></g>
+      </svg>
+      <div class="world-text">
+        <h2 class="world-name" id="lab-name">The lab</h2>
+        <p class="world-who">Researchers and technical teams</p>
+        <p class="voice">Our results aren't published yet. The AI should sit next to them, not in someone else's cloud.</p>
+        <ul class="does">
+          <li><span>Talk through an unpublished draft</span> <span class="tag tag-now">Works today</span></li>
+          <li><span>The assistant puts a plan on the whiteboard, and you edit it together</span> <span class="tag tag-now">Works today</span></li>
+          <li><span>More tools from the catalogue</span> <span class="tag tag-soon">Coming soon</span></li>
+        </ul>
+        <p class="why"><strong>Why local:</strong> unpublished work stays on the lab's own machines.</p>
+        <figure class="mini" data-mini>
+          <div class="mini-bar"><span class="mini-title"><svg aria-hidden="true"><use href="#figure"/></svg>localSpace</span><span class="mini-model">Qwen2.5 7B</span></div>
+          <div class="mini-rows">
+            <div class="mini-row">
+              <span class="avatar" aria-hidden="true">Y</span>
+              <div class="mini-body">
+                <p class="mini-q" data-type>Put the plan for next week's experiments on the board as notes.</p>
+                <details class="mini-paste"><summary>What was pasted with it</summary><p>Monday: calibrate the two spectrometers and record the baseline.
+Tuesday and Wednesday: run the 24 soil samples, eight per batch.
+Thursday: repeat the three samples that failed last week.
+Friday: compare the results with September's and draft the summary for the group meeting.</p></details>
+              </div>
+            </div>
+            <div class="mini-row">
+              <span class="avatar avatar-model" aria-hidden="true"><svg><use href="#figure"/></svg></span>
+              <div class="mini-body mini-a" data-stream>
+                <p>Let's create the plan using the <code>canvas__add_sticky</code> function since <code>canvas__add_text</code> is not available.</p>
+                <div class="mini-board" data-board>
+                  <p class="sticky">Monday: calibrate the two spectrometers and record the baseline.</p>
+                  <p class="sticky">Tuesday and Wednesday: run the 24 soil samples, eight per batch.</p>
+                  <p class="sticky">Thursday: repeat the three samples that failed last week.</p>
+                  <p class="sticky">Friday: compare the results with September's and draft the summary for the group meeting.</p>
+                </div>
+                <p>I've added the plan for next week's experiments as blue sticky notes on the board. Each note corresponds to a day's tasks.</p>
+              </div>
+            </div>
+          </div>
+          <figcaption class="mini-note">The model's real answer, in full, and the four notes it put on the board. Qwen2.5 7B on a laptop with a 4 GB graphics card, 8 October 2026.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  <article class="world" id="control" data-world="control" aria-labelledby="control-name">
+    <div class="wrap world-inner">
+      <svg class="scene" viewBox="0 0 400 300" aria-hidden="true" data-mark="145,88,0.22" data-anchors="145,168 250,156 200,72 264,208 118,178">
+        <polygon class="inside" points="200,32 302.2,91 302.2,209 200,268 97.8,209 97.8,91"/>
+        <g class="things">
+          <path class="link" d="M200 82 160 104M262 208 172 196M128 178h-10"/>
+          <g><rect class="ob" x="118" y="104" width="54" height="128" rx="4"/><path class="ln" d="M118 130h54M118 156h54M118 182h54M118 208h54"/><g><circle class="ac" cx="160" cy="117" r="3"/><circle class="ac" cx="160" cy="143" r="3"/><circle class="ac" cx="160" cy="169" r="3"/><circle class="ac" cx="160" cy="195" r="3"/><circle class="ac" cx="160" cy="221" r="3"/></g></g>
+          <g><rect class="ob" x="214" y="128" width="72" height="50" rx="4"/><path class="ln thin" d="M224 144h34M224 154h42M224 164h28"/><path class="ln" d="M250 178v12M236 190h28"/></g>
+          <g><rect class="ob" x="188" y="62" width="24" height="15" rx="2"/><path class="ln" d="M184 80h32"/></g>
+          <g><rect class="ob" x="252" y="198" width="24" height="15" rx="2"/><path class="ln" d="M248 216h32"/></g>
+          <g><rect class="ob" x="104" y="168" width="24" height="15" rx="2"/><path class="ln" d="M100 186h32"/></g>
+        </g>
+        <polygon class="wall" points="200,32 302.2,91 302.2,209 200,268 97.8,209 97.8,91"/>
+        <use href="#figure" x="132" y="74" width="26" height="28"/>
+        <g class="still-dots"><circle class="dot" cx="200" cy="120" r="3.5"/><circle class="dot" cx="230" cy="232" r="3.5"/><circle class="dot" cx="270" cy="110" r="3.5"/></g>
+      </svg>
+      <div class="world-text">
+        <h2 class="world-name" id="control-name">The control room</h2>
+        <p class="world-who">The IT person who has to say yes</p>
+        <p class="voice">I decide whether everyone else gets this. Show me nothing leaves.</p>
+        <ul class="does">
+          <li><span>Start with one laptop and see how it runs</span> <span class="tag tag-now">Works today</span></li>
+          <li><span>One server, people signing in from the desktop app, models chosen centrally</span> <span class="tag tag-soon">Coming soon</span></li>
+          <li><span>No admin screen shows anyone's conversations, and because whoever controls the server's disk could read them, localSpace will ask for an encrypted disk.</span> <span class="tag tag-soon">Coming soon</span></li>
+        </ul>
+        <p class="why"><strong>Why local:</strong> one machine to check, inside the building, and nothing sent outside.</p>
+        <figure class="mini" data-mini>
+          <div class="mini-bar"><span class="mini-title"><svg aria-hidden="true"><use href="#figure"/></svg>localSpace</span><span class="mini-model">Qwen2.5 7B</span></div>
+          <div class="mini-rows">
+            <div class="mini-row">
+              <span class="avatar" aria-hidden="true">Y</span>
+              <div class="mini-body"><p class="mini-q" data-type>Write a short note to staff on how to sign in to the new assistant.</p></div>
+            </div>
+            <div class="mini-row">
+              <span class="avatar avatar-model" aria-hidden="true"><svg><use href="#figure"/></svg></span>
+              <div class="mini-body mini-a" data-stream>
+                <p>Hello Team,</p>
+                <p>We have a new assistant system in place, and I want to make sure everyone knows how to sign in.</p>
+                <p class="mini-more">… <span class="vh">The answer goes on.</span></p>
+              </div>
+            </div>
+          </div>
+          <figcaption class="mini-note">The model's real answer, shortened at the end of a sentence. Qwen2.5 7B on a laptop with a 4 GB graphics card, 8 October 2026.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  </div>
+</div>
+
+<section class="uc-end" id="join" aria-labelledby="end-title">
+  <div class="wrap uc-end-grid">
+    <svg class="tiles" viewBox="0 0 400 300" aria-hidden="true" data-tiles>
+      <g class="tile" style="--i:0"><rect x="178" y="18" width="44" height="44" rx="10"/><use href="#i-bank" x="188" y="28" width="24" height="24"/></g>
+      <g class="tile" style="--i:1"><rect x="255" y="46" width="44" height="44" rx="10"/><use href="#i-clinic" x="265" y="56" width="24" height="24"/></g>
+      <g class="tile" style="--i:2"><rect x="296" y="116" width="44" height="44" rx="10"/><use href="#i-law" x="306" y="126" width="24" height="24"/></g>
+      <g class="tile" style="--i:3"><rect x="282" y="196" width="44" height="44" rx="10"/><use href="#i-distributor" x="292" y="206" width="24" height="24"/></g>
+      <g class="tile" style="--i:4"><rect x="219" y="244" width="44" height="44" rx="10"/><use href="#i-ministry" x="229" y="254" width="24" height="24"/></g>
+      <g class="tile" style="--i:5"><rect x="137" y="244" width="44" height="44" rx="10"/><use href="#i-classroom" x="147" y="254" width="24" height="24"/></g>
+      <g class="tile" style="--i:6"><rect x="74" y="196" width="44" height="44" rx="10"/><use href="#i-student" x="84" y="206" width="24" height="24"/></g>
+      <g class="tile" style="--i:7"><rect x="60" y="116" width="44" height="44" rx="10"/><use href="#i-lab" x="70" y="126" width="24" height="24"/></g>
+      <g class="tile" style="--i:8"><rect x="101" y="46" width="44" height="44" rx="10"/><use href="#i-control" x="111" y="56" width="24" height="24"/></g>
+      <use class="tiles-mark" href="#mark-full" x="152" y="102" width="96" height="96"/>
+    </svg>
+    <div>
+      <h2 id="end-title">Whichever world is yours, the wall is the same.</h2>
+      <p class="uc-end-lead">Join the waitlist to try it on your own computer, or talk to us about a pilot in your organisation.</p>
+      <form class="waitlist" action="https://formspree.io/f/xgawaneg" method="POST" data-waitlist>
+        <div class="form-fields">
+          <label class="field-label" for="email-3">Your email</label>
+          <div class="email-row">
+            <input class="input" id="email-3" name="email" type="email" autocomplete="email" inputmode="email" required>
+            <button class="btn btn-primary" type="submit">Join the waitlist</button>
+          </div>
+          <label class="field-label field-gap" for="use-3">How would you run it? <span class="optional">(optional)</span></label>
+          <select class="select" id="use-3" name="use_case">
+            <option value="">Choose an answer</option>
+            <option>On my own computer</option>
+            <option>On a server for my team or company</option>
+            <option>At an organisation that cannot send data to the cloud</option>
+            <option>Just curious</option>
+          </select>
+          <input type="hidden" name="_subject" value="localSpace preview request">
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" hidden>
+        </div>
+        <p class="form-status" role="status"></p>
+        <p class="form-note">One email, when there is a build to try. Your address goes to Formspree, the service that runs this form, and from there only to us.</p>
+      </form>
+      <p class="uc-pilot"><a class="btn btn-secondary" href="mailto:locallabs.io@gmail.com?subject=A%20localSpace%20pilot">Talk to us about a pilot</a></p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap foot-in">
+    <a class="brand" href="../"><img src="../brand/localspace-lockup.png" width="102" height="30" alt="localSpace" loading="lazy" decoding="async"></a>
+    <nav class="foot-links" aria-label="Footer">
+      <a href="../#how">How it works</a>
+      <a href="./" aria-current="page">Who it's for</a>
+      <a href="../#companies">For companies</a>
+      <a href="#join">Join the waitlist</a>
+    </nav>
+    <p class="foot-meta"><a href="mailto:locallabs.io@gmail.com" data-contact>locallabs.io@gmail.com</a> <span>© 2026 localLabs</span></p>
+  </div>
+</footer>
+</body>
+</html>
