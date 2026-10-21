@@ -26,14 +26,12 @@ export const STRINGS = {
     preview: "Preview",
     windows: "Windows 10 or 11, 64-bit",
     heroDetails: "File details and SHA-256",
-    earlier: "Examples from an earlier version; new examples coming soon.",
     demo: {
       label: "On one laptop:",
-      cpu: "Processor only",
       gpu: "4 GB graphics card",
       rate: "{t} tokens a second · about {w} words a second",
       caption:
-        "Speeds once it is writing, measured on a real laptop in September 2026. The app tells you yours before you download anything.",
+        "Speed once it is writing: Qwen3.5 4B in localSpace 0.2.0-preview.1, measured on 21 October 2026 on a laptop with an NVIDIA GeForce RTX 3050 Ti (4 GB) and 16 GB of memory, in Silent mode. The app tells you yours before you download anything.",
     },
     claimsTitle: "What you can count on",
     claims: [
@@ -45,17 +43,17 @@ export const STRINGS = {
       {
         title: "It looks at your computer before anything downloads",
         text: "The first screen: what it found, the model it recommends for this computer, how fast that model will write and how big the download is.",
-        alt: "The first screen of localSpace. Under This computer: NVIDIA GeForce RTX 3050 Ti Laptop GPU, 4 GB of graphics memory, 16 GB of system memory. Recommended for it: Qwen2.5 7B Instruct, runs well, faster than you read, about 7 to 9 words a second. About half of it fits in the graphics memory; the rest runs from system memory, which is slower. Free to use, also for commercial use. About 4.4 GB to download; drive C: has 92 GB free. A button, Download and start.",
+        alt: "The first screen of localSpace 0.2.0-preview.1. Under This computer: NVIDIA GeForce RTX 3050 Ti Laptop GPU, 4 GB of graphics memory, 16 GB of system memory. Recommended for it: Qwen3.5 4B, runs well, faster than you read, about 15 to 20 words a second. Most of it fits in the graphics memory; the rest runs from system memory, which is slower. Free to use, also for commercial use. About 3.2 GB to download; drive D: has 12 GB free. A button, Download and start.",
       },
       {
         title: "Every model tells you how it will run",
         text: "We would rather tell you it is slow than have you find out after a 60 GB download.",
-        alt: "The list of models in localSpace's settings, each with how it will run on this computer before it is downloaded. Qwen2.5 0.5B Instruct: runs well, faster than you read, about 50 to 70 words a second. Qwen2.5 1.5B Instruct: runs well, about 35 to 50 words a second. Qwen2.5 3B Instruct: runs well, about 20 to 30 words a second; free for research and evaluation only, not for commercial use. Qwen2.5 7B Instruct: runs well, about 7 to 9 words a second. Qwen2.5 14B Instruct: works, about as fast as you read, about 3 to 4 words a second. Qwen3 30B-A3B: will not fit on this computer; about 17.3 GB to download. gpt-oss 120B: will not fit on this computer; about 59.0 GB to download.",
+        alt: "The models that can be added, in localSpace's settings, under Runs well on this computer, each with how it will run here before it is downloaded. Qwen3.5 4B by Alibaba (Qwen): about 15 to 20 words a second, about 3.2 GB to download. Qwen3.5 9B: about 5 to 7 words a second, about 6.1 GB; it needs most of this computer's memory, so close other programs such as your browser before you use it. Gemma 4 E2B by Google: about 15 to 20 words a second, about 3.2 GB. Gemma 4 E4B: about 7 to 10 words a second, about 4.8 GB. Each is free to use, also for commercial use. Below the list: Show the 2 models that will not fit.",
       },
       {
         title: "Then you type",
         text: "Answers are written on your computer, and your conversations are kept there too.",
-        alt: "A conversation in localSpace. Asked: I have eggs, spinach, feta and half a loaf of stale bread. What can I cook tonight? It suggests feta-stuffed spinach omelets: sauté the spinach with some garlic, then stuff the feta into the eggs as they cook. Asked: What should I check before I buy a used bicycle? It lists eight things, from the brakes, wheels and tires to the chain, derailleurs, frame and lights, and suggests a mechanic's inspection as well.",
+        alt: "A conversation in localSpace with Qwen3.5 4B. Asked: What should I check before I buy a used bicycle? It lists seven checks: a test ride for the brakes, gears and handling; the tires; the frame, for cracks and rust; the wheels and spokes; the saddle and seatpost; the chain and derailleur; and the bike's history. It ends: if something is broken or unclear, ask for a repair estimate before paying full price.",
       },
     ],
     ways: {
@@ -144,14 +142,12 @@ export const STRINGS = {
     preview: "Предварительная версия",
     windows: "Windows 10 или 11, 64-разрядная",
     heroDetails: "Файлы и SHA-256",
-    earlier: "Примеры из более ранней версии; новые примеры скоро появятся.",
     demo: {
       label: "На одном ноутбуке:",
-      cpu: "Только процессор",
       gpu: "Видеокарта 4 ГБ",
       rate: "{t} токена в секунду · около {w} слов в секунду",
       caption:
-        "Скорость во время ответа, измеренная на настоящем ноутбуке в сентябре 2026 года. Вопрос и ответ показаны так, как они были написаны, на английском. Приложение скажет вашу скорость до любой загрузки.",
+        "Скорость во время ответа: Qwen3.5 4B в localSpace 0.2.0-preview.1, измерено 21 октября 2026 года на ноутбуке с NVIDIA GeForce RTX 3050 Ti (4 ГБ) и 16 ГБ памяти, в режиме Silent. Вопрос и ответ показаны так, как они были написаны, на английском. Приложение скажет вашу скорость до любой загрузки.",
     },
     claimsTitle: "На что можно рассчитывать",
     claims: [
@@ -163,17 +159,17 @@ export const STRINGS = {
       {
         title: "До любой загрузки оно смотрит на ваш компьютер",
         text: "Первый экран: что приложение нашло, какую модель советует этому компьютеру, как быстро она будет писать и сколько нужно скачать.",
-        alt: "Первый экран localSpace на английском. В разделе «Этот компьютер»: NVIDIA GeForce RTX 3050 Ti Laptop GPU, 4 ГБ видеопамяти, 16 ГБ оперативной памяти. Рекомендовано: Qwen2.5 7B Instruct, работает хорошо, быстрее, чем вы читаете, около 7–9 слов в секунду. Около половины модели помещается в видеопамять, остальное работает из оперативной памяти, а это медленнее. Бесплатно, в том числе для коммерческого использования. Скачать около 4,4 ГБ; на диске C: свободно 92 ГБ. Кнопка «Скачать и начать».",
+        alt: "Первый экран localSpace 0.2.0-preview.1 на английском. В разделе «Этот компьютер»: NVIDIA GeForce RTX 3050 Ti Laptop GPU, 4 ГБ видеопамяти, 16 ГБ оперативной памяти. Рекомендовано: Qwen3.5 4B, работает хорошо, быстрее, чем вы читаете, около 15–20 слов в секунду. Большая часть модели помещается в видеопамять, остальное работает из оперативной памяти, а это медленнее. Бесплатно, в том числе для коммерческого использования. Скачать около 3,2 ГБ; на диске D: свободно 12 ГБ. Кнопка «Скачать и начать».",
       },
       {
         title: "Каждая модель говорит, как она будет работать",
         text: "Мы лучше скажем, что модель медленная, чем вы узнаете это после загрузки на 60 ГБ.",
-        alt: "Список моделей в настройках localSpace на английском, у каждой — как она будет работать на этом компьютере, ещё до загрузки. Qwen2.5 0.5B Instruct: работает хорошо, быстрее, чем вы читаете, около 50–70 слов в секунду. Qwen2.5 1.5B Instruct: работает хорошо, около 35–50 слов в секунду. Qwen2.5 3B Instruct: работает хорошо, около 20–30 слов в секунду; бесплатно только для исследований и оценки, не для коммерческого использования. Qwen2.5 7B Instruct: работает хорошо, около 7–9 слов в секунду. Qwen2.5 14B Instruct: работает примерно с вашей скоростью чтения, около 3–4 слов в секунду. Qwen3 30B-A3B: не поместится на этом компьютере; скачать около 17,3 ГБ. gpt-oss 120B: не поместится на этом компьютере; скачать около 59,0 ГБ.",
+        alt: "Модели, которые можно добавить, в настройках localSpace на английском, в разделе «Хорошо работает на этом компьютере»; у каждой — как она будет работать здесь, ещё до загрузки. Qwen3.5 4B от Alibaba (Qwen): около 15–20 слов в секунду, скачать около 3,2 ГБ. Qwen3.5 9B: около 5–7 слов в секунду, около 6,1 ГБ; ей нужна почти вся память компьютера, поэтому перед работой закройте другие программы, например браузер. Gemma 4 E2B от Google: около 15–20 слов в секунду, около 3,2 ГБ. Gemma 4 E4B: около 7–10 слов в секунду, около 4,8 ГБ. Все бесплатны, в том числе для коммерческого использования. Под списком: «Показать 2 модели, которые не поместятся».",
       },
       {
         title: "Потом вы пишете",
         text: "Ответы пишутся на вашем компьютере, и ваши разговоры хранятся там же.",
-        alt: "Разговор в localSpace на английском. Вопрос: у меня есть яйца, шпинат, фета и полбуханки чёрствого хлеба; что приготовить на ужин? Модель предлагает омлет со шпинатом и фетой: обжарить шпинат с чесноком и добавить фету в яйца во время готовки. Вопрос: что проверить перед покупкой подержанного велосипеда? Модель перечисляет восемь пунктов, от тормозов, колёс и шин до цепи, переключателей, рамы и фонарей, и советует ещё показать велосипед мастеру.",
+        alt: "Разговор в localSpace с Qwen3.5 4B на английском. Вопрос: что проверить перед покупкой подержанного велосипеда? Модель перечисляет семь проверок: пробная поездка (тормоза, передачи, управление), шины, рама (трещины и ржавчина), колёса и спицы, седло и подседельный штырь, цепь и переключатель, история велосипеда. И в конце: если что-то сломано или непонятно, узнайте цену ремонта, прежде чем платить полную стоимость.",
       },
     ],
     ways: {
@@ -262,14 +258,12 @@ export const STRINGS = {
     preview: "Sinov versiyasi",
     windows: "Windows 10 yoki 11, 64-bit",
     heroDetails: "Fayllar va SHA-256",
-    earlier: "Misollar oldingi versiyadan; yangi misollar tez orada.",
     demo: {
       label: "Bitta noutbukda:",
-      cpu: "Faqat protsessor",
       gpu: "4 GB videokarta",
       rate: "soniyasiga {t} token · soniyasiga taxminan {w} soʻz",
       caption:
-        "Javob yozilayotgandagi tezlik, 2026-yil sentabrida haqiqiy noutbukda oʻlchangan. Savol va javob qanday yozilgan boʻlsa, shunday — ingliz tilida koʻrsatilgan. Ilova sizning tezligingizni hech narsa yuklab olinmasdan oldin aytadi.",
+        "Javob yozilayotgandagi tezlik: localSpace 0.2.0-preview.1 dagi Qwen3.5 4B, 2026-yil 21-oktabrda NVIDIA GeForce RTX 3050 Ti (4 GB) va 16 GB xotirali noutbukda, Silent rejimida oʻlchangan. Savol va javob qanday yozilgan boʻlsa, shunday — ingliz tilida koʻrsatilgan. Ilova sizning tezligingizni hech narsa yuklab olinmasdan oldin aytadi.",
     },
     claimsTitle: "Nimaga ishonsangiz boʻladi",
     claims: [
@@ -281,17 +275,17 @@ export const STRINGS = {
       {
         title: "Hech narsa yuklab olinmasdan oldin u kompyuteringizni koʻrib chiqadi",
         text: "Birinchi ekran: nima topgani, shu kompyuterga qaysi modelni tavsiya qilgani, u qanchalik tez yozishi va qancha yuklab olish kerakligi.",
-        alt: "localSpace’ning ingliz tilidagi birinchi ekrani. «Bu kompyuter» ostida: NVIDIA GeForce RTX 3050 Ti Laptop GPU, 4 GB videoxotira, 16 GB tizim xotirasi. Tavsiya etilgani: Qwen2.5 7B Instruct, yaxshi ishlaydi, siz oʻqishingizdan tezroq, soniyasiga taxminan 7–9 soʻz. Uning taxminan yarmi videoxotiraga sigʻadi, qolgani sekinroq tizim xotirasidan ishlaydi. Bepul, tijoriy foydalanish uchun ham. Taxminan 4,4 GB yuklab olinadi; C: diskda 92 GB boʻsh. «Yuklab olish va boshlash» tugmasi.",
+        alt: "localSpace 0.2.0-preview.1 ning ingliz tilidagi birinchi ekrani. «Bu kompyuter» ostida: NVIDIA GeForce RTX 3050 Ti Laptop GPU, 4 GB videoxotira, 16 GB tizim xotirasi. Tavsiya etilgani: Qwen3.5 4B, yaxshi ishlaydi, siz oʻqishingizdan tezroq, soniyasiga taxminan 15–20 soʻz. Uning katta qismi videoxotiraga sigʻadi, qolgani sekinroq tizim xotirasidan ishlaydi. Bepul, tijoriy foydalanish uchun ham. Taxminan 3,2 GB yuklab olinadi; D: diskda 12 GB boʻsh. «Yuklab olish va boshlash» tugmasi.",
       },
       {
         title: "Har bir model qanday ishlashini aytadi",
         text: "60 GB yuklab olgandan keyin bilib qolishingizdan koʻra, sekin ekanini oldindan aytganimiz maʼqul.",
-        alt: "localSpace sozlamalaridagi ingliz tilidagi modellar roʻyxati; har birida yuklab olinmasdan oldin shu kompyuterda qanday ishlashi yozilgan. Qwen2.5 0.5B Instruct: yaxshi ishlaydi, siz oʻqishingizdan tezroq, soniyasiga taxminan 50–70 soʻz. Qwen2.5 1.5B Instruct: yaxshi ishlaydi, soniyasiga taxminan 35–50 soʻz. Qwen2.5 3B Instruct: yaxshi ishlaydi, soniyasiga taxminan 20–30 soʻz; faqat tadqiqot va baholash uchun bepul, tijoriy foydalanish uchun emas. Qwen2.5 7B Instruct: yaxshi ishlaydi, soniyasiga taxminan 7–9 soʻz. Qwen2.5 14B Instruct: ishlaydi, taxminan siz oʻqigandek tez, soniyasiga 3–4 soʻz. Qwen3 30B-A3B: bu kompyuterga sigʻmaydi; taxminan 17,3 GB yuklab olinadi. gpt-oss 120B: bu kompyuterga sigʻmaydi; taxminan 59,0 GB yuklab olinadi.",
+        alt: "localSpace sozlamalaridagi qoʻshish mumkin boʻlgan modellar (ingliz tilida), «Bu kompyuterda yaxshi ishlaydi» ostida; har birida yuklab olinmasdan oldin bu yerda qanday ishlashi yozilgan. Alibaba (Qwen) ning Qwen3.5 4B: soniyasiga taxminan 15–20 soʻz, taxminan 3,2 GB. Qwen3.5 9B: soniyasiga taxminan 5–7 soʻz, taxminan 6,1 GB; unga kompyuter xotirasining katta qismi kerak, shuning uchun undan oldin brauzer kabi boshqa dasturlarni yoping. Google ning Gemma 4 E2B: soniyasiga taxminan 15–20 soʻz, taxminan 3,2 GB. Gemma 4 E4B: soniyasiga taxminan 7–10 soʻz, taxminan 4,8 GB. Hammasi bepul, tijoriy foydalanish uchun ham. Roʻyxat ostida: «Sigʻmaydigan 2 ta modelni koʻrsatish».",
       },
       {
         title: "Keyin siz yozasiz",
         text: "Javoblar kompyuteringizda yoziladi, suhbatlaringiz ham oʻsha yerda saqlanadi.",
-        alt: "localSpace’dagi ingliz tilidagi suhbat. Savol: menda tuxum, ismaloq, feta pishlogʻi va yarimta qotgan non bor; kechqurun nima pishirsam boʻladi? Model ismaloq va fetali omlet taklif qiladi: ismaloqni sarimsoq bilan qovurib, pishayotgan tuxumga fetani qoʻshish. Savol: ishlatilgan velosiped sotib olishdan oldin nimani tekshirish kerak? Model tormoz, gʻildirak va shinalardan tortib zanjir, tezlik almashtirgich, rama va chiroqlargacha sakkizta narsani sanaydi va ustaga koʻrsatishni ham maslahat beradi.",
+        alt: "localSpace’dagi Qwen3.5 4B bilan ingliz tilidagi suhbat. Savol: ishlatilgan velosiped sotib olishdan oldin nimani tekshirish kerak? Model yettita tekshiruvni sanaydi: sinov yurishi (tormoz, tezliklar, boshqaruv), shinalar, rama (yoriq va zang), gʻildirak va kegaylar, oʻrindiq va uning ustuni, zanjir va tezlik almashtirgich, velosiped tarixi. Oxirida: biror narsa buzilgan yoki tushunarsiz boʻlsa, toʻliq narx toʻlashdan oldin taʼmirlash narxini soʻrang.",
       },
     ],
     ways: {

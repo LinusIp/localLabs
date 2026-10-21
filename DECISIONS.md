@@ -3,6 +3,22 @@
 Why the page is the way it is, so that a later change does not undo a choice
 by accident. Newest first.
 
+## 2026-10-21: the examples retaken on Qwen3.5 4B
+
+- **The demo, the speed and the three screens come from localSpace
+  0.2.0-preview.1 (920b7123),** in one sitting on 21 October 2026, on one
+  laptop: NVIDIA GeForce RTX 3050 Ti Laptop GPU (4 GB), 16 GB of memory,
+  Silent mode, with the model placed the app's own way (most of it on the
+  card). Qwen2.5, which 0.2 no longer offers, is gone from the page.
+- **The demo's answer** is the one Qwen3.5 4B wrote, word for word, measured
+  by `localspace measure --chat`: 121 tokens at 25.2 a second. The two chat
+  answers in the third screen ran at 25.06 and 25.13 a second (the engine's
+  own timing). Words a second still use the app's 0.75 words per token.
+- **One chip, not three.** The processor-only run was stopped by the laptop's
+  watch when free memory fell under 3 GB, so it has no figure; a speed is
+  shown only once it has been measured.
+- **The link-preview image** shows that one measured speed.
+
 ## 2026-10-21: the download section, in three languages
 
 - **The waitlist is gone; the page offers the download.** Both Formspree forms

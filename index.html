@@ -20,7 +20,7 @@
 <meta property="og:image" content="https://linusip.github.io/localLabs/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="The localSpace logo and the words: Your computer can run its own AI. We will tell you how well. Below them, three speeds measured on one laptop: 9.5, 13.2 and 40.5 tokens a second.">
+<meta property="og:image:alt" content="The localSpace logo and the words: Your computer can run its own AI. We will tell you how well. Below them, one speed measured on one laptop: Qwen3.5 4B, 25.2 tokens a second, with a 4 GB graphics card.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Your computer can run its own AI. We will tell you how well.">
 <meta name="twitter:description" content="localSpace looks at your computer, recommends a model that suits it and tells you how fast it will write before anything downloads. Everything you type stays on your machine.">
@@ -77,9 +77,7 @@
         <div class="demo-pick" data-demo-pick hidden>
           <p class="demo-label" id="demo-label">On one laptop:</p>
           <div class="chips" role="group" aria-labelledby="demo-label">
-            <button class="chip" type="button" aria-pressed="false" data-tps="9.5" data-model="Qwen2.5 7B">Processor only <span class="chip-model">7B</span></button>
-            <button class="chip" type="button" aria-pressed="true" data-tps="13.2" data-model="Qwen2.5 7B">4 GB graphics card <span class="chip-model">7B</span></button>
-            <button class="chip" type="button" aria-pressed="false" data-tps="40.5" data-model="Qwen2.5 3B">4 GB graphics card <span class="chip-model">3B</span></button>
+            <button class="chip" type="button" aria-pressed="true" data-tps="25.2" data-model="Qwen3.5 4B">4 GB graphics card <span class="chip-model">4B</span></button>
           </div>
         </div>
         <div class="panel">
@@ -91,25 +89,30 @@
             <div class="msg" lang="en">
               <span class="avatar avatar-model" aria-hidden="true"><svg viewBox="0 0 256 256" focusable="false"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M136.4 40.85 199.27 77.15A16.8 16.8 0 0 1 207.67 91.7V164.3A16.8 16.8 0 0 1 199.27 178.85L136.4 215.15A16.8 16.8 0 0 1 119.6 215.15L56.73 178.85A16.8 16.8 0 0 1 48.33 164.3V91.7A16.8 16.8 0 0 1 56.73 77.15L119.6 40.85A16.8 16.8 0 0 1 136.4 40.85Z" stroke-width="23.3"/><path d="M88.5 105.3 128 131.2 167.5 105.3" stroke-width="9.1"/><path d="M128 131.2V208.3" stroke-width="9.1"/></g><g fill="currentColor"><circle cx="88.5" cy="105.3" r="15.5"/><circle cx="167.5" cy="105.3" r="15.5"/><circle cx="128" cy="168.2" r="15.5"/></g></svg></span>
               <div class="msg-body">
-                <p class="answer" data-demo-answer>Subject: Request for Kitchen Tap Repair
+                <p class="answer" data-demo-answer>Subject: Request to repair leaking kitchen tap
 
 Dear [Landlord's Name],
 
-I hope this email finds you well. I am writing to bring to your attention a small issue in the kitchen. The tap seems to be leaking, which is a bit concerning. I believe it would be best if you could have a look at it and arrange for it to be fixed at your earliest convenience.
+I hope you are having a good week.
 
-Thank you for your prompt attention to this matter.
+I am writing to kindly ask if it would be possible to have the leaking tap in the kitchen fixed at your earliest convenience. The water is running continuously, which is causing some inconvenience and potential damage to the countertop.
 
-Best regards,</p>
+Please let me know what steps we need to take next or if you require any further information from my side.
+
+Thank you for your time and assistance.
+
+Best regards,
+[Your Name]
+[Your Address/Unit Number]</p>
               </div>
             </div>
           </div>
           <div class="panel-foot">
-            <span class="model-chip" data-demo-model>Qwen2.5 7B</span>
-            <p class="rate" data-demo-rate data-rate="{t} tokens a second · about {w} words a second" aria-live="polite"><span class="num">13.2</span> tokens a second · about 10 words a second</p>
+            <span class="model-chip" data-demo-model>Qwen3.5 4B</span>
+            <p class="rate" data-demo-rate data-rate="{t} tokens a second · about {w} words a second" aria-live="polite"><span class="num">25.2</span> tokens a second · about 19 words a second</p>
           </div>
         </div>
-        <figcaption>Speeds once it is writing, measured on a real laptop in September 2026. The app tells you yours before you download anything.</figcaption>
-        <p class="earlier">Examples from an earlier version; new examples coming soon.</p>
+        <figcaption>Speed once it is writing: Qwen3.5 4B in localSpace 0.2.0-preview.1, measured on 21 October 2026 on a laptop with an NVIDIA GeForce RTX 3050 Ti (4 GB) and 16 GB of memory, in Silent mode. The app tells you yours before you download anything.</figcaption>
       </figure>
     </div>
   </section>
@@ -128,7 +131,6 @@ Best regards,</p>
   <section class="section" id="how" aria-labelledby="how-title">
     <div class="wrap">
       <h2 id="how-title">How it works</h2>
-      <p class="earlier earlier-how">Examples from an earlier version; new examples coming soon.</p>
       <ol class="steps">
         <li>
           <figure class="step">
@@ -136,7 +138,7 @@ Best regards,</p>
               <h3>It looks at your computer before anything downloads</h3>
               <p>The first screen: what it found, the model it recommends for this computer, how fast that model will write and how big the download is.</p>
             </figcaption>
-            <img class="shot" src="shots/first-run.webp" width="576" height="598" loading="lazy" decoding="async" alt="The first screen of localSpace. Under This computer: NVIDIA GeForce RTX 3050 Ti Laptop GPU, 4 GB of graphics memory, 16 GB of system memory. Recommended for it: Qwen2.5 7B Instruct, runs well, faster than you read, about 7 to 9 words a second. About half of it fits in the graphics memory; the rest runs from system memory, which is slower. Free to use, also for commercial use. About 4.4 GB to download; drive C: has 92 GB free. A button, Download and start.">
+            <img class="shot" src="shots/first-run.webp" width="540" height="463" loading="lazy" decoding="async" alt="The first screen of localSpace 0.2.0-preview.1. Under This computer: NVIDIA GeForce RTX 3050 Ti Laptop GPU, 4 GB of graphics memory, 16 GB of system memory. Recommended for it: Qwen3.5 4B, runs well, faster than you read, about 15 to 20 words a second. Most of it fits in the graphics memory; the rest runs from system memory, which is slower. Free to use, also for commercial use. About 3.2 GB to download; drive D: has 12 GB free. A button, Download and start.">
           </figure>
         </li>
         <li>
@@ -145,7 +147,7 @@ Best regards,</p>
               <h3>Every model tells you how it will run</h3>
               <p>We would rather tell you it is slow than have you find out after a 60 GB download.</p>
             </figcaption>
-            <img class="shot" src="shots/models.webp" width="694" height="728" loading="lazy" decoding="async" alt="The list of models in localSpace's settings, each with how it will run on this computer before it is downloaded. Qwen2.5 0.5B Instruct: runs well, faster than you read, about 50 to 70 words a second. Qwen2.5 1.5B Instruct: runs well, about 35 to 50 words a second. Qwen2.5 3B Instruct: runs well, about 20 to 30 words a second; free for research and evaluation only, not for commercial use. Qwen2.5 7B Instruct: runs well, about 7 to 9 words a second. Qwen2.5 14B Instruct: works, about as fast as you read, about 3 to 4 words a second. Qwen3 30B-A3B: will not fit on this computer; about 17.3 GB to download. gpt-oss 120B: will not fit on this computer; about 59.0 GB to download.">
+            <img class="shot" src="shots/models.webp" width="685" height="530" loading="lazy" decoding="async" alt="The models that can be added, in localSpace's settings, under Runs well on this computer, each with how it will run here before it is downloaded. Qwen3.5 4B by Alibaba (Qwen): about 15 to 20 words a second, about 3.2 GB to download. Qwen3.5 9B: about 5 to 7 words a second, about 6.1 GB; it needs most of this computer's memory, so close other programs such as your browser before you use it. Gemma 4 E2B by Google: about 15 to 20 words a second, about 3.2 GB. Gemma 4 E4B: about 7 to 10 words a second, about 4.8 GB. Each is free to use, also for commercial use. Below the list: Show the 2 models that will not fit.">
           </figure>
         </li>
         <li>
@@ -154,7 +156,7 @@ Best regards,</p>
               <h3>Then you type</h3>
               <p>Answers are written on your computer, and your conversations are kept there too.</p>
             </figcaption>
-            <img class="shot" src="shots/chat.webp" width="795" height="540" loading="lazy" decoding="async" alt="A conversation in localSpace. Asked: I have eggs, spinach, feta and half a loaf of stale bread. What can I cook tonight? It suggests feta-stuffed spinach omelets: sauté the spinach with some garlic, then stuff the feta into the eggs as they cook. Asked: What should I check before I buy a used bicycle? It lists eight things, from the brakes, wheels and tires to the chain, derailleurs, frame and lights, and suggests a mechanic's inspection as well.">
+            <img class="shot" src="shots/chat.webp" width="792" height="648" loading="lazy" decoding="async" alt="A conversation in localSpace with Qwen3.5 4B. Asked: What should I check before I buy a used bicycle? It lists seven checks: a test ride for the brakes, gears and handling; the tires; the frame, for cracks and rust; the wheels and spokes; the saddle and seatpost; the chain and derailleur; and the bike's history. It ends: if something is broken or unclear, ask for a repair estimate before paying full price.">
           </figure>
         </li>
       </ol>

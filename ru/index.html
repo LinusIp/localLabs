@@ -20,7 +20,7 @@
 <meta property="og:image" content="https://linusip.github.io/localLabs/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="The localSpace logo and the words: Your computer can run its own AI. We will tell you how well. Below them, three speeds measured on one laptop: 9.5, 13.2 and 40.5 tokens a second.">
+<meta property="og:image:alt" content="The localSpace logo and the words: Your computer can run its own AI. We will tell you how well. Below them, one speed measured on one laptop: Qwen3.5 4B, 25.2 tokens a second, with a 4 GB graphics card.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Ваш компьютер может запускать свой ИИ. Мы скажем, насколько хорошо.">
 <meta name="twitter:description" content="localSpace смотрит на ваш компьютер, советует подходящую ему модель и ещё до загрузки говорит, как быстро она будет писать. Всё, что вы пишете, остаётся на вашем компьютере.">
@@ -77,9 +77,7 @@
         <div class="demo-pick" data-demo-pick hidden>
           <p class="demo-label" id="demo-label">На одном ноутбуке:</p>
           <div class="chips" role="group" aria-labelledby="demo-label">
-            <button class="chip" type="button" aria-pressed="false" data-tps="9.5" data-model="Qwen2.5 7B">Только процессор <span class="chip-model">7B</span></button>
-            <button class="chip" type="button" aria-pressed="true" data-tps="13.2" data-model="Qwen2.5 7B">Видеокарта 4 ГБ <span class="chip-model">7B</span></button>
-            <button class="chip" type="button" aria-pressed="false" data-tps="40.5" data-model="Qwen2.5 3B">Видеокарта 4 ГБ <span class="chip-model">3B</span></button>
+            <button class="chip" type="button" aria-pressed="true" data-tps="25.2" data-model="Qwen3.5 4B">Видеокарта 4 ГБ <span class="chip-model">4B</span></button>
           </div>
         </div>
         <div class="panel">
@@ -91,25 +89,30 @@
             <div class="msg" lang="en">
               <span class="avatar avatar-model" aria-hidden="true"><svg viewBox="0 0 256 256" focusable="false"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M136.4 40.85 199.27 77.15A16.8 16.8 0 0 1 207.67 91.7V164.3A16.8 16.8 0 0 1 199.27 178.85L136.4 215.15A16.8 16.8 0 0 1 119.6 215.15L56.73 178.85A16.8 16.8 0 0 1 48.33 164.3V91.7A16.8 16.8 0 0 1 56.73 77.15L119.6 40.85A16.8 16.8 0 0 1 136.4 40.85Z" stroke-width="23.3"/><path d="M88.5 105.3 128 131.2 167.5 105.3" stroke-width="9.1"/><path d="M128 131.2V208.3" stroke-width="9.1"/></g><g fill="currentColor"><circle cx="88.5" cy="105.3" r="15.5"/><circle cx="167.5" cy="105.3" r="15.5"/><circle cx="128" cy="168.2" r="15.5"/></g></svg></span>
               <div class="msg-body">
-                <p class="answer" data-demo-answer>Subject: Request for Kitchen Tap Repair
+                <p class="answer" data-demo-answer>Subject: Request to repair leaking kitchen tap
 
 Dear [Landlord's Name],
 
-I hope this email finds you well. I am writing to bring to your attention a small issue in the kitchen. The tap seems to be leaking, which is a bit concerning. I believe it would be best if you could have a look at it and arrange for it to be fixed at your earliest convenience.
+I hope you are having a good week.
 
-Thank you for your prompt attention to this matter.
+I am writing to kindly ask if it would be possible to have the leaking tap in the kitchen fixed at your earliest convenience. The water is running continuously, which is causing some inconvenience and potential damage to the countertop.
 
-Best regards,</p>
+Please let me know what steps we need to take next or if you require any further information from my side.
+
+Thank you for your time and assistance.
+
+Best regards,
+[Your Name]
+[Your Address/Unit Number]</p>
               </div>
             </div>
           </div>
           <div class="panel-foot">
-            <span class="model-chip" data-demo-model>Qwen2.5 7B</span>
-            <p class="rate" data-demo-rate data-rate="{t} токена в секунду · около {w} слов в секунду" aria-live="polite"><span class="num">13,2</span> токена в секунду · около 10 слов в секунду</p>
+            <span class="model-chip" data-demo-model>Qwen3.5 4B</span>
+            <p class="rate" data-demo-rate data-rate="{t} токена в секунду · около {w} слов в секунду" aria-live="polite"><span class="num">25,2</span> токена в секунду · около 19 слов в секунду</p>
           </div>
         </div>
-        <figcaption>Скорость во время ответа, измеренная на настоящем ноутбуке в сентябре 2026 года. Вопрос и ответ показаны так, как они были написаны, на английском. Приложение скажет вашу скорость до любой загрузки.</figcaption>
-        <p class="earlier">Примеры из более ранней версии; новые примеры скоро появятся.</p>
+        <figcaption>Скорость во время ответа: Qwen3.5 4B в localSpace 0.2.0-preview.1, измерено 21 октября 2026 года на ноутбуке с NVIDIA GeForce RTX 3050 Ti (4 ГБ) и 16 ГБ памяти, в режиме Silent. Вопрос и ответ показаны так, как они были написаны, на английском. Приложение скажет вашу скорость до любой загрузки.</figcaption>
       </figure>
     </div>
   </section>
@@ -128,7 +131,6 @@ Best regards,</p>
   <section class="section" id="how" aria-labelledby="how-title">
     <div class="wrap">
       <h2 id="how-title">Как это работает</h2>
-      <p class="earlier earlier-how">Примеры из более ранней версии; новые примеры скоро появятся.</p>
       <ol class="steps">
         <li>
           <figure class="step">
@@ -136,7 +138,7 @@ Best regards,</p>
               <h3>До любой загрузки оно смотрит на ваш компьютер</h3>
               <p>Первый экран: что приложение нашло, какую модель советует этому компьютеру, как быстро она будет писать и сколько нужно скачать.</p>
             </figcaption>
-            <img class="shot" src="../shots/first-run.webp" width="576" height="598" loading="lazy" decoding="async" alt="Первый экран localSpace на английском. В разделе «Этот компьютер»: NVIDIA GeForce RTX 3050 Ti Laptop GPU, 4 ГБ видеопамяти, 16 ГБ оперативной памяти. Рекомендовано: Qwen2.5 7B Instruct, работает хорошо, быстрее, чем вы читаете, около 7–9 слов в секунду. Около половины модели помещается в видеопамять, остальное работает из оперативной памяти, а это медленнее. Бесплатно, в том числе для коммерческого использования. Скачать около 4,4 ГБ; на диске C: свободно 92 ГБ. Кнопка «Скачать и начать».">
+            <img class="shot" src="../shots/first-run.webp" width="540" height="463" loading="lazy" decoding="async" alt="Первый экран localSpace 0.2.0-preview.1 на английском. В разделе «Этот компьютер»: NVIDIA GeForce RTX 3050 Ti Laptop GPU, 4 ГБ видеопамяти, 16 ГБ оперативной памяти. Рекомендовано: Qwen3.5 4B, работает хорошо, быстрее, чем вы читаете, около 15–20 слов в секунду. Большая часть модели помещается в видеопамять, остальное работает из оперативной памяти, а это медленнее. Бесплатно, в том числе для коммерческого использования. Скачать около 3,2 ГБ; на диске D: свободно 12 ГБ. Кнопка «Скачать и начать».">
           </figure>
         </li>
         <li>
@@ -145,7 +147,7 @@ Best regards,</p>
               <h3>Каждая модель говорит, как она будет работать</h3>
               <p>Мы лучше скажем, что модель медленная, чем вы узнаете это после загрузки на 60 ГБ.</p>
             </figcaption>
-            <img class="shot" src="../shots/models.webp" width="694" height="728" loading="lazy" decoding="async" alt="Список моделей в настройках localSpace на английском, у каждой — как она будет работать на этом компьютере, ещё до загрузки. Qwen2.5 0.5B Instruct: работает хорошо, быстрее, чем вы читаете, около 50–70 слов в секунду. Qwen2.5 1.5B Instruct: работает хорошо, около 35–50 слов в секунду. Qwen2.5 3B Instruct: работает хорошо, около 20–30 слов в секунду; бесплатно только для исследований и оценки, не для коммерческого использования. Qwen2.5 7B Instruct: работает хорошо, около 7–9 слов в секунду. Qwen2.5 14B Instruct: работает примерно с вашей скоростью чтения, около 3–4 слов в секунду. Qwen3 30B-A3B: не поместится на этом компьютере; скачать около 17,3 ГБ. gpt-oss 120B: не поместится на этом компьютере; скачать около 59,0 ГБ.">
+            <img class="shot" src="../shots/models.webp" width="685" height="530" loading="lazy" decoding="async" alt="Модели, которые можно добавить, в настройках localSpace на английском, в разделе «Хорошо работает на этом компьютере»; у каждой — как она будет работать здесь, ещё до загрузки. Qwen3.5 4B от Alibaba (Qwen): около 15–20 слов в секунду, скачать около 3,2 ГБ. Qwen3.5 9B: около 5–7 слов в секунду, около 6,1 ГБ; ей нужна почти вся память компьютера, поэтому перед работой закройте другие программы, например браузер. Gemma 4 E2B от Google: около 15–20 слов в секунду, около 3,2 ГБ. Gemma 4 E4B: около 7–10 слов в секунду, около 4,8 ГБ. Все бесплатны, в том числе для коммерческого использования. Под списком: «Показать 2 модели, которые не поместятся».">
           </figure>
         </li>
         <li>
@@ -154,7 +156,7 @@ Best regards,</p>
               <h3>Потом вы пишете</h3>
               <p>Ответы пишутся на вашем компьютере, и ваши разговоры хранятся там же.</p>
             </figcaption>
-            <img class="shot" src="../shots/chat.webp" width="795" height="540" loading="lazy" decoding="async" alt="Разговор в localSpace на английском. Вопрос: у меня есть яйца, шпинат, фета и полбуханки чёрствого хлеба; что приготовить на ужин? Модель предлагает омлет со шпинатом и фетой: обжарить шпинат с чесноком и добавить фету в яйца во время готовки. Вопрос: что проверить перед покупкой подержанного велосипеда? Модель перечисляет восемь пунктов, от тормозов, колёс и шин до цепи, переключателей, рамы и фонарей, и советует ещё показать велосипед мастеру.">
+            <img class="shot" src="../shots/chat.webp" width="792" height="648" loading="lazy" decoding="async" alt="Разговор в localSpace с Qwen3.5 4B на английском. Вопрос: что проверить перед покупкой подержанного велосипеда? Модель перечисляет семь проверок: пробная поездка (тормоза, передачи, управление), шины, рама (трещины и ржавчина), колёса и спицы, седло и подседельный штырь, цепь и переключатель, история велосипеда. И в конце: если что-то сломано или непонятно, узнайте цену ремонта, прежде чем платить полную стоимость.">
           </figure>
         </li>
       </ol>

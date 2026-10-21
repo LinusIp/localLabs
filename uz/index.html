@@ -20,7 +20,7 @@
 <meta property="og:image" content="https://linusip.github.io/localLabs/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="The localSpace logo and the words: Your computer can run its own AI. We will tell you how well. Below them, three speeds measured on one laptop: 9.5, 13.2 and 40.5 tokens a second.">
+<meta property="og:image:alt" content="The localSpace logo and the words: Your computer can run its own AI. We will tell you how well. Below them, one speed measured on one laptop: Qwen3.5 4B, 25.2 tokens a second, with a 4 GB graphics card.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Kompyuteringiz oʻz sunʼiy intellektini ishga tushira oladi. Qanchalik yaxshi ekanini biz aytamiz.">
 <meta name="twitter:description" content="localSpace kompyuteringizni koʻrib chiqadi, unga mos modelni tavsiya qiladi va hech narsa yuklab olinmasdan oldin u qanchalik tez yozishini aytadi. Siz yozgan hamma narsa kompyuteringizda qoladi.">
@@ -77,9 +77,7 @@
         <div class="demo-pick" data-demo-pick hidden>
           <p class="demo-label" id="demo-label">Bitta noutbukda:</p>
           <div class="chips" role="group" aria-labelledby="demo-label">
-            <button class="chip" type="button" aria-pressed="false" data-tps="9.5" data-model="Qwen2.5 7B">Faqat protsessor <span class="chip-model">7B</span></button>
-            <button class="chip" type="button" aria-pressed="true" data-tps="13.2" data-model="Qwen2.5 7B">4 GB videokarta <span class="chip-model">7B</span></button>
-            <button class="chip" type="button" aria-pressed="false" data-tps="40.5" data-model="Qwen2.5 3B">4 GB videokarta <span class="chip-model">3B</span></button>
+            <button class="chip" type="button" aria-pressed="true" data-tps="25.2" data-model="Qwen3.5 4B">4 GB videokarta <span class="chip-model">4B</span></button>
           </div>
         </div>
         <div class="panel">
@@ -91,25 +89,30 @@
             <div class="msg" lang="en">
               <span class="avatar avatar-model" aria-hidden="true"><svg viewBox="0 0 256 256" focusable="false"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M136.4 40.85 199.27 77.15A16.8 16.8 0 0 1 207.67 91.7V164.3A16.8 16.8 0 0 1 199.27 178.85L136.4 215.15A16.8 16.8 0 0 1 119.6 215.15L56.73 178.85A16.8 16.8 0 0 1 48.33 164.3V91.7A16.8 16.8 0 0 1 56.73 77.15L119.6 40.85A16.8 16.8 0 0 1 136.4 40.85Z" stroke-width="23.3"/><path d="M88.5 105.3 128 131.2 167.5 105.3" stroke-width="9.1"/><path d="M128 131.2V208.3" stroke-width="9.1"/></g><g fill="currentColor"><circle cx="88.5" cy="105.3" r="15.5"/><circle cx="167.5" cy="105.3" r="15.5"/><circle cx="128" cy="168.2" r="15.5"/></g></svg></span>
               <div class="msg-body">
-                <p class="answer" data-demo-answer>Subject: Request for Kitchen Tap Repair
+                <p class="answer" data-demo-answer>Subject: Request to repair leaking kitchen tap
 
 Dear [Landlord's Name],
 
-I hope this email finds you well. I am writing to bring to your attention a small issue in the kitchen. The tap seems to be leaking, which is a bit concerning. I believe it would be best if you could have a look at it and arrange for it to be fixed at your earliest convenience.
+I hope you are having a good week.
 
-Thank you for your prompt attention to this matter.
+I am writing to kindly ask if it would be possible to have the leaking tap in the kitchen fixed at your earliest convenience. The water is running continuously, which is causing some inconvenience and potential damage to the countertop.
 
-Best regards,</p>
+Please let me know what steps we need to take next or if you require any further information from my side.
+
+Thank you for your time and assistance.
+
+Best regards,
+[Your Name]
+[Your Address/Unit Number]</p>
               </div>
             </div>
           </div>
           <div class="panel-foot">
-            <span class="model-chip" data-demo-model>Qwen2.5 7B</span>
-            <p class="rate" data-demo-rate data-rate="soniyasiga {t} token · soniyasiga taxminan {w} soʻz" aria-live="polite">soniyasiga <span class="num">13,2</span> token · soniyasiga taxminan 10 soʻz</p>
+            <span class="model-chip" data-demo-model>Qwen3.5 4B</span>
+            <p class="rate" data-demo-rate data-rate="soniyasiga {t} token · soniyasiga taxminan {w} soʻz" aria-live="polite">soniyasiga <span class="num">25,2</span> token · soniyasiga taxminan 19 soʻz</p>
           </div>
         </div>
-        <figcaption>Javob yozilayotgandagi tezlik, 2026-yil sentabrida haqiqiy noutbukda oʻlchangan. Savol va javob qanday yozilgan boʻlsa, shunday — ingliz tilida koʻrsatilgan. Ilova sizning tezligingizni hech narsa yuklab olinmasdan oldin aytadi.</figcaption>
-        <p class="earlier">Misollar oldingi versiyadan; yangi misollar tez orada.</p>
+        <figcaption>Javob yozilayotgandagi tezlik: localSpace 0.2.0-preview.1 dagi Qwen3.5 4B, 2026-yil 21-oktabrda NVIDIA GeForce RTX 3050 Ti (4 GB) va 16 GB xotirali noutbukda, Silent rejimida oʻlchangan. Savol va javob qanday yozilgan boʻlsa, shunday — ingliz tilida koʻrsatilgan. Ilova sizning tezligingizni hech narsa yuklab olinmasdan oldin aytadi.</figcaption>
       </figure>
     </div>
   </section>
@@ -128,7 +131,6 @@ Best regards,</p>
   <section class="section" id="how" aria-labelledby="how-title">
     <div class="wrap">
       <h2 id="how-title">Qanday ishlaydi</h2>
-      <p class="earlier earlier-how">Misollar oldingi versiyadan; yangi misollar tez orada.</p>
       <ol class="steps">
         <li>
           <figure class="step">
@@ -136,7 +138,7 @@ Best regards,</p>
               <h3>Hech narsa yuklab olinmasdan oldin u kompyuteringizni koʻrib chiqadi</h3>
               <p>Birinchi ekran: nima topgani, shu kompyuterga qaysi modelni tavsiya qilgani, u qanchalik tez yozishi va qancha yuklab olish kerakligi.</p>
             </figcaption>
-            <img class="shot" src="../shots/first-run.webp" width="576" height="598" loading="lazy" decoding="async" alt="localSpace’ning ingliz tilidagi birinchi ekrani. «Bu kompyuter» ostida: NVIDIA GeForce RTX 3050 Ti Laptop GPU, 4 GB videoxotira, 16 GB tizim xotirasi. Tavsiya etilgani: Qwen2.5 7B Instruct, yaxshi ishlaydi, siz oʻqishingizdan tezroq, soniyasiga taxminan 7–9 soʻz. Uning taxminan yarmi videoxotiraga sigʻadi, qolgani sekinroq tizim xotirasidan ishlaydi. Bepul, tijoriy foydalanish uchun ham. Taxminan 4,4 GB yuklab olinadi; C: diskda 92 GB boʻsh. «Yuklab olish va boshlash» tugmasi.">
+            <img class="shot" src="../shots/first-run.webp" width="540" height="463" loading="lazy" decoding="async" alt="localSpace 0.2.0-preview.1 ning ingliz tilidagi birinchi ekrani. «Bu kompyuter» ostida: NVIDIA GeForce RTX 3050 Ti Laptop GPU, 4 GB videoxotira, 16 GB tizim xotirasi. Tavsiya etilgani: Qwen3.5 4B, yaxshi ishlaydi, siz oʻqishingizdan tezroq, soniyasiga taxminan 15–20 soʻz. Uning katta qismi videoxotiraga sigʻadi, qolgani sekinroq tizim xotirasidan ishlaydi. Bepul, tijoriy foydalanish uchun ham. Taxminan 3,2 GB yuklab olinadi; D: diskda 12 GB boʻsh. «Yuklab olish va boshlash» tugmasi.">
           </figure>
         </li>
         <li>
@@ -145,7 +147,7 @@ Best regards,</p>
               <h3>Har bir model qanday ishlashini aytadi</h3>
               <p>60 GB yuklab olgandan keyin bilib qolishingizdan koʻra, sekin ekanini oldindan aytganimiz maʼqul.</p>
             </figcaption>
-            <img class="shot" src="../shots/models.webp" width="694" height="728" loading="lazy" decoding="async" alt="localSpace sozlamalaridagi ingliz tilidagi modellar roʻyxati; har birida yuklab olinmasdan oldin shu kompyuterda qanday ishlashi yozilgan. Qwen2.5 0.5B Instruct: yaxshi ishlaydi, siz oʻqishingizdan tezroq, soniyasiga taxminan 50–70 soʻz. Qwen2.5 1.5B Instruct: yaxshi ishlaydi, soniyasiga taxminan 35–50 soʻz. Qwen2.5 3B Instruct: yaxshi ishlaydi, soniyasiga taxminan 20–30 soʻz; faqat tadqiqot va baholash uchun bepul, tijoriy foydalanish uchun emas. Qwen2.5 7B Instruct: yaxshi ishlaydi, soniyasiga taxminan 7–9 soʻz. Qwen2.5 14B Instruct: ishlaydi, taxminan siz oʻqigandek tez, soniyasiga 3–4 soʻz. Qwen3 30B-A3B: bu kompyuterga sigʻmaydi; taxminan 17,3 GB yuklab olinadi. gpt-oss 120B: bu kompyuterga sigʻmaydi; taxminan 59,0 GB yuklab olinadi.">
+            <img class="shot" src="../shots/models.webp" width="685" height="530" loading="lazy" decoding="async" alt="localSpace sozlamalaridagi qoʻshish mumkin boʻlgan modellar (ingliz tilida), «Bu kompyuterda yaxshi ishlaydi» ostida; har birida yuklab olinmasdan oldin bu yerda qanday ishlashi yozilgan. Alibaba (Qwen) ning Qwen3.5 4B: soniyasiga taxminan 15–20 soʻz, taxminan 3,2 GB. Qwen3.5 9B: soniyasiga taxminan 5–7 soʻz, taxminan 6,1 GB; unga kompyuter xotirasining katta qismi kerak, shuning uchun undan oldin brauzer kabi boshqa dasturlarni yoping. Google ning Gemma 4 E2B: soniyasiga taxminan 15–20 soʻz, taxminan 3,2 GB. Gemma 4 E4B: soniyasiga taxminan 7–10 soʻz, taxminan 4,8 GB. Hammasi bepul, tijoriy foydalanish uchun ham. Roʻyxat ostida: «Sigʻmaydigan 2 ta modelni koʻrsatish».">
           </figure>
         </li>
         <li>
@@ -154,7 +156,7 @@ Best regards,</p>
               <h3>Keyin siz yozasiz</h3>
               <p>Javoblar kompyuteringizda yoziladi, suhbatlaringiz ham oʻsha yerda saqlanadi.</p>
             </figcaption>
-            <img class="shot" src="../shots/chat.webp" width="795" height="540" loading="lazy" decoding="async" alt="localSpace’dagi ingliz tilidagi suhbat. Savol: menda tuxum, ismaloq, feta pishlogʻi va yarimta qotgan non bor; kechqurun nima pishirsam boʻladi? Model ismaloq va fetali omlet taklif qiladi: ismaloqni sarimsoq bilan qovurib, pishayotgan tuxumga fetani qoʻshish. Savol: ishlatilgan velosiped sotib olishdan oldin nimani tekshirish kerak? Model tormoz, gʻildirak va shinalardan tortib zanjir, tezlik almashtirgich, rama va chiroqlargacha sakkizta narsani sanaydi va ustaga koʻrsatishni ham maslahat beradi.">
+            <img class="shot" src="../shots/chat.webp" width="792" height="648" loading="lazy" decoding="async" alt="localSpace’dagi Qwen3.5 4B bilan ingliz tilidagi suhbat. Savol: ishlatilgan velosiped sotib olishdan oldin nimani tekshirish kerak? Model yettita tekshiruvni sanaydi: sinov yurishi (tormoz, tezliklar, boshqaruv), shinalar, rama (yoriq va zang), gʻildirak va kegaylar, oʻrindiq va uning ustuni, zanjir va tezlik almashtirgich, velosiped tarixi. Oxirida: biror narsa buzilgan yoki tushunarsiz boʻlsa, toʻliq narx toʻlashdan oldin taʼmirlash narxini soʻrang.">
           </figure>
         </li>
       </ol>

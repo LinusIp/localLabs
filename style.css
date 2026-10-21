@@ -633,17 +633,6 @@ h3 {
 .hero-get { margin-top: 32px; }
 .hero-buttons { display: flex; flex-wrap: wrap; gap: 10px; }
 
-/* Says that the demo and the screens come from an earlier version. */
-.earlier {
-  margin-top: 10px;
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--ls-ink-soft);
-}
-.section > .wrap > .earlier-how { margin: -24px 0 40px; }
-@media (min-width: 1000px) {
-  .section > .wrap > .earlier-how { margin: -40px 0 56px; }
-}
 .hero-meta { margin-top: 12px; font-size: 15px; color: var(--ls-muted); }
 .hero-meta + .hero-meta { margin-top: 4px; }
 

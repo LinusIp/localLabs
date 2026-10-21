@@ -26,18 +26,26 @@ const LANGS = [
 
 const MARK = `<svg viewBox="0 0 256 256" focusable="false"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M136.4 40.85 199.27 77.15A16.8 16.8 0 0 1 207.67 91.7V164.3A16.8 16.8 0 0 1 199.27 178.85L136.4 215.15A16.8 16.8 0 0 1 119.6 215.15L56.73 178.85A16.8 16.8 0 0 1 48.33 164.3V91.7A16.8 16.8 0 0 1 56.73 77.15L119.6 40.85A16.8 16.8 0 0 1 136.4 40.85Z" stroke-width="23.3"/><path d="M88.5 105.3 128 131.2 167.5 105.3" stroke-width="9.1"/><path d="M128 131.2V208.3" stroke-width="9.1"/></g><g fill="currentColor"><circle cx="88.5" cy="105.3" r="15.5"/><circle cx="167.5" cy="105.3" r="15.5"/><circle cx="128" cy="168.2" r="15.5"/></g></svg>`;
 
-// The demo's question and answer are real, from Qwen2.5 7B, and stay in the
-// language the model wrote them in on every page.
+// The demo's question and answer are real: Qwen3.5 4B in localSpace
+// 0.2.0-preview.1 (920b7123) wrote this answer on 21 October 2026, measured by
+// `localspace measure --chat` on the laptop named in the caption. It stays in
+// the language the model wrote it in on every page.
 const DEMO_QUESTION = "Write a short, polite email to my landlord asking him to fix the leaking tap in the kitchen.";
-const DEMO_ANSWER = `Subject: Request for Kitchen Tap Repair
+const DEMO_ANSWER = `Subject: Request to repair leaking kitchen tap
 
 Dear [Landlord's Name],
 
-I hope this email finds you well. I am writing to bring to your attention a small issue in the kitchen. The tap seems to be leaking, which is a bit concerning. I believe it would be best if you could have a look at it and arrange for it to be fixed at your earliest convenience.
+I hope you are having a good week.
 
-Thank you for your prompt attention to this matter.
+I am writing to kindly ask if it would be possible to have the leaking tap in the kitchen fixed at your earliest convenience. The water is running continuously, which is causing some inconvenience and potential damage to the countertop.
 
-Best regards,`;
+Please let me know what steps we need to take next or if you require any further information from my side.
+
+Thank you for your time and assistance.
+
+Best regards,
+[Your Name]
+[Your Address/Unit Number]`;
 
 function esc(s) {
   return String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
@@ -107,7 +115,7 @@ ${alternates}
 <meta property="og:image" content="${SITE}og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="The localSpace logo and the words: Your computer can run its own AI. We will tell you how well. Below them, three speeds measured on one laptop: 9.5, 13.2 and 40.5 tokens a second.">
+<meta property="og:image:alt" content="The localSpace logo and the words: Your computer can run its own AI. We will tell you how well. Below them, one speed measured on one laptop: Qwen3.5 4B, 25.2 tokens a second, with a 4 GB graphics card.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${esc(t.h1.join(" "))}">
 <meta name="twitter:description" content="${esc(t.description)}">
@@ -164,9 +172,7 @@ ${alternates}
         <div class="demo-pick" data-demo-pick hidden>
           <p class="demo-label" id="demo-label">${esc(t.demo.label)}</p>
           <div class="chips" role="group" aria-labelledby="demo-label">
-            <button class="chip" type="button" aria-pressed="false" data-tps="9.5" data-model="Qwen2.5 7B">${esc(t.demo.cpu)} <span class="chip-model">7B</span></button>
-            <button class="chip" type="button" aria-pressed="true" data-tps="13.2" data-model="Qwen2.5 7B">${esc(t.demo.gpu)} <span class="chip-model">7B</span></button>
-            <button class="chip" type="button" aria-pressed="false" data-tps="40.5" data-model="Qwen2.5 3B">${esc(t.demo.gpu)} <span class="chip-model">3B</span></button>
+            <button class="chip" type="button" aria-pressed="true" data-tps="25.2" data-model="Qwen3.5 4B">${esc(t.demo.gpu)} <span class="chip-model">4B</span></button>
           </div>
         </div>
         <div class="panel">
@@ -183,12 +189,11 @@ ${alternates}
             </div>
           </div>
           <div class="panel-foot">
-            <span class="model-chip" data-demo-model>Qwen2.5 7B</span>
-            <p class="rate" data-demo-rate data-rate="${esc(t.demo.rate)}" aria-live="polite">${esc(t.demo.rate).replace("{t}", `<span class="num">${(13.2).toLocaleString(lang.code)}</span>`).replace("{w}", "10")}</p>
+            <span class="model-chip" data-demo-model>Qwen3.5 4B</span>
+            <p class="rate" data-demo-rate data-rate="${esc(t.demo.rate)}" aria-live="polite">${esc(t.demo.rate).replace("{t}", `<span class="num">${(25.2).toLocaleString(lang.code)}</span>`).replace("{w}", "19")}</p>
           </div>
         </div>
         <figcaption>${esc(t.demo.caption)}</figcaption>
-        <p class="earlier">${esc(t.earlier)}</p>
       </figure>
     </div>
   </section>
@@ -205,7 +210,6 @@ ${t.claims.map(([a, b]) => `        <li><strong>${esc(a)}</strong><span>${esc(b)
   <section class="section" id="how" aria-labelledby="how-title">
     <div class="wrap">
       <h2 id="how-title">${esc(t.nav.how)}</h2>
-      <p class="earlier earlier-how">${esc(t.earlier)}</p>
       <ol class="steps">
 ${t.steps
   .map(
@@ -306,9 +310,9 @@ ${t.dl.stands.map((s) => `            <li>${esc(s)}</li>`).join("\n")}
 }
 
 const SHOTS = [
-  { src: "shots/first-run.webp", w: 576, h: 598 },
-  { src: "shots/models.webp", w: 694, h: 728 },
-  { src: "shots/chat.webp", w: 795, h: 540 },
+  { src: "shots/first-run.webp", w: 540, h: 463 },
+  { src: "shots/models.webp", w: 685, h: 530 },
+  { src: "shots/chat.webp", w: 792, h: 648 },
 ];
 
 for (const lang of LANGS) {
