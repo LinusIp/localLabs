@@ -53,7 +53,7 @@ function fileCard(t, key) {
   const f = release.files[key];
   const s = t.files[key];
   const href = release.counter + f.route;
-  const size = f.mb ? `${esc(f.mb)} MB` : `<span class="pending">${esc(t.pending)}</span>`;
+  const size = f.mb ? `${esc(f.mb.replace(".", t.decimal))} ${esc(t.labels.mb)}` : `<span class="pending">${esc(t.pending)}</span>`;
   const hash = f.sha256
     ? `<code class="hash" id="sha-${key}">${esc(f.sha256)}</code><button class="copy" type="button" data-copy="sha-${key}" hidden>${esc(t.copy)}</button>`
     : `<span class="pending">${esc(t.pending)}</span>`;

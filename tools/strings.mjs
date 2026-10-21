@@ -75,7 +75,8 @@ export const STRINGS = {
     pending: "given on publish day",
     copy: "Copy",
     copied: "Copied",
-    labels: { file: "File", size: "Size" },
+    labels: { file: "File", size: "Size", mb: "MB" },
+    decimal: ".",
     files: {
       setup: {
         title: "Installer",
@@ -191,7 +192,8 @@ export const STRINGS = {
     pending: "появится в день публикации",
     copy: "Копировать",
     copied: "Скопировано",
-    labels: { file: "Файл", size: "Размер" },
+    labels: { file: "Файл", size: "Размер", mb: "МБ" },
+    decimal: ",",
     files: {
       setup: {
         title: "Установщик",
@@ -307,7 +309,8 @@ export const STRINGS = {
     pending: "eʼlon qilingan kuni beriladi",
     copy: "Nusxalash",
     copied: "Nusxalandi",
-    labels: { file: "Fayl", size: "Hajmi" },
+    labels: { file: "Fayl", size: "Hajmi", mb: "MB" },
+    decimal: ",",
     files: {
       setup: {
         title: "Oʻrnatuvchi",
