@@ -151,7 +151,10 @@ ${alternates}
         <h1 id="hero-title"><span>${esc(t.h1[0])}</span> <span>${esc(t.h1[1])}</span></h1>
         <p class="lede">${esc(t.lede)}</p>
         <div class="hero-get">
-          <a class="btn btn-primary btn-big" href="${esc(setupHref)}">${esc(t.heroButton)}</a>
+          <div class="hero-buttons">
+            <a class="btn btn-primary btn-big" href="${esc(setupHref)}">${esc(t.heroButton)}</a>
+            <a class="btn btn-secondary btn-big" href="${TELEGRAM}">${esc(t.dl.communityButton)}</a>
+          </div>
           <p class="hero-meta">${esc(t.versionWord)} ${esc(release.version)} <span class="tag">${esc(t.preview)}</span> · ${esc(t.windows)}</p>
           <p class="hero-meta"><a href="#download">${esc(t.heroDetails)}</a></p>
         </div>
@@ -185,6 +188,7 @@ ${alternates}
           </div>
         </div>
         <figcaption>${esc(t.demo.caption)}</figcaption>
+        <p class="earlier">${esc(t.earlier)}</p>
       </figure>
     </div>
   </section>
@@ -201,6 +205,7 @@ ${t.claims.map(([a, b]) => `        <li><strong>${esc(a)}</strong><span>${esc(b)
   <section class="section" id="how" aria-labelledby="how-title">
     <div class="wrap">
       <h2 id="how-title">${esc(t.nav.how)}</h2>
+      <p class="earlier earlier-how">${esc(t.earlier)}</p>
       <ol class="steps">
 ${t.steps
   .map(

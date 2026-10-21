@@ -26,6 +26,7 @@ export const STRINGS = {
     preview: "Preview",
     windows: "Windows 10 or 11, 64-bit",
     heroDetails: "File details and SHA-256",
+    earlier: "Examples from an earlier version; new examples coming soon.",
     demo: {
       label: "On one laptop:",
       cpu: "Processor only",
@@ -143,6 +144,7 @@ export const STRINGS = {
     preview: "Предварительная версия",
     windows: "Windows 10 или 11, 64-разрядная",
     heroDetails: "Файлы и SHA-256",
+    earlier: "Примеры из более ранней версии; новые примеры скоро появятся.",
     demo: {
       label: "На одном ноутбуке:",
       cpu: "Только процессор",
@@ -260,6 +262,7 @@ export const STRINGS = {
     preview: "Sinov versiyasi",
     windows: "Windows 10 yoki 11, 64-bit",
     heroDetails: "Fayllar va SHA-256",
+    earlier: "Misollar oldingi versiyadan; yangi misollar tez orada.",
     demo: {
       label: "Bitta noutbukda:",
       cpu: "Faqat protsessor",
