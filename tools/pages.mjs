@@ -112,14 +112,14 @@ ${alternates}
 <meta property="og:url" content="${url}">
 <meta property="og:title" content="${esc(t.h1.join(" "))}">
 <meta property="og:description" content="${esc(t.description)}">
-<meta property="og:image" content="${SITE}og.png">
+<meta property="og:image" content="${SITE}og-0.2.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="The localSpace logo and the words: Your computer can run its own AI. We will tell you how well. Below them, one speed measured on one laptop: Qwen3.5 4B, 25.2 tokens a second, with a 4 GB graphics card.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${esc(t.h1.join(" "))}">
 <meta name="twitter:description" content="${esc(t.description)}">
-<meta name="twitter:image" content="${SITE}og.png">
+<meta name="twitter:image" content="${SITE}og-0.2.png">
 
 <link rel="icon" href="${r}favicon.svg" type="image/svg+xml">
 <link rel="icon" href="${r}favicon-32.png" type="image/png" sizes="32x32">
@@ -310,9 +310,9 @@ ${t.dl.stands.map((s) => `            <li>${esc(s)}</li>`).join("\n")}
 }
 
 const SHOTS = [
-  { src: "shots/first-run.webp", w: 540, h: 463 },
-  { src: "shots/models.webp", w: 685, h: 530 },
-  { src: "shots/chat.webp", w: 792, h: 648 },
+  { src: "shots/first-run-0.2.webp", w: 540, h: 463 },
+  { src: "shots/models-0.2.webp", w: 685, h: 530 },
+  { src: "shots/chat-0.2.webp", w: 792, h: 648 },
 ];
 
 for (const lang of LANGS) {
