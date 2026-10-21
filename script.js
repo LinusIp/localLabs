@@ -1,6 +1,5 @@
 /* The localSpace landing page. Everything here is an enhancement: without it
-   the page is complete, the forms post straight to Formspree and the demo
-   shows its answer whole. */
+   the page is complete and the demo shows its answer whole. */
 (function () {
   'use strict';
 
@@ -10,12 +9,6 @@
     if (reduceMotion.addEventListener) reduceMotion.addEventListener('change', listener);
     else reduceMotion.addListener(listener);
   }
-
-  /* The contact address is written plainly in index.html, in the company card
-     and the footer, so it can be read without scripts. The forms' fallback
-     takes it from there: changing the address is one edit, in one file. */
-  var contactLink = document.querySelector('a[data-contact]');
-  var CONTACT_EMAIL = contactLink ? contactLink.textContent.trim() : '';
 
   /* -- header: a hairline once the page has moved; the sheet closes after a choice */
 
@@ -63,106 +56,28 @@
     });
   })();
 
-  /* -- the waitlist: both forms, one implementation ------------------------------ */
+  /* -- copy buttons: each SHA-256 has one. Without scripts the hash is still
+     there to select by hand, and the button stays hidden. */
 
-  var EMAIL_SHAPE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-  var SEND_TIMEOUT_MS = 15000;
+  var copyWords = { en: ['Copy', 'Copied'], ru: ['Копировать', 'Скопировано'], uz: ['Nusxalash', 'Nusxalandi'] };
+  var lang = document.documentElement.lang;
+  var words = copyWords[lang] || copyWords.en;
 
-  document.querySelectorAll('form[data-waitlist]').forEach(function (form) {
-    var fields = form.querySelector('.form-fields');
-    var email = form.querySelector('input[type="email"]');
-    var pick = form.querySelector('select');
-    var trap = form.querySelector('input[name="_gotcha"]');
-    var submit = form.querySelector('button[type="submit"]');
-    var status = form.querySelector('.form-status');
-    var label = submit.textContent;
-
-    function say(parts, tone) {
-      status.className = 'form-status' + (tone ? ' is-' + tone : '');
-      status.textContent = '';
-      parts.forEach(function (part) { status.append(part); });
-    }
-
-    function withFallback(sentence) {
-      if (!CONTACT_EMAIL) return [sentence + ' Please try again in a minute.'];
-      var link = document.createElement('a');
-      link.href = 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent('Please add me to the localSpace waitlist');
-      link.textContent = CONTACT_EMAIL;
-      return [sentence + ' Try again, or email ', link, ' and we will add you by hand.'];
-    }
-
-    function ready() {
-      submit.disabled = false;
-      submit.textContent = label;
-      form.removeAttribute('aria-busy');
-    }
-
-    function refuseAddress(sentence) {
-      email.setAttribute('aria-invalid', 'true');
-      say([sentence], 'error');
-      email.focus();
-    }
-
-    email.addEventListener('input', function () { email.removeAttribute('aria-invalid'); });
-
-    form.addEventListener('submit', function (event) {
-      event.preventDefault();
-      if (trap.value) return;
-
-      var address = email.value.trim();
-      if (!EMAIL_SHAPE.test(address)) {
-        refuseAddress('That email address does not look complete. Check it and try again.');
-        return;
-      }
-
-      submit.disabled = true;
-      submit.textContent = 'Sending…';
-      form.setAttribute('aria-busy', 'true');
-      say([], '');
-
-      var abort = 'AbortController' in window ? new AbortController() : null;
-      var timer = abort ? setTimeout(function () { abort.abort(); }, SEND_TIMEOUT_MS) : 0;
-
-      fetch(form.action, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({
-          email: address,
-          use_case: pick.value || 'unspecified',
-          _subject: 'localSpace preview request: ' + address
-        }),
-        signal: abort ? abort.signal : undefined
-      })
-        .then(function (response) {
+  if (navigator.clipboard && window.isSecureContext) {
+    document.querySelectorAll('button[data-copy]').forEach(function (button) {
+      var source = document.getElementById(button.getAttribute('data-copy'));
+      if (!source) return;
+      button.hidden = false;
+      var timer = 0;
+      button.addEventListener('click', function () {
+        navigator.clipboard.writeText(source.textContent.trim()).then(function () {
+          button.textContent = words[1];
           clearTimeout(timer);
-          if (response.ok) {
-            fields.hidden = true;
-            form.removeAttribute('aria-busy');
-            say(['You are on the list. We will email you once — when there is a build worth your disk space.'], 'ok');
-            status.tabIndex = -1;
-            status.focus();
-            return;
-          }
-          return response.json().catch(function () { return {}; }).then(function (body) {
-            ready();
-            var errors = (body && body.errors) || [];
-            var aboutTheAddress = errors.some(function (error) { return error.field === 'email'; });
-            if (aboutTheAddress) {
-              refuseAddress('The list would not take that address. Check it for a typo and try again.');
-              return;
-            }
-            say(withFallback('That did not go through on our side.'), 'error');
-            submit.focus();
-          });
-        })
-        .catch(function () {
-          clearTimeout(timer);
-          ready();
-          say(withFallback('That did not reach us. Your connection may have dropped.'), 'error');
-          submit.focus();
+          timer = setTimeout(function () { button.textContent = words[0]; }, 2000);
         });
+      });
     });
-  });
+  }
 
   /* -- the speed demo ------------------------------------------------------------
      The same answer streams word by word at the rate measured for the chosen
@@ -306,10 +221,12 @@
     function showRate(tokensPerSecond) {
       var figure = document.createElement('span');
       figure.className = 'num';
-      figure.textContent = String(tokensPerSecond);
+      figure.textContent = tokensPerSecond.toLocaleString(lang);
       var wordsPerSecond = Math.round(tokensPerSecond * WORDS_PER_TOKEN);
+      /* The sentence is the page's own, in its language, with {t} and {w} in it. */
+      var parts = rateOut.getAttribute('data-rate').split('{t}');
       rateOut.textContent = '';
-      rateOut.append(figure, ' tokens a second · about ' + wordsPerSecond + ' words a second');
+      rateOut.append(parts[0], figure, (parts[1] || '').replace('{w}', String(wordsPerSecond)));
     }
 
     function choose(chip) {

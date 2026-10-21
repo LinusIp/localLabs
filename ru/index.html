@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>localSpace — ваш компьютер может запускать свой ИИ</title>
+<meta name="description" content="localSpace смотрит на ваш компьютер, советует подходящую ему модель и ещё до загрузки говорит, как быстро она будет писать. Всё, что вы пишете, остаётся на вашем компьютере.">
+<link rel="canonical" href="https://linusip.github.io/localLabs/ru/">
+<link rel="alternate" hreflang="en" href="https://linusip.github.io/localLabs/">
+<link rel="alternate" hreflang="ru" href="https://linusip.github.io/localLabs/ru/">
+<link rel="alternate" hreflang="uz" href="https://linusip.github.io/localLabs/uz/">
+<link rel="alternate" hreflang="x-default" href="https://linusip.github.io/localLabs/">
+<meta name="theme-color" content="#faf9f8">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="localSpace">
+<meta property="og:url" content="https://linusip.github.io/localLabs/ru/">
+<meta property="og:title" content="Ваш компьютер может запускать свой ИИ. Мы скажем, насколько хорошо.">
+<meta property="og:description" content="localSpace смотрит на ваш компьютер, советует подходящую ему модель и ещё до загрузки говорит, как быстро она будет писать. Всё, что вы пишете, остаётся на вашем компьютере.">
+<meta property="og:image" content="https://linusip.github.io/localLabs/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The localSpace logo and the words: Your computer can run its own AI. We will tell you how well. Below them, three speeds measured on one laptop: 9.5, 13.2 and 40.5 tokens a second.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ваш компьютер может запускать свой ИИ. Мы скажем, насколько хорошо.">
+<meta name="twitter:description" content="localSpace смотрит на ваш компьютер, советует подходящую ему модель и ещё до загрузки говорит, как быстро она будет писать. Всё, что вы пишете, остаётся на вашем компьютере.">
+<meta name="twitter:image" content="https://linusip.github.io/localLabs/og.png">
+
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="preload" href="../fonts/figtree-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../style.css">
+<script src="../script.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Перейти к содержанию</a>
+
+<header class="site-head" id="top">
+  <div class="wrap head-in">
+    <a class="brand" href="#top"><img src="../brand/localspace-lockup.png" width="102" height="30" alt="localSpace"></a>
+    <nav class="nav-links" aria-label="Разделы">
+      <a href="#how">Как это работает</a>
+      <a href="#companies">Для компаний</a>
+    </nav>
+    <nav class="langs" aria-label="Язык"><a href="../" lang="en" hreflang="en">EN</a><a href="../ru/" aria-current="true" lang="ru">RU</a><a href="../uz/" lang="uz" hreflang="uz">UZ</a></nav>
+    <a class="btn btn-primary head-cta" href="#download">Скачать</a>
+    <details class="menu">
+      <summary>Меню</summary>
+      <nav class="menu-sheet" aria-label="Разделы">
+        <a href="#how">Как это работает</a>
+        <a href="#companies">Для компаний</a>
+        <a href="#download">Скачать</a>
+      </nav>
+    </details>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap hero-grid">
+      <div>
+        <h1 id="hero-title"><span>Ваш компьютер может запускать свой ИИ.</span> <span>Мы скажем, насколько хорошо.</span></h1>
+        <p class="lede">Ещё до загрузки приложение показывает, какая модель подходит вашему компьютеру и сколько слов в секунду она будет писать. Всё, что вы пишете, остаётся на этом компьютере.</p>
+        <div class="hero-get">
+          <a class="btn btn-primary btn-big" href="https://localspace.locallabs.workers.dev/download/windows">Скачать для Windows</a>
+          <p class="hero-meta">Версия 0.2.0-preview.1 <span class="tag">Предварительная версия</span> · Windows 10 или 11, 64-разрядная</p>
+          <p class="hero-meta"><a href="#download">Файлы и SHA-256</a></p>
+        </div>
+      </div>
+
+      <figure class="demo" data-demo>
+        <div class="demo-pick" data-demo-pick hidden>
+          <p class="demo-label" id="demo-label">На одном ноутбуке:</p>
+          <div class="chips" role="group" aria-labelledby="demo-label">
+            <button class="chip" type="button" aria-pressed="false" data-tps="9.5" data-model="Qwen2.5 7B">Только процессор <span class="chip-model">7B</span></button>
+            <button class="chip" type="button" aria-pressed="true" data-tps="13.2" data-model="Qwen2.5 7B">Видеокарта 4 ГБ <span class="chip-model">7B</span></button>
+            <button class="chip" type="button" aria-pressed="false" data-tps="40.5" data-model="Qwen2.5 3B">Видеокарта 4 ГБ <span class="chip-model">3B</span></button>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="thread">
+            <div class="msg" lang="en">
+              <span class="avatar" aria-hidden="true">Y</span>
+              <p class="msg-body msg-person">Write a short, polite email to my landlord asking him to fix the leaking tap in the kitchen.</p>
+            </div>
+            <div class="msg" lang="en">
+              <span class="avatar avatar-model" aria-hidden="true"><svg viewBox="0 0 256 256" focusable="false"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M136.4 40.85 199.27 77.15A16.8 16.8 0 0 1 207.67 91.7V164.3A16.8 16.8 0 0 1 199.27 178.85L136.4 215.15A16.8 16.8 0 0 1 119.6 215.15L56.73 178.85A16.8 16.8 0 0 1 48.33 164.3V91.7A16.8 16.8 0 0 1 56.73 77.15L119.6 40.85A16.8 16.8 0 0 1 136.4 40.85Z" stroke-width="23.3"/><path d="M88.5 105.3 128 131.2 167.5 105.3" stroke-width="9.1"/><path d="M128 131.2V208.3" stroke-width="9.1"/></g><g fill="currentColor"><circle cx="88.5" cy="105.3" r="15.5"/><circle cx="167.5" cy="105.3" r="15.5"/><circle cx="128" cy="168.2" r="15.5"/></g></svg></span>
+              <div class="msg-body">
+                <p class="answer" data-demo-answer>Subject: Request for Kitchen Tap Repair
+
+Dear [Landlord's Name],
+
+I hope this email finds you well. I am writing to bring to your attention a small issue in the kitchen. The tap seems to be leaking, which is a bit concerning. I believe it would be best if you could have a look at it and arrange for it to be fixed at your earliest convenience.
+
+Thank you for your prompt attention to this matter.
+
+Best regards,</p>
+              </div>
+            </div>
+          </div>
+          <div class="panel-foot">
+            <span class="model-chip" data-demo-model>Qwen2.5 7B</span>
+            <p class="rate" data-demo-rate data-rate="{t} токена в секунду · около {w} слов в секунду" aria-live="polite"><span class="num">13,2</span> токена в секунду · около 10 слов в секунду</p>
+          </div>
+        </div>
+        <figcaption>Скорость во время ответа, измеренная на настоящем ноутбуке в сентябре 2026 года. Вопрос и ответ показаны так, как они были написаны, на английском. Приложение скажет вашу скорость до любой загрузки.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="claims" aria-labelledby="claims-title">
+    <div class="wrap">
+      <h2 class="vh" id="claims-title">На что можно рассчитывать</h2>
+      <ul>
+        <li><strong>Ничего не покидает ваш компьютер</strong><span>Приложение ничего не отправляет: ни ваши вопросы, ни свои ответы, ни даже то, как часто вы им пользуетесь.</span></li>
+        <li><strong>Без подписки и без платы за сообщения</strong><span>Оно работает на том железе, что у вас уже есть.</span></li>
+        <li><strong>Работает совсем без интернета</strong><span>Когда модель скачана, подключение больше не нужно.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="how" aria-labelledby="how-title">
+    <div class="wrap">
+      <h2 id="how-title">Как это работает</h2>
+      <ol class="steps">
+        <li>
+          <figure class="step">
+            <figcaption>
+              <h3>До любой загрузки оно смотрит на ваш компьютер</h3>
+              <p>Первый экран: что приложение нашло, какую модель советует этому компьютеру, как быстро она будет писать и сколько нужно скачать.</p>
+            </figcaption>
+            <img class="shot" src="../shots/first-run.webp" width="576" height="598" loading="lazy" decoding="async" alt="Первый экран localSpace на английском. В разделе «Этот компьютер»: NVIDIA GeForce RTX 3050 Ti Laptop GPU, 4 ГБ видеопамяти, 16 ГБ оперативной памяти. Рекомендовано: Qwen2.5 7B Instruct, работает хорошо, быстрее, чем вы читаете, около 7–9 слов в секунду. Около половины модели помещается в видеопамять, остальное работает из оперативной памяти, а это медленнее. Бесплатно, в том числе для коммерческого использования. Скачать около 4,4 ГБ; на диске C: свободно 92 ГБ. Кнопка «Скачать и начать».">
+          </figure>
+        </li>
+        <li>
+          <figure class="step">
+            <figcaption>
+              <h3>Каждая модель говорит, как она будет работать</h3>
+              <p>Мы лучше скажем, что модель медленная, чем вы узнаете это после загрузки на 60 ГБ.</p>
+            </figcaption>
+            <img class="shot" src="../shots/models.webp" width="694" height="728" loading="lazy" decoding="async" alt="Список моделей в настройках localSpace на английском, у каждой — как она будет работать на этом компьютере, ещё до загрузки. Qwen2.5 0.5B Instruct: работает хорошо, быстрее, чем вы читаете, около 50–70 слов в секунду. Qwen2.5 1.5B Instruct: работает хорошо, около 35–50 слов в секунду. Qwen2.5 3B Instruct: работает хорошо, около 20–30 слов в секунду; бесплатно только для исследований и оценки, не для коммерческого использования. Qwen2.5 7B Instruct: работает хорошо, около 7–9 слов в секунду. Qwen2.5 14B Instruct: работает примерно с вашей скоростью чтения, около 3–4 слов в секунду. Qwen3 30B-A3B: не поместится на этом компьютере; скачать около 17,3 ГБ. gpt-oss 120B: не поместится на этом компьютере; скачать около 59,0 ГБ.">
+          </figure>
+        </li>
+        <li>
+          <figure class="step">
+            <figcaption>
+              <h3>Потом вы пишете</h3>
+              <p>Ответы пишутся на вашем компьютере, и ваши разговоры хранятся там же.</p>
+            </figcaption>
+            <img class="shot" src="../shots/chat.webp" width="795" height="540" loading="lazy" decoding="async" alt="Разговор в localSpace на английском. Вопрос: у меня есть яйца, шпинат, фета и полбуханки чёрствого хлеба; что приготовить на ужин? Модель предлагает омлет со шпинатом и фетой: обжарить шпинат с чесноком и добавить фету в яйца во время готовки. Вопрос: что проверить перед покупкой подержанного велосипеда? Модель перечисляет восемь пунктов, от тормозов, колёс и шин до цепи, переключателей, рамы и фонарей, и советует ещё показать велосипед мастеру.">
+          </figure>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="companies" aria-labelledby="ways-title">
+    <div class="wrap">
+      <h2 id="ways-title">Два способа запустить</h2>
+      <div class="ways">
+        <article class="way">
+          <h3>На вашем компьютере</h3>
+          <p>Одно приложение на вашем собственном железе. Не нужно создавать учётную запись и ни во что входить.</p>
+          <p class="way-end"><a href="#download">Скачать</a></p>
+        </article>
+        <article class="way">
+          <h3>На сервере вашей компании</h3>
+          <p>Сотрудники открывают его в браузере и входят по рабочей почте. Модель работает на собственном сервере компании, поэтому ничего не уходит во внешний ИИ-сервис, а ноутбукам сотрудников видеокарта вообще не нужна.</p>
+          <p class="way-note">Серверы для компаний скоро появятся.</p>
+          <p class="way-end">Напишите нам: в нашей <a href="https://t.me/localSpace_discussion">группе в Telegram</a> или на <a href="mailto:locallabs.io@gmail.com?subject=localSpace%20%D0%B4%D0%BB%D1%8F%20%D0%BD%D0%B0%D1%88%D0%B5%D0%B9%20%D0%BA%D0%BE%D0%BC%D0%BF%D0%B0%D0%BD%D0%B8%D0%B8" data-contact>locallabs.io@gmail.com</a></p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section download" id="download" aria-labelledby="download-title">
+    <div class="wrap">
+      <h2 id="download-title">Скачать localSpace <span class="tag tag-big">Предварительная версия</span></h2>
+      <p class="lede">Версия 0.2.0-preview.1, для Windows 10 или 11, 64-разрядной. Это предварительная версия, так что шероховатости будут.</p>
+
+      <div class="files">
+        <article class="file">
+          <h3>Установщик</h3>
+          <p>Устанавливает localSpace и добавляет его в меню «Пуск».</p>
+          <a class="btn btn-primary" href="https://localspace.locallabs.workers.dev/download/windows">Скачать установщик</a>
+          <dl class="facts">
+            <div><dt>Файл</dt><dd><code>localSpace-0.2.0-&lt;build&gt;-windows-x64-setup.exe</code></dd></div>
+            <div><dt>Размер</dt><dd><span class="pending">появится в день публикации</span></dd></div>
+            <div><dt>SHA-256</dt><dd class="hash-row"><span class="pending">появится в день публикации</span></dd></div>
+          </dl>
+        </article>
+        <article class="file">
+          <h3>Портативный zip</h3>
+          <p>Ничего не устанавливается: распакуйте архив и запустите localSpace из папки.</p>
+          <a class="btn btn-primary" href="https://localspace.locallabs.workers.dev/download/portable">Скачать zip</a>
+          <dl class="facts">
+            <div><dt>Файл</dt><dd><code>localSpace-0.2.0-&lt;build&gt;-windows-x64-portable.zip</code></dd></div>
+            <div><dt>Размер</dt><dd><span class="pending">появится в день публикации</span></dd></div>
+            <div><dt>SHA-256</dt><dd class="hash-row"><span class="pending">появится в день публикации</span></dd></div>
+          </dl>
+        </article>
+      </div>
+      <p class="count-note">Кнопки «Скачать» считают нажатия за день по каждому файлу и ничего не сохраняют о вас. <a href="https://github.com/LinusIp/localspace-downloads">Код счётчика открыт.</a></p>
+
+      <div class="dl-grid">
+        <div class="dl-block">
+          <h3>Проверьте загрузку</h3>
+          <p>В PowerShell, в папке с файлом, выполните:</p>
+          <pre class="command"><code>Get-FileHash .\localSpace-0.2.0-&lt;build&gt;-windows-x64-setup.exe -Algorithm SHA256</code></pre>
+          <p>Сравните результат с SHA-256 выше. Если значения различаются, не запускайте файл.</p>
+        </div>
+        <div class="dl-block">
+          <h3>Что нужно</h3>
+          <p>Windows 10 или 11, 64-разрядная. Модели скачиваются отдельно, внутри приложения: несколько ГБ, подобранные под ваш компьютер.</p>
+          <p class="measured">Измерено: Qwen3.5 4B — около 6–7 токенов в секунду (ответы на английском) на ноутбуке с Core i7 и графикой Intel Iris Xe, без видеокарты NVIDIA, с 8 ГБ памяти, при открытых браузере и VS Code.</p>
+        </div>
+        <div class="dl-block">
+          <h3>Если Windows останавливает установщик</h3>
+          <p>Если Windows пишет «Система Windows защитила ваш компьютер», нажмите <strong>Подробнее</strong>, затем <strong>Выполнить в любом случае</strong>.</p>
+          <p><strong>Если Windows не открывает установщик.</strong> На некоторых компьютерах включено интеллектуальное управление приложениями (Smart App Control), и оно может останавливать программы новых издателей. localSpace пока не подписан, поэтому так может случиться. Мы над этим работаем. Подлинность загрузки можно проверить по SHA-256 выше. Мы не советуем отключать интеллектуальное управление приложениями.</p>
+        </div>
+        <div class="dl-block">
+          <h3>Что уже есть</h3>
+          <ul class="stands">
+            <li>Оно может отвечать про картинки, которые вы добавили в чат, если модель умеет их читать.</li>
+            <li>Текстовые файлы и поиск в интернете оно пока не умеет.</li>
+            <li>В очень длинном чате первое слово может появляться дольше.</li>
+            <li>Телеметрии нет. Отключать нечего: её никто не писал.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="community">
+        <div>
+          <h3>Расскажите, как всё прошло</h3>
+          <p>Что сработало, что сломалось и на каком компьютере — расскажите в нашей группе в Telegram. В приложении пункт Help → Send feedback открывает эту же группу.</p>
+        </div>
+        <a class="btn btn-secondary" href="https://t.me/localSpace_discussion">Вступить в сообщество</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap foot-in">
+    <a class="brand" href="#top"><img src="../brand/localspace-lockup.png" width="102" height="30" alt="localSpace" loading="lazy" decoding="async"></a>
+    <nav class="foot-links" aria-label="Подвал">
+      <a href="#how">Как это работает</a>
+      <a href="#companies">Для компаний</a>
+      <a href="#download">Скачать</a>
+    </nav>
+    <p class="foot-meta"><a href="mailto:locallabs.io@gmail.com" data-contact>locallabs.io@gmail.com</a> <a href="https://t.me/localSpace_discussion">Telegram</a> <span>© 2026 localLabs</span></p>
+  </div>
+</footer>
+</body>
+</html>

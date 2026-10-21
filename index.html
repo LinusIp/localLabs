@@ -6,6 +6,10 @@
 <title>localSpace — your computer can run its own AI</title>
 <meta name="description" content="localSpace looks at your computer, recommends a model that suits it and tells you how fast it will write before anything downloads. Everything you type stays on your machine.">
 <link rel="canonical" href="https://linusip.github.io/localLabs/">
+<link rel="alternate" hreflang="en" href="https://linusip.github.io/localLabs/">
+<link rel="alternate" hreflang="ru" href="https://linusip.github.io/localLabs/ru/">
+<link rel="alternate" hreflang="uz" href="https://linusip.github.io/localLabs/uz/">
+<link rel="alternate" hreflang="x-default" href="https://linusip.github.io/localLabs/">
 <meta name="theme-color" content="#faf9f8">
 
 <meta property="og:type" content="website">
@@ -19,9 +23,8 @@
 <meta property="og:image:alt" content="The localSpace logo and the words: Your computer can run its own AI. We will tell you how well. Below them, three speeds measured on one laptop: 9.5, 13.2 and 40.5 tokens a second.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Your computer can run its own AI. We will tell you how well.">
-<meta name="twitter:description" content="localSpace looks at your computer, recommends a model that suits it and tells you how fast it will write before anything downloads.">
+<meta name="twitter:description" content="localSpace looks at your computer, recommends a model that suits it and tells you how fast it will write before anything downloads. Everything you type stays on your machine.">
 <meta name="twitter:image" content="https://linusip.github.io/localLabs/og.png">
-<meta name="twitter:image:alt" content="The localSpace logo and the words: Your computer can run its own AI. We will tell you how well.">
 
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
@@ -40,13 +43,14 @@
       <a href="#how">How it works</a>
       <a href="#companies">For companies</a>
     </nav>
-    <a class="btn btn-primary head-cta" href="#join">Join the waitlist</a>
+    <nav class="langs" aria-label="Language"><a href="" aria-current="true" lang="en">EN</a><a href="ru/" lang="ru" hreflang="ru">RU</a><a href="uz/" lang="uz" hreflang="uz">UZ</a></nav>
+    <a class="btn btn-primary head-cta" href="#download">Download</a>
     <details class="menu">
       <summary>Menu</summary>
       <nav class="menu-sheet" aria-label="Sections">
         <a href="#how">How it works</a>
         <a href="#companies">For companies</a>
-        <a href="#join">Join the waitlist</a>
+        <a href="#download">Download</a>
       </nav>
     </details>
   </div>
@@ -59,28 +63,11 @@
       <div>
         <h1 id="hero-title"><span>Your computer can run its own AI.</span> <span>We will tell you how well.</span></h1>
         <p class="lede">Before anything downloads, it shows which model suits your machine and how many words a second it will write. Everything you type stays on that machine.</p>
-
-        <form class="waitlist" action="https://formspree.io/f/xgawaneg" method="POST" data-waitlist>
-          <div class="form-fields">
-            <label class="field-label" for="email-1">Your email</label>
-            <div class="email-row">
-              <input class="input" id="email-1" name="email" type="email" autocomplete="email" inputmode="email" required>
-              <button class="btn btn-primary" type="submit">Join the waitlist</button>
-            </div>
-            <label class="field-label field-gap" for="use-1">How would you run it? <span class="optional">(optional)</span></label>
-            <select class="select" id="use-1" name="use_case">
-              <option value="">Choose an answer</option>
-              <option>On my own computer</option>
-              <option>On a server for my team or company</option>
-              <option>At an organisation that cannot send data to the cloud</option>
-              <option>Just curious</option>
-            </select>
-            <input type="hidden" name="_subject" value="localSpace preview request">
-            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" hidden>
-          </div>
-          <p class="form-status" role="status"></p>
-          <p class="form-note">One email, when there is a build to try. Your address goes to Formspree, the service that runs this form, and from there only to us.</p>
-        </form>
+        <div class="hero-get">
+          <a class="btn btn-primary btn-big" href="https://localspace.locallabs.workers.dev/download/windows">Download for Windows</a>
+          <p class="hero-meta">Version 0.2.0-preview.1 <span class="tag">Preview</span> · Windows 10 or 11, 64-bit</p>
+          <p class="hero-meta"><a href="#download">File details and SHA-256</a></p>
+        </div>
       </div>
 
       <figure class="demo" data-demo>
@@ -94,11 +81,11 @@
         </div>
         <div class="panel">
           <div class="thread">
-            <div class="msg">
+            <div class="msg" lang="en">
               <span class="avatar" aria-hidden="true">Y</span>
               <p class="msg-body msg-person">Write a short, polite email to my landlord asking him to fix the leaking tap in the kitchen.</p>
             </div>
-            <div class="msg">
+            <div class="msg" lang="en">
               <span class="avatar avatar-model" aria-hidden="true"><svg viewBox="0 0 256 256" focusable="false"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M136.4 40.85 199.27 77.15A16.8 16.8 0 0 1 207.67 91.7V164.3A16.8 16.8 0 0 1 199.27 178.85L136.4 215.15A16.8 16.8 0 0 1 119.6 215.15L56.73 178.85A16.8 16.8 0 0 1 48.33 164.3V91.7A16.8 16.8 0 0 1 56.73 77.15L119.6 40.85A16.8 16.8 0 0 1 136.4 40.85Z" stroke-width="23.3"/><path d="M88.5 105.3 128 131.2 167.5 105.3" stroke-width="9.1"/><path d="M128 131.2V208.3" stroke-width="9.1"/></g><g fill="currentColor"><circle cx="88.5" cy="105.3" r="15.5"/><circle cx="167.5" cy="105.3" r="15.5"/><circle cx="128" cy="168.2" r="15.5"/></g></svg></span>
               <div class="msg-body">
                 <p class="answer" data-demo-answer>Subject: Request for Kitchen Tap Repair
@@ -115,7 +102,7 @@ Best regards,</p>
           </div>
           <div class="panel-foot">
             <span class="model-chip" data-demo-model>Qwen2.5 7B</span>
-            <p class="rate" data-demo-rate aria-live="polite"><span class="num">13.2</span> tokens a second · about 10 words a second</p>
+            <p class="rate" data-demo-rate data-rate="{t} tokens a second · about {w} words a second" aria-live="polite"><span class="num">13.2</span> tokens a second · about 10 words a second</p>
           </div>
         </div>
         <figcaption>Speeds once it is writing, measured on a real laptop in September 2026. The app tells you yours before you download anything.</figcaption>
@@ -176,51 +163,81 @@ Best regards,</p>
         <article class="way">
           <h3>On your own computer</h3>
           <p>One app, on your own hardware. There is no account to create and nothing to sign in to.</p>
-          <p class="way-end"><a href="#join">Join the waitlist</a></p>
+          <p class="way-end"><a href="#download">Download</a></p>
         </article>
         <article class="way">
           <h3>On your company's server</h3>
           <p>Employees open it in their browser and sign in with their work email. The model runs on your company's own server, so nothing goes to an outside AI service, and their laptops need no graphics card at all.</p>
           <p class="way-note">Company servers are coming soon.</p>
-          <p class="way-end">Talk to us: <a href="mailto:locallabs.io@gmail.com?subject=localSpace%20for%20our%20company" data-contact>locallabs.io@gmail.com</a></p>
+          <p class="way-end">Write to us: in our <a href="https://t.me/localSpace_discussion">Telegram group</a> or at <a href="mailto:locallabs.io@gmail.com?subject=localSpace%20for%20our%20company" data-contact>locallabs.io@gmail.com</a></p>
         </article>
       </div>
     </div>
   </section>
 
-  <section class="section join" id="join" aria-labelledby="join-title">
-    <div class="wrap join-grid">
-      <div>
-        <h2 id="join-title">Where it stands</h2>
-        <ul class="stands">
-          <li>We are at an early build. A small group of testers has tried it on their own laptops.</li>
-          <li>It cannot read your documents or search the web yet.</li>
-          <li>There is no telemetry. There is nothing to turn off, because none was written.</li>
-        </ul>
+  <section class="section download" id="download" aria-labelledby="download-title">
+    <div class="wrap">
+      <h2 id="download-title">Download localSpace <span class="tag tag-big">Preview</span></h2>
+      <p class="lede">Version 0.2.0-preview.1, for Windows 10 or 11, 64-bit. This is a preview, so expect rough edges.</p>
+
+      <div class="files">
+        <article class="file">
+          <h3>Installer</h3>
+          <p>Installs localSpace and adds it to the Start menu.</p>
+          <a class="btn btn-primary" href="https://localspace.locallabs.workers.dev/download/windows">Download the installer</a>
+          <dl class="facts">
+            <div><dt>File</dt><dd><code>localSpace-0.2.0-&lt;build&gt;-windows-x64-setup.exe</code></dd></div>
+            <div><dt>Size</dt><dd><span class="pending">given on publish day</span></dd></div>
+            <div><dt>SHA-256</dt><dd class="hash-row"><span class="pending">given on publish day</span></dd></div>
+          </dl>
+        </article>
+        <article class="file">
+          <h3>Portable zip</h3>
+          <p>Nothing is installed: unzip it and start localSpace from the folder.</p>
+          <a class="btn btn-primary" href="https://localspace.locallabs.workers.dev/download/portable">Download the zip</a>
+          <dl class="facts">
+            <div><dt>File</dt><dd><code>localSpace-0.2.0-&lt;build&gt;-windows-x64-portable.zip</code></dd></div>
+            <div><dt>Size</dt><dd><span class="pending">given on publish day</span></dd></div>
+            <div><dt>SHA-256</dt><dd class="hash-row"><span class="pending">given on publish day</span></dd></div>
+          </dl>
+        </article>
       </div>
-      <div>
-        <h3 class="join-lead">Join the waitlist</h3>
-        <form class="waitlist" action="https://formspree.io/f/xgawaneg" method="POST" data-waitlist>
-          <div class="form-fields">
-            <label class="field-label" for="email-2">Your email</label>
-            <div class="email-row">
-              <input class="input" id="email-2" name="email" type="email" autocomplete="email" inputmode="email" required>
-              <button class="btn btn-primary" type="submit">Join the waitlist</button>
-            </div>
-            <label class="field-label field-gap" for="use-2">How would you run it? <span class="optional">(optional)</span></label>
-            <select class="select" id="use-2" name="use_case">
-              <option value="">Choose an answer</option>
-              <option>On my own computer</option>
-              <option>On a server for my team or company</option>
-              <option>At an organisation that cannot send data to the cloud</option>
-              <option>Just curious</option>
-            </select>
-            <input type="hidden" name="_subject" value="localSpace preview request">
-            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" hidden>
-          </div>
-          <p class="form-status" role="status"></p>
-          <p class="form-note">One email, when there is a build to try. Your address goes to Formspree, the service that runs this form, and from there only to us.</p>
-        </form>
+      <p class="count-note">The Download buttons count clicks per day and file, and store nothing about you. <a href="https://github.com/LinusIp/localspace-downloads">The counter's code is public.</a></p>
+
+      <div class="dl-grid">
+        <div class="dl-block">
+          <h3>Check your download</h3>
+          <p>In PowerShell, in the folder where the file is, run:</p>
+          <pre class="command"><code>Get-FileHash .\localSpace-0.2.0-&lt;build&gt;-windows-x64-setup.exe -Algorithm SHA256</code></pre>
+          <p>Compare the result with the SHA-256 above. If the two values differ, don't run the file.</p>
+        </div>
+        <div class="dl-block">
+          <h3>What it needs</h3>
+          <p>Windows 10 or 11, 64-bit. Models download separately inside the app: a few GB, chosen for your computer.</p>
+          <p class="measured">Measured: Qwen3.5 4B: about 6–7 tokens per second (English answers) on a Core i7 laptop with Intel Iris Xe graphics, no NVIDIA card, 8 GB of memory, with a browser and VS Code open.</p>
+        </div>
+        <div class="dl-block">
+          <h3>If Windows stops the installer</h3>
+          <p>If Windows says “Windows protected your PC”, click <strong>More info</strong>, then <strong>Run anyway</strong>.</p>
+          <p><strong>If Windows won’t open the installer.</strong> Some computers have Smart App Control turned on, and it may stop programs from new publishers. localSpace isn’t signed yet, so this can happen. We’re working on it. You can check the download is genuine with the SHA-256 above. We don’t recommend turning Smart App Control off.</p>
+        </div>
+        <div class="dl-block">
+          <h3>Where it stands</h3>
+          <ul class="stands">
+            <li>It can answer about pictures you add to a chat, with a model that reads them.</li>
+            <li>It cannot read text files or search the web yet.</li>
+            <li>In a very long chat, the first word can take longer.</li>
+            <li>There is no telemetry. There is nothing to turn off, because none was written.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="community">
+        <div>
+          <h3>Tell us how it went</h3>
+          <p>What worked, what broke, and on which computer: tell us in our Telegram group. In the app, Help → Send feedback opens the same group.</p>
+        </div>
+        <a class="btn btn-secondary" href="https://t.me/localSpace_discussion">Join our community</a>
       </div>
     </div>
   </section>
@@ -233,9 +250,9 @@ Best regards,</p>
     <nav class="foot-links" aria-label="Footer">
       <a href="#how">How it works</a>
       <a href="#companies">For companies</a>
-      <a href="#join">Join the waitlist</a>
+      <a href="#download">Download</a>
     </nav>
-    <p class="foot-meta"><a href="mailto:locallabs.io@gmail.com" data-contact>locallabs.io@gmail.com</a> <span>© 2026 localLabs</span></p>
+    <p class="foot-meta"><a href="mailto:locallabs.io@gmail.com" data-contact>locallabs.io@gmail.com</a> <a href="https://t.me/localSpace_discussion">Telegram</a> <span>© 2026 localLabs</span></p>
   </div>
 </footer>
 </body>

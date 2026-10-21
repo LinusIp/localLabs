@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>localSpace — kompyuteringiz oʻz sunʼiy intellektini ishga tushira oladi</title>
+<meta name="description" content="localSpace kompyuteringizni koʻrib chiqadi, unga mos modelni tavsiya qiladi va hech narsa yuklab olinmasdan oldin u qanchalik tez yozishini aytadi. Siz yozgan hamma narsa kompyuteringizda qoladi.">
+<link rel="canonical" href="https://linusip.github.io/localLabs/uz/">
+<link rel="alternate" hreflang="en" href="https://linusip.github.io/localLabs/">
+<link rel="alternate" hreflang="ru" href="https://linusip.github.io/localLabs/ru/">
+<link rel="alternate" hreflang="uz" href="https://linusip.github.io/localLabs/uz/">
+<link rel="alternate" hreflang="x-default" href="https://linusip.github.io/localLabs/">
+<meta name="theme-color" content="#faf9f8">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="localSpace">
+<meta property="og:url" content="https://linusip.github.io/localLabs/uz/">
+<meta property="og:title" content="Kompyuteringiz oʻz sunʼiy intellektini ishga tushira oladi. Qanchalik yaxshi ekanini biz aytamiz.">
+<meta property="og:description" content="localSpace kompyuteringizni koʻrib chiqadi, unga mos modelni tavsiya qiladi va hech narsa yuklab olinmasdan oldin u qanchalik tez yozishini aytadi. Siz yozgan hamma narsa kompyuteringizda qoladi.">
+<meta property="og:image" content="https://linusip.github.io/localLabs/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The localSpace logo and the words: Your computer can run its own AI. We will tell you how well. Below them, three speeds measured on one laptop: 9.5, 13.2 and 40.5 tokens a second.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Kompyuteringiz oʻz sunʼiy intellektini ishga tushira oladi. Qanchalik yaxshi ekanini biz aytamiz.">
+<meta name="twitter:description" content="localSpace kompyuteringizni koʻrib chiqadi, unga mos modelni tavsiya qiladi va hech narsa yuklab olinmasdan oldin u qanchalik tez yozishini aytadi. Siz yozgan hamma narsa kompyuteringizda qoladi.">
+<meta name="twitter:image" content="https://linusip.github.io/localLabs/og.png">
+
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="preload" href="../fonts/figtree-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../style.css">
+<script src="../script.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Asosiy qismga oʻtish</a>
+
+<header class="site-head" id="top">
+  <div class="wrap head-in">
+    <a class="brand" href="#top"><img src="../brand/localspace-lockup.png" width="102" height="30" alt="localSpace"></a>
+    <nav class="nav-links" aria-label="Boʻlimlar">
+      <a href="#how">Qanday ishlaydi</a>
+      <a href="#companies">Kompaniyalar uchun</a>
+    </nav>
+    <nav class="langs" aria-label="Til"><a href="../" lang="en" hreflang="en">EN</a><a href="../ru/" lang="ru" hreflang="ru">RU</a><a href="../uz/" aria-current="true" lang="uz">UZ</a></nav>
+    <a class="btn btn-primary head-cta" href="#download">Yuklab olish</a>
+    <details class="menu">
+      <summary>Menyu</summary>
+      <nav class="menu-sheet" aria-label="Boʻlimlar">
+        <a href="#how">Qanday ishlaydi</a>
+        <a href="#companies">Kompaniyalar uchun</a>
+        <a href="#download">Yuklab olish</a>
+      </nav>
+    </details>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap hero-grid">
+      <div>
+        <h1 id="hero-title"><span>Kompyuteringiz oʻz sunʼiy intellektini ishga tushira oladi.</span> <span>Qanchalik yaxshi ekanini biz aytamiz.</span></h1>
+        <p class="lede">Hech narsa yuklab olinmasdan oldin ilova kompyuteringizga qaysi model mos kelishini va u soniyasiga nechta soʻz yozishini koʻrsatadi. Siz yozgan hamma narsa shu kompyuterda qoladi.</p>
+        <div class="hero-get">
+          <a class="btn btn-primary btn-big" href="https://localspace.locallabs.workers.dev/download/windows">Windows uchun yuklab olish</a>
+          <p class="hero-meta">Versiya 0.2.0-preview.1 <span class="tag">Sinov versiyasi</span> · Windows 10 yoki 11, 64-bit</p>
+          <p class="hero-meta"><a href="#download">Fayllar va SHA-256</a></p>
+        </div>
+      </div>
+
+      <figure class="demo" data-demo>
+        <div class="demo-pick" data-demo-pick hidden>
+          <p class="demo-label" id="demo-label">Bitta noutbukda:</p>
+          <div class="chips" role="group" aria-labelledby="demo-label">
+            <button class="chip" type="button" aria-pressed="false" data-tps="9.5" data-model="Qwen2.5 7B">Faqat protsessor <span class="chip-model">7B</span></button>
+            <button class="chip" type="button" aria-pressed="true" data-tps="13.2" data-model="Qwen2.5 7B">4 GB videokarta <span class="chip-model">7B</span></button>
+            <button class="chip" type="button" aria-pressed="false" data-tps="40.5" data-model="Qwen2.5 3B">4 GB videokarta <span class="chip-model">3B</span></button>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="thread">
+            <div class="msg" lang="en">
+              <span class="avatar" aria-hidden="true">Y</span>
+              <p class="msg-body msg-person">Write a short, polite email to my landlord asking him to fix the leaking tap in the kitchen.</p>
+            </div>
+            <div class="msg" lang="en">
+              <span class="avatar avatar-model" aria-hidden="true"><svg viewBox="0 0 256 256" focusable="false"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M136.4 40.85 199.27 77.15A16.8 16.8 0 0 1 207.67 91.7V164.3A16.8 16.8 0 0 1 199.27 178.85L136.4 215.15A16.8 16.8 0 0 1 119.6 215.15L56.73 178.85A16.8 16.8 0 0 1 48.33 164.3V91.7A16.8 16.8 0 0 1 56.73 77.15L119.6 40.85A16.8 16.8 0 0 1 136.4 40.85Z" stroke-width="23.3"/><path d="M88.5 105.3 128 131.2 167.5 105.3" stroke-width="9.1"/><path d="M128 131.2V208.3" stroke-width="9.1"/></g><g fill="currentColor"><circle cx="88.5" cy="105.3" r="15.5"/><circle cx="167.5" cy="105.3" r="15.5"/><circle cx="128" cy="168.2" r="15.5"/></g></svg></span>
+              <div class="msg-body">
+                <p class="answer" data-demo-answer>Subject: Request for Kitchen Tap Repair
+
+Dear [Landlord's Name],
+
+I hope this email finds you well. I am writing to bring to your attention a small issue in the kitchen. The tap seems to be leaking, which is a bit concerning. I believe it would be best if you could have a look at it and arrange for it to be fixed at your earliest convenience.
+
+Thank you for your prompt attention to this matter.
+
+Best regards,</p>
+              </div>
+            </div>
+          </div>
+          <div class="panel-foot">
+            <span class="model-chip" data-demo-model>Qwen2.5 7B</span>
+            <p class="rate" data-demo-rate data-rate="soniyasiga {t} token · soniyasiga taxminan {w} soʻz" aria-live="polite">soniyasiga <span class="num">13,2</span> token · soniyasiga taxminan 10 soʻz</p>
+          </div>
+        </div>
+        <figcaption>Javob yozilayotgandagi tezlik, 2026-yil sentabrida haqiqiy noutbukda oʻlchangan. Savol va javob qanday yozilgan boʻlsa, shunday — ingliz tilida koʻrsatilgan. Ilova sizning tezligingizni hech narsa yuklab olinmasdan oldin aytadi.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="claims" aria-labelledby="claims-title">
+    <div class="wrap">
+      <h2 class="vh" id="claims-title">Nimaga ishonsangiz boʻladi</h2>
+      <ul>
+        <li><strong>Hech narsa kompyuteringizdan chiqmaydi</strong><span>Ilova hech narsa yubormaydi: savollaringizni ham, javoblarini ham, undan qanchalik tez-tez foydalanishingizni ham.</span></li>
+        <li><strong>Obuna yoʻq, xabar uchun toʻlov yoʻq</strong><span>U sizda allaqachon bor uskunada ishlaydi.</span></li>
+        <li><strong>Internetsiz ham ishlaydi</strong><span>Model yuklab olingach, ulanish kerak emas.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="how" aria-labelledby="how-title">
+    <div class="wrap">
+      <h2 id="how-title">Qanday ishlaydi</h2>
+      <ol class="steps">
+        <li>
+          <figure class="step">
+            <figcaption>
+              <h3>Hech narsa yuklab olinmasdan oldin u kompyuteringizni koʻrib chiqadi</h3>
+              <p>Birinchi ekran: nima topgani, shu kompyuterga qaysi modelni tavsiya qilgani, u qanchalik tez yozishi va qancha yuklab olish kerakligi.</p>
+            </figcaption>
+            <img class="shot" src="../shots/first-run.webp" width="576" height="598" loading="lazy" decoding="async" alt="localSpace’ning ingliz tilidagi birinchi ekrani. «Bu kompyuter» ostida: NVIDIA GeForce RTX 3050 Ti Laptop GPU, 4 GB videoxotira, 16 GB tizim xotirasi. Tavsiya etilgani: Qwen2.5 7B Instruct, yaxshi ishlaydi, siz oʻqishingizdan tezroq, soniyasiga taxminan 7–9 soʻz. Uning taxminan yarmi videoxotiraga sigʻadi, qolgani sekinroq tizim xotirasidan ishlaydi. Bepul, tijoriy foydalanish uchun ham. Taxminan 4,4 GB yuklab olinadi; C: diskda 92 GB boʻsh. «Yuklab olish va boshlash» tugmasi.">
+          </figure>
+        </li>
+        <li>
+          <figure class="step">
+            <figcaption>
+              <h3>Har bir model qanday ishlashini aytadi</h3>
+              <p>60 GB yuklab olgandan keyin bilib qolishingizdan koʻra, sekin ekanini oldindan aytganimiz maʼqul.</p>
+            </figcaption>
+            <img class="shot" src="../shots/models.webp" width="694" height="728" loading="lazy" decoding="async" alt="localSpace sozlamalaridagi ingliz tilidagi modellar roʻyxati; har birida yuklab olinmasdan oldin shu kompyuterda qanday ishlashi yozilgan. Qwen2.5 0.5B Instruct: yaxshi ishlaydi, siz oʻqishingizdan tezroq, soniyasiga taxminan 50–70 soʻz. Qwen2.5 1.5B Instruct: yaxshi ishlaydi, soniyasiga taxminan 35–50 soʻz. Qwen2.5 3B Instruct: yaxshi ishlaydi, soniyasiga taxminan 20–30 soʻz; faqat tadqiqot va baholash uchun bepul, tijoriy foydalanish uchun emas. Qwen2.5 7B Instruct: yaxshi ishlaydi, soniyasiga taxminan 7–9 soʻz. Qwen2.5 14B Instruct: ishlaydi, taxminan siz oʻqigandek tez, soniyasiga 3–4 soʻz. Qwen3 30B-A3B: bu kompyuterga sigʻmaydi; taxminan 17,3 GB yuklab olinadi. gpt-oss 120B: bu kompyuterga sigʻmaydi; taxminan 59,0 GB yuklab olinadi.">
+          </figure>
+        </li>
+        <li>
+          <figure class="step">
+            <figcaption>
+              <h3>Keyin siz yozasiz</h3>
+              <p>Javoblar kompyuteringizda yoziladi, suhbatlaringiz ham oʻsha yerda saqlanadi.</p>
+            </figcaption>
+            <img class="shot" src="../shots/chat.webp" width="795" height="540" loading="lazy" decoding="async" alt="localSpace’dagi ingliz tilidagi suhbat. Savol: menda tuxum, ismaloq, feta pishlogʻi va yarimta qotgan non bor; kechqurun nima pishirsam boʻladi? Model ismaloq va fetali omlet taklif qiladi: ismaloqni sarimsoq bilan qovurib, pishayotgan tuxumga fetani qoʻshish. Savol: ishlatilgan velosiped sotib olishdan oldin nimani tekshirish kerak? Model tormoz, gʻildirak va shinalardan tortib zanjir, tezlik almashtirgich, rama va chiroqlargacha sakkizta narsani sanaydi va ustaga koʻrsatishni ham maslahat beradi.">
+          </figure>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="companies" aria-labelledby="ways-title">
+    <div class="wrap">
+      <h2 id="ways-title">Ishga tushirishning ikki yoʻli</h2>
+      <div class="ways">
+        <article class="way">
+          <h3>Oʻz kompyuteringizda</h3>
+          <p>Oʻz uskunangizda bitta ilova. Hisob ochish ham, biror joyga kirish ham kerak emas.</p>
+          <p class="way-end"><a href="#download">Yuklab olish</a></p>
+        </article>
+        <article class="way">
+          <h3>Kompaniyangiz serverida</h3>
+          <p>Xodimlar uni brauzerda ochib, ish pochtasi bilan kiradi. Model kompaniyaning oʻz serverida ishlaydi, shuning uchun hech narsa tashqi sunʼiy intellekt xizmatiga ketmaydi, xodimlarning noutbuklariga esa videokarta umuman kerak emas.</p>
+          <p class="way-note">Kompaniyalar uchun serverlar tez orada.</p>
+          <p class="way-end">Bizga yozing: <a href="https://t.me/localSpace_discussion">Telegram guruhimizda</a> yoki <a href="mailto:locallabs.io@gmail.com?subject=Kompaniyamiz%20uchun%20localSpace" data-contact>locallabs.io@gmail.com</a></p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section download" id="download" aria-labelledby="download-title">
+    <div class="wrap">
+      <h2 id="download-title">localSpace’ni yuklab olish <span class="tag tag-big">Sinov versiyasi</span></h2>
+      <p class="lede">Versiya 0.2.0-preview.1, Windows 10 yoki 11, 64-bit uchun. Bu sinov versiyasi, shuning uchun kamchiliklar boʻladi.</p>
+
+      <div class="files">
+        <article class="file">
+          <h3>Oʻrnatuvchi</h3>
+          <p>localSpace’ni oʻrnatadi va «Pusk» menyusiga qoʻshadi.</p>
+          <a class="btn btn-primary" href="https://localspace.locallabs.workers.dev/download/windows">Oʻrnatuvchini yuklab olish</a>
+          <dl class="facts">
+            <div><dt>Fayl</dt><dd><code>localSpace-0.2.0-&lt;build&gt;-windows-x64-setup.exe</code></dd></div>
+            <div><dt>Hajmi</dt><dd><span class="pending">eʼlon qilingan kuni beriladi</span></dd></div>
+            <div><dt>SHA-256</dt><dd class="hash-row"><span class="pending">eʼlon qilingan kuni beriladi</span></dd></div>
+          </dl>
+        </article>
+        <article class="file">
+          <h3>Koʻchma zip</h3>
+          <p>Hech narsa oʻrnatilmaydi: arxivni oching va localSpace’ni papkadan ishga tushiring.</p>
+          <a class="btn btn-primary" href="https://localspace.locallabs.workers.dev/download/portable">Zip’ni yuklab olish</a>
+          <dl class="facts">
+            <div><dt>Fayl</dt><dd><code>localSpace-0.2.0-&lt;build&gt;-windows-x64-portable.zip</code></dd></div>
+            <div><dt>Hajmi</dt><dd><span class="pending">eʼlon qilingan kuni beriladi</span></dd></div>
+            <div><dt>SHA-256</dt><dd class="hash-row"><span class="pending">eʼlon qilingan kuni beriladi</span></dd></div>
+          </dl>
+        </article>
+      </div>
+      <p class="count-note">«Yuklab olish» tugmalari har bir fayl boʻyicha kunlik bosishlarni sanaydi va siz haqingizda hech narsa saqlamaydi. <a href="https://github.com/LinusIp/localspace-downloads">Hisoblagich kodi ochiq.</a></p>
+
+      <div class="dl-grid">
+        <div class="dl-block">
+          <h3>Yuklab olingan faylni tekshiring</h3>
+          <p>PowerShell’da, fayl turgan papkada quyidagini bajaring:</p>
+          <pre class="command"><code>Get-FileHash .\localSpace-0.2.0-&lt;build&gt;-windows-x64-setup.exe -Algorithm SHA256</code></pre>
+          <p>Natijani yuqoridagi SHA-256 bilan solishtiring. Agar ikki qiymat farq qilsa, faylni ishga tushirmang.</p>
+        </div>
+        <div class="dl-block">
+          <h3>Nima kerak</h3>
+          <p>Windows 10 yoki 11, 64-bit. Modellar ilova ichida alohida yuklab olinadi: bir necha GB, kompyuteringizga qarab tanlanadi.</p>
+          <p class="measured">Oʻlchangan: Qwen3.5 4B — soniyasiga taxminan 6–7 token (ingliz tilidagi javoblar), Core i7 va Intel Iris Xe grafikali, NVIDIA videokartasiz, 8 GB xotirali noutbukda, brauzer va VS Code ochiq holda.</p>
+        </div>
+        <div class="dl-block">
+          <h3>Agar Windows oʻrnatuvchini toʻxtatsa</h3>
+          <p>Agar Windows «Windows protected your PC» (rus tilidagi Windowsda «Система Windows защитила ваш компьютер») desa, <strong>More info</strong> (<strong>Подробнее</strong>), keyin <strong>Run anyway</strong> (<strong>Выполнить в любом случае</strong>) tugmasini bosing.</p>
+          <p><strong>Agar Windows oʻrnatuvchini ochmasa.</strong> Baʼzi kompyuterlarda Smart App Control yoqilgan boʻladi va u yangi nashriyotchilarning dasturlarini toʻxtatishi mumkin. localSpace hali imzolanmagan, shuning uchun shunday boʻlishi mumkin. Biz bu ustida ishlayapmiz. Yuklab olingan fayl haqiqiyligini yuqoridagi SHA-256 orqali tekshirishingiz mumkin. Smart App Control’ni oʻchirishni tavsiya qilmaymiz.</p>
+        </div>
+        <div class="dl-block">
+          <h3>Hozir nima bor</h3>
+          <ul class="stands">
+            <li>Chatga qoʻshgan rasmlaringiz haqida javob bera oladi, agar model rasmlarni oʻqiy olsa.</li>
+            <li>Matnli fayllarni oʻqish va internetda qidirish hali yoʻq.</li>
+            <li>Juda uzun chatda birinchi soʻz chiqishi uzoqroq vaqt olishi mumkin.</li>
+            <li>Telemetriya yoʻq. Oʻchiradigan narsa ham yoʻq, chunki u yozilmagan.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="community">
+        <div>
+          <h3>Qanday oʻtganini aytib bering</h3>
+          <p>Nima ishladi, nima buzildi va qaysi kompyuterda — Telegram guruhimizda aytib bering. Ilovada Help → Send feedback bandi xuddi shu guruhni ochadi.</p>
+        </div>
+        <a class="btn btn-secondary" href="https://t.me/localSpace_discussion">Hamjamiyatimizga qoʻshiling</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap foot-in">
+    <a class="brand" href="#top"><img src="../brand/localspace-lockup.png" width="102" height="30" alt="localSpace" loading="lazy" decoding="async"></a>
+    <nav class="foot-links" aria-label="Sahifa oxiri">
+      <a href="#how">Qanday ishlaydi</a>
+      <a href="#companies">Kompaniyalar uchun</a>
+      <a href="#download">Yuklab olish</a>
+    </nav>
+    <p class="foot-meta"><a href="mailto:locallabs.io@gmail.com" data-contact>locallabs.io@gmail.com</a> <a href="https://t.me/localSpace_discussion">Telegram</a> <span>© 2026 localLabs</span></p>
+  </div>
+</footer>
+</body>
+</html>

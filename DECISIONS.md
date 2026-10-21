@@ -3,6 +3,35 @@
 Why the page is the way it is, so that a later change does not undo a choice
 by accident. Newest first.
 
+## 2026-10-21: the download section, in three languages
+
+- **The waitlist is gone; the page offers the download.** Both Formspree forms
+  and their script are removed. The header, the hero and the first way to run
+  it point to the download section; companies write to the Telegram group or
+  by email.
+- **The Download buttons go through a counter,**
+  `localspace.locallabs.workers.dev`
+  ([LinusIp/localspace-downloads](https://github.com/LinusIp/localspace-downloads)),
+  which adds 1 per day and file and redirects to the file on GitHub. It stores
+  nothing about the visitor and skips link previews and crawlers. The page
+  says so under the buttons and links the counter's code. No analytics.
+- **The file facts are written into the page, not fetched:** name, size in
+  MB and the full SHA-256, from the release's `SHA256SUMS.txt`, with the
+  `Get-FileHash` line. They live in `release.json`; `node tools/pages.mjs`
+  writes the three pages from it. Until a release is published, size and hash
+  read "given on publish day" and the counter answers "not published yet".
+- **The Smart App Control note is the one written for the download page,**
+  word for word. The page never suggests turning Smart App Control off; the
+  "More info, then Run anyway" line is for SmartScreen only.
+- **English, Russian and Uzbek (Latin script),** at `/`, `/ru/` and `/uz/`,
+  from one layout (`tools/pages.mjs`) and one file of strings
+  (`tools/strings.mjs`). The demo and the screenshots stay as recorded, in
+  English, and the Russian and Uzbek captions say so.
+- **The Russian page uses the system's sans,** because Figtree has no Cyrillic
+  letters: one font for the whole page rather than two in one line.
+- **The one measured figure for 0.2 is stated as measured:** tokens per
+  second, English answers, and the computer it ran on.
+
 ## 2026-09-19: the rebuild
 
 - **Every speed on the page is our own measurement.** One laptop (Ryzen 7
