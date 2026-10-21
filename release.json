@@ -1,7 +1,7 @@
 {
   "version": "0.2.0-preview.1",
   "tag": "v0.2.0-preview.1",
-  "counter": "https://localspace.locallabs.workers.dev",
+  "counter": "https://localspace.locallabs-io.workers.dev",
   "files": {
     "setup": {
       "route": "/download/windows",

@@ -10,7 +10,7 @@ by accident. Newest first.
   it point to the download section; companies write to the Telegram group or
   by email.
 - **The Download buttons go through a counter,**
-  `localspace.locallabs.workers.dev`
+  `localspace.locallabs-io.workers.dev`
   ([LinusIp/localspace-downloads](https://github.com/LinusIp/localspace-downloads)),
   which adds 1 per day and file and redirects to the file on GitHub. It stores
   nothing about the visitor and skips link previews and crawlers. The page
