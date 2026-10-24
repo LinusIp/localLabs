@@ -1,6 +1,7 @@
-// Writes the scroll-story preview in its three languages: story/index.html,
-// story/ru/index.html and story/uz/index.html. Built section by section; the
-// live page stays index.html until the story replaces it.
+// Writes the page in its three languages: index.html, ru/index.html and
+// uz/index.html, from one layout, the strings in tools/strings.mjs, the
+// sitting's answers in tools/step4-answers.json and the release facts in
+// release.json. Run it after changing any of them, and commit what it writes:
 //
 //   node tools/story.mjs
 
@@ -13,10 +14,11 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const TELEGRAM = "https://t.me/localSpace_discussion";
 const release = JSON.parse(readFileSync(join(ROOT, "release.json"), "utf8"));
 
+const SITE = "https://linusip.github.io/localLabs/";
 const LANGS = [
-  { code: "en", dir: "story/", root: "../" },
-  { code: "ru", dir: "story/ru/", root: "../../" },
-  { code: "uz", dir: "story/uz/", root: "../../" },
+  { code: "en", dir: "", root: "" },
+  { code: "ru", dir: "ru/", root: "../" },
+  { code: "uz", dir: "uz/", root: "../" },
 ];
 
 // Step 1's words. The readings are what the preview build's first screen
@@ -209,7 +211,25 @@ function page(lang) {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(t.title)}</title>
-<meta name="robots" content="noindex">
+<meta name="description" content="${esc(t.description)}">
+<link rel="canonical" href="${SITE}${lang.dir}">
+${LANGS.map((l) => `<link rel="alternate" hreflang="${l.code}" href="${SITE}${l.dir}">`).join("\n")}
+<link rel="alternate" hreflang="x-default" href="${SITE}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="localSpace">
+<meta property="og:url" content="${SITE}${lang.dir}">
+<meta property="og:title" content="${esc(t.h1.join(" "))}">
+<meta property="og:description" content="${esc(t.description)}">
+<meta property="og:image" content="${SITE}og-0.2.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The localSpace logo and the words: Your computer can run its own AI. We will tell you how well. Below them, one speed measured on one laptop: Qwen3.5 4B, 25.2 tokens a second, with a 4 GB graphics card.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="${esc(t.h1.join(" "))}">
+<meta name="twitter:description" content="${esc(t.description)}">
+<meta name="twitter:image" content="${SITE}og-0.2.png">
+<link rel="icon" href="${r}favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="${r}apple-touch-icon.png">
 <meta name="theme-color" content="#f8f8fb">
 <link rel="icon" href="${r}favicon.svg" type="image/svg+xml">
 <link rel="preload" href="${r}fonts/figtree-latin.woff2" as="font" type="font/woff2" crossorigin>
