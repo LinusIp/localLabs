@@ -65,7 +65,129 @@
     </div>
   </section>
 
-  <p class="wrap end-note">Дальше — карточки моделей, чат, приватность и финал.</p>
+  <section class="story story-pick" data-story aria-labelledby="pick-title">
+    <div class="stage">
+      <div class="wrap stage-grid">
+        <div>
+          <p class="eyebrow">Оно выбирает</p>
+          <h2 id="pick-title">Потом оно выбирает подходящую модель.</h2>
+          <p class="body">Каждая модель ещё до загрузки говорит, как она будет работать на этом компьютере. Лучшая для него идёт первой.</p>
+          <p class="measured-line">Измерено на том же ноутбуке: 25,2 токена в секунду.</p>
+          <p class="source">Строки моделей — слова самого приложения на том ноутбуке, на английском.</p>
+        </div>
+        <ul class="models" lang="en">
+          <li class="model is-pick" style="--i: 0">
+            <span class="badge" lang="ru">Рекомендовано</span>
+            <p class="model-name">Qwen3.5 4B <span>Alibaba (Qwen)</span></p>
+            <p class="model-line">Runs well — faster than you read: about 15 to 20 words a second.</p>
+            <p class="model-speed" lang="ru"><b>25,2</b> токена в секунду, измерено</p>
+          </li>
+          <li class="model" style="--i: 1">
+            
+            <p class="model-name">Gemma 4 E2B <span>Google</span></p>
+            <p class="model-line">Runs well — faster than you read: about 15 to 20 words a second.</p>
+            
+          </li>
+          <li class="model" style="--i: 2">
+            
+            <p class="model-name">Gemma 4 E4B <span>Google</span></p>
+            <p class="model-line">Runs well — faster than you read: about 7 to 10 words a second.</p>
+            
+          </li>
+          <li class="model" style="--i: 3">
+            
+            <p class="model-name">Qwen3.5 9B <span>Alibaba (Qwen)</span></p>
+            <p class="model-line">Runs well — faster than you read: about 5 to 7 words a second. Needs most of this computer's memory: close other programs, such as your browser, before you use it.</p>
+            
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="story story-ask" data-story aria-labelledby="ask-title">
+    <div class="stage">
+      <div class="wrap stage-grid">
+        <div>
+          <p class="eyebrow">Потом вы спрашиваете</p>
+          <h2 id="ask-title">Покажите фото. Спросите на своём языке.</h2>
+          <p class="body">Одна рукописная задача, решённая на английском, русском и узбекском — на самом компьютере.</p>
+          <div class="answer-tabs" role="group" aria-label="Ответ на" data-tabs hidden>
+            <button type="button" class="chip" data-tab="en" aria-pressed="false" lang="en">English</button>
+            <button type="button" class="chip" data-tab="ru" aria-pressed="true" lang="ru">Русский</button>
+            <button type="button" class="chip" data-tab="uz" aria-pressed="false" lang="uz">Oʻzbekcha</button>
+          </div>
+        </div>
+        <div class="window">
+          <div class="window-bar"><span>localSpace</span><span class="model-chip">Qwen3.5 4B</span></div>
+          <div class="thread" data-answer="en" lang="en" hidden>
+            <div class="msg msg-you"><span class="avatar" aria-hidden="true">A</span><div><div class="photo-slot">Здесь будет фото</div><p>Solve the problem in this picture and explain each step.</p></div></div>
+            <div class="msg msg-model"><span class="avatar avatar-model" aria-hidden="true"></span><div><p class="placeholder">Здесь будет настоящий ответ Qwen3.5 4B после сеанса.</p></div></div>
+          </div>
+          <div class="thread" data-answer="ru" lang="ru">
+            <div class="msg msg-you"><span class="avatar" aria-hidden="true">A</span><div><div class="photo-slot">Здесь будет фото</div><p>Реши задачу на этой картинке и объясни каждый шаг.</p></div></div>
+            <div class="msg msg-model"><span class="avatar avatar-model" aria-hidden="true"></span><div><p class="placeholder">Здесь будет настоящий ответ Qwen3.5 4B после сеанса.</p></div></div>
+          </div>
+          <div class="thread" data-answer="uz" lang="uz" hidden>
+            <div class="msg msg-you"><span class="avatar" aria-hidden="true">A</span><div><div class="photo-slot">Здесь будет фото</div><p>Bu rasmdagi masalani yeching va har bir qadamni tushuntiring.</p></div></div>
+            <div class="msg msg-model"><span class="avatar avatar-model" aria-hidden="true"></span><div><p class="placeholder">Здесь будет настоящий ответ Qwen3.5 4B после сеанса.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="plain privacy" aria-labelledby="privacy-title">
+    <div class="wrap">
+      <p class="eyebrow">Приватно</p>
+      <h2 id="privacy-title">Ничего не покидает ваш компьютер.</h2>
+      <p class="lede">Приложение ничего не отправляет: ни ваши вопросы, ни свои ответы, ни даже то, как часто вы им пользуетесь.</p>
+      <ul class="claims">
+        <li><strong>Без подписки и без платы за сообщения</strong><span>Оно работает на том железе, что у вас уже есть.</span></li>
+        <li><strong>Работает совсем без интернета</strong><span>Когда модель скачана, подключение больше не нужно.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="plain end" id="download" aria-labelledby="end-title">
+    <div class="wrap">
+      <h2 id="end-title">Попробуйте на своём компьютере.</h2>
+      <div class="ctas">
+        <a class="btn btn-primary btn-big" href="https://localspace.locallabs-io.workers.dev/download/windows">Скачать для Windows</a>
+        <a class="btn btn-quiet btn-big" href="https://t.me/localSpace_discussion">Вступить в сообщество</a>
+      </div>
+      <p class="meta">Версия 0.2.0-preview.1, для Windows 10 или 11, 64-разрядной. Это предварительная версия, так что шероховатости будут.</p>
+      <div class="files">
+        <article class="file">
+          <h3>Установщик</h3>
+          <p>Устанавливает localSpace и добавляет его в меню «Пуск».</p>
+          <a class="btn btn-primary" href="https://localspace.locallabs-io.workers.dev/download/windows">Скачать установщик</a>
+          <dl class="facts">
+            <div><dt>Файл</dt><dd><code>localSpace-0.2.0-920b7123-windows-x64-setup.exe</code></dd></div>
+            <div><dt>Размер</dt><dd>37,1 МБ</dd></div>
+            <div><dt>SHA-256</dt><dd class="hash-row"><code id="sha-setup">c81a07b0d23741656fd2de6d320fef6ab21c9ec68db779d3f43e587d649a57ae</code><button class="copy" type="button" data-copy="sha-setup" hidden>Копировать</button></dd></div>
+          </dl>
+        </article>
+        <article class="file">
+          <h3>Портативный zip</h3>
+          <p>Ничего не устанавливается: распакуйте архив и запустите localSpace из папки.</p>
+          <a class="btn btn-primary" href="https://localspace.locallabs-io.workers.dev/download/portable">Скачать zip</a>
+          <dl class="facts">
+            <div><dt>Файл</dt><dd><code>localSpace-0.2.0-920b7123-windows-x64-portable.zip</code></dd></div>
+            <div><dt>Размер</dt><dd>65,2 МБ</dd></div>
+            <div><dt>SHA-256</dt><dd class="hash-row"><code id="sha-portable">5dd1a7f0c3f1964208fa235bfb12c15f398413d23bdcf98dc86bcb5960e25737</code><button class="copy" type="button" data-copy="sha-portable" hidden>Копировать</button></dd></div>
+          </dl>
+        </article>
+      </div>
+      <p class="source">Кнопки «Скачать» считают нажатия за день по каждому файлу и ничего не сохраняют о вас. <a href="https://github.com/LinusIp/localspace-downloads">Код счётчика открыт.</a></p>
+      <div class="dl-grid">
+        <div><h3>Проверьте загрузку</h3><p>В PowerShell, в папке с файлом, выполните:</p><pre class="command"><code>Get-FileHash .\localSpace-0.2.0-920b7123-windows-x64-setup.exe -Algorithm SHA256</code></pre><p>Сравните результат с SHA-256 выше. Если значения различаются, не запускайте файл.</p></div>
+        <div><h3>Что нужно</h3><p>Windows 10 или 11, 64-разрядная. Модели скачиваются отдельно, внутри приложения: несколько ГБ, подобранные под ваш компьютер.</p><p class="source">Измерено: Qwen3.5 4B — около 6–7 токенов в секунду (ответы на английском) на ноутбуке с Core i7 и графикой Intel Iris Xe, без видеокарты NVIDIA, с 8 ГБ памяти, при открытых браузере и VS Code.</p></div>
+        <div><h3>Если Windows останавливает установщик</h3><p>Если Windows пишет «Система Windows защитила ваш компьютер», нажмите <strong>Подробнее</strong>, затем <strong>Выполнить в любом случае</strong>.</p><p><strong>Если Windows не открывает установщик.</strong> На некоторых компьютерах включено интеллектуальное управление приложениями (Smart App Control), и оно может останавливать программы новых издателей. localSpace пока не подписан, поэтому так может случиться. Мы над этим работаем. Подлинность загрузки можно проверить по SHA-256 выше. Мы не советуем отключать интеллектуальное управление приложениями.</p></div>
+        <div><h3>На сервере вашей компании</h3><p>Серверы для компаний скоро появятся.</p><p>Напишите нам: в нашей <a href="https://t.me/localSpace_discussion">группе в Telegram</a> или на <a href="mailto:locallabs.io@gmail.com">locallabs.io@gmail.com</a></p></div>
+      </div>
+    </div>
+  </section>
 </main>
 </body>
 </html>
