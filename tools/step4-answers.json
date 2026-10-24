@@ -1,0 +1,20 @@
+{
+  "source": "localspace measure --pictures (920b7123), Qwen3.5 4B, thinking off, 2026-10-24, RTX 3050 Ti 4 GB laptop, Silent",
+  "answers": {
+    "en": {
+      "question": "Solve the problem in this picture and explain each step.",
+      "speed": "read 1106 in 16.9 s; wrote 282 at 25.1 a second",
+      "answer": "The problem is:\n**∫ x · eˣ dx**\nWe’ll solve it using **integration by parts**, which uses the formula:\n> ∫ u dv = uv - ∫ v du\n---\n### Step 1: Choose u and dv\nLet’s pick:\n- **u = x** → because it becomes simpler when differentiated\n- **dv = eˣ dx** → because we can easily integrate it\nThen:\n- **du = dx** (derivative of x)\n- **v = eˣ** (integral of eˣ dx)\n---\n### Step 2: Plug into the formula\n∫ x·eˣ dx = uv - ∫ v du\n= (x)(eˣ) - ∫ (eˣ)(dx)\n= x eˣ - ∫ eˣ dx\n---\n### Step 3: Integrate the remaining part\n∫ eˣ dx = eˣ + C (where C is the constant of integration)\nSo now:\n= x eˣ - eˣ + C\n---\n### Final Answer:\n**x eˣ - eˣ + C**\nor factored as:\n**(x - 1)eˣ + C**\n✅ That’s the solution!"
+    },
+    "ru": {
+      "question": "Реши задачу на этой картинке и объясни каждый шаг.",
+      "speed": "read 1107 in 18.0 s; wrote 408 at 25.2 a second",
+      "answer": "Хорошо, давай разберём интеграл:\n∫ x · eˣ dx\nЭто интеграл от произведения функции — у нас есть x (линейная функция) и eˣ (экспонента). Для таких случаев удобно использовать **метод интегрирования по частям**.\n---\n### Шаг 1: Формула интегрирования по частям\nФормула такая:\n∫ u dv = uv - ∫ v du\nНужно выбрать, какая часть будет u (функция), а какая — dv (производная от другой части).\nОбычно выбирают так:\n- u — та функция, которую можно легко продифференцировать (например, полином)\n- dv — та, которую можно легко проинтегрировать (например, экспонента)\nЗдесь:\n- Пусть **u = x** → тогда du = dx\n- Пусть **dv = eˣ dx** → тогда v = ∫ eˣ dx = eˣ\n---\n### Шаг 2: Подставим в формулу\n∫ x·eˣ dx = u·v - ∫ v·du\n= x·eˣ - ∫ eˣ dx\n---\n### Шаг 3: Вычислим оставшийся интеграл\n∫ eˣ dx = eˣ + C (где C — константа интегрирования)\n---\n### Шаг 4: Соберём всё вместе\nОтвет:\nx·eˣ - eˣ + C\nМожно вынести общий множитель eˣ:\n= eˣ(x - 1) + C\n---\n✅ **Итоговый ответ:**\n**∫ x·eˣ dx = eˣ(x - 1) + C**\nЕсли нужно — могу объяснить ещё проще или на другом языке, если хочешь."
+    },
+    "uz": {
+      "question": "Bu rasmdagi masalani yeching va har bir qadamni tushuntiring.",
+      "speed": "read 1114 in 17.8 s; wrote 371 at 25.6 a second",
+      "answer": "Bu integralni yechish uchun \"integralsiz bo'lish\" (integration by parts) usulidan foydalanamiz. Bu usul quyidagicha ishlaydi:\n**Formula:**\n∫u·dv = u·v - ∫v·du\n---\n### 1-qadam: u va dv ni tanlash\nBizning holatda:\n- u = x (chunki uni oddiyroq qilib olishimiz mumkin)\n- dv = e^x dx (chunki uning integrali aniq ma'lum)\nShunday qilib:\n- du = dx (x ning hosilasi 1 ga teng)\n- v = ∫e^x dx = e^x\n---\n### 2-qadam: Formula ni qo'llash\nEndi formulani qo'yamiz:\n∫x·e^x dx = x·e^x - ∫e^x dx\n---\n### 3-qadam: Ikkinchi integralni hisoblash\n∫e^x dx = e^x + C (C — integrallash konstantasi)\nDemak:\n∫x·e^x dx = x·e^x - e^x + C\n---\n### 4-qadam: Yakuniy javobni soddalashtirish\nKeling, ifodani qisqartiramiz:\n= e^x(x - 1) + C\n---\n✅ **Javob:**\n**∫x·e^x dx = e^x(x - 1) + C**\nBu javob to'g'ri va oddiy ko'rinishda."
+    }
+  }
+}

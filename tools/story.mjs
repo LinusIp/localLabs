@@ -74,7 +74,8 @@ const STEPS = {
       title: "Show it a photo. Ask in your language.",
       body: "One handwritten problem, answered in English, Russian and Uzbek, on the computer itself.",
       tabs: "Answer in",
-      placeholder: "Qwen3.5 4B's real answer goes here after the sitting.",
+      photo: "A photo of a handwritten problem on squared paper: the integral of x times e to the x, dx.",
+      speed: "Qwen3.5 4B on the same laptop: it read the picture in {s} s, then wrote {t} tokens a second.",
     },
     privacy: { eyebrow: "Private" },
     end: { title: "Try it on your own computer." },
@@ -94,7 +95,8 @@ const STEPS = {
       title: "Покажите фото. Спросите на своём языке.",
       body: "Одна рукописная задача, решённая на английском, русском и узбекском — на самом компьютере.",
       tabs: "Ответ на",
-      placeholder: "Здесь будет настоящий ответ Qwen3.5 4B после сеанса.",
+      photo: "Фото рукописной задачи на бумаге в клетку: интеграл от x, умноженного на e в степени x, по dx.",
+      speed: "Qwen3.5 4B на том же ноутбуке: прочитала картинку за {s} с, потом писала {t} токена в секунду.",
     },
     privacy: { eyebrow: "Приватно" },
     end: { title: "Попробуйте на своём компьютере." },
@@ -114,24 +116,50 @@ const STEPS = {
       title: "Rasm koʻrsating. Oʻz tilingizda soʻrang.",
       body: "Bitta qoʻlda yozilgan masala ingliz, rus va oʻzbek tillarida — kompyuterning oʻzida yechilgan.",
       tabs: "Javob tili",
-      placeholder: "Seansdan keyin bu yerda Qwen3.5 4B ning haqiqiy javobi boʻladi.",
+      photo: "Katakli qogʻozdagi qoʻlda yozilgan masala surati: x ni e ning x darajasiga koʻpaytmasidan dx boʻyicha integral.",
+      speed: "Oʻsha noutbukdagi Qwen3.5 4B: rasmni {s} soniyada oʻqidi, soʻng soniyasiga {t} token yozdi.",
     },
     privacy: { eyebrow: "Maxfiy" },
     end: { title: "Oʻz kompyuteringizda sinab koʻring." },
   },
 };
 
-// The founder's photo, shown beside the question; a marked slot until it is
-// chosen and its sitting is done.
-const PHOTO_SLOT = { en: "The photo goes here", ru: "Здесь будет фото", uz: "Bu yerda rasm boʻladi" };
+// Step 3: the founder's handwritten integral (shots/integral-photo.webp,
+// cropped and re-encoded so no metadata goes with it) and what Qwen3.5 4B
+// answered in the sitting of 24 October 2026, word for word, with the question
+// asked in each language (tools/step4-answers.json).
+const SITTING = JSON.parse(readFileSync(join(ROOT, "tools", "step4-answers.json"), "utf8")).answers;
+const LANG_NAMES = { en: "English", ru: "Русский", uz: "Oʻzbekcha" };
 
-// Step 3: the question asked in each language in the sitting, and the
-// answer Qwen3.5 4B gave, word for word. Null until the sitting.
-const ASKED = {
-  en: { name: "English", question: "Solve the problem in this picture and explain each step.", answer: null },
-  ru: { name: "Русский", question: "Реши задачу на этой картинке и объясни каждый шаг.", answer: null },
-  uz: { name: "Oʻzbekcha", question: "Bu rasmdagi masalani yeching va har bir qadamni tushuntiring.", answer: null },
-};
+// The few Markdown forms the answers use, shown as the app shows them:
+// headings, bullet lists, rules, quotes and bold. Every word stays as written.
+function rendered(text) {
+  const inline = (line) => esc(line).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+  const out = [];
+  let list = false;
+  for (const line of text.split("\n")) {
+    const item = /^- (.*)$/.exec(line);
+    if (!item && list) {
+      out.push("</ul>");
+      list = false;
+    }
+    if (item) {
+      if (!list) out.push("<ul>");
+      list = true;
+      out.push(`<li>${inline(item[1])}</li>`);
+    } else if (line === "---") out.push("<hr>");
+    else if (line.startsWith("### ")) out.push(`<h4>${inline(line.slice(4))}</h4>`);
+    else if (line.startsWith("> ")) out.push(`<blockquote>${inline(line.slice(2))}</blockquote>`);
+    else out.push(`<p>${inline(line)}</p>`);
+  }
+  if (list) out.push("</ul>");
+  return out.join("");
+}
+
+// "read 1106 in 16.9 s; wrote 282 at 25.1 a second" → the two figures.
+function speeds(cell) {
+  return { read: Number(/in ([\d.]+) s/.exec(cell)[1]), wrote: Number(/at ([\d.]+) a second/.exec(cell)[1]) };
+}
 
 function esc(s) {
   return String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
@@ -261,15 +289,16 @@ ${MODELS.map((m, i) => `          <li class="model${m.pick ? " is-pick" : ""}" s
           <h2 id="ask-title">${esc(st.ask.title)}</h2>
           <p class="body">${esc(st.ask.body)}</p>
           <div class="answer-tabs" role="group" aria-label="${esc(st.ask.tabs)}" data-tabs hidden>
-${LANGS.map((l) => `            <button type="button" class="chip" data-tab="${l.code}" aria-pressed="${l.code === lang.code}" lang="${l.code}">${esc(ASKED[l.code].name)}</button>`).join("\n")}
+${LANGS.map((l) => `            <button type="button" class="chip" data-tab="${l.code}" aria-pressed="${l.code === lang.code}" lang="${l.code}">${esc(LANG_NAMES[l.code])}</button>`).join("\n")}
           </div>
         </div>
         <div class="window">
           <div class="window-bar"><span>localSpace</span><span class="model-chip">Qwen3.5 4B</span></div>
 ${LANGS.map((l) => `          <div class="thread" data-answer="${l.code}" lang="${l.code}"${l.code === lang.code ? "" : " hidden"}>
-            <div class="msg msg-you"><span class="avatar" aria-hidden="true">A</span><div><div class="photo-slot">${esc(PHOTO_SLOT[lang.code])}</div><p>${esc(ASKED[l.code].question)}</p></div></div>
-            <div class="msg msg-model"><span class="avatar avatar-model" aria-hidden="true"></span><div>${ASKED[l.code].answer ? `<p class="answer">${esc(ASKED[l.code].answer)}</p>` : `<p class="placeholder">${esc(st.ask.placeholder)}</p>`}</div></div>
-          </div>`).join("\n")}
+            <div class="msg msg-you"><span class="avatar" aria-hidden="true">A</span><div><img class="photo" src="${r}shots/integral-photo.webp" width="880" height="524" alt="${esc(st.ask.photo)}" loading="lazy" decoding="async"><p>${esc(SITTING[l.code].question)}</p></div></div>
+            <div class="msg msg-model"><span class="avatar avatar-model" aria-hidden="true"></span><div class="answer">${rendered(SITTING[l.code].answer)}</div></div>
+          </div>
+          <p class="speed-line" data-answer="${l.code}"${l.code === lang.code ? "" : " hidden"}>${esc(st.ask.speed.replace("{s}", speeds(SITTING[l.code].speed).read.toLocaleString(lang.code)).replace("{t}", speeds(SITTING[l.code].speed).wrote.toLocaleString(lang.code)))}</p>`).join("\n")}
         </div>
       </div>
     </div>
