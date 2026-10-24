@@ -10,6 +10,9 @@ by accident. Newest first.
   end), built at `/story/` beside the live page until it replaces it. The
   look is calm and light, with the real app screens as cards; a dark version
   is kept for a later dark mode.
+- **The site has one palette, the app's default theme:** (a), indigo and
+  amber. The app lets people choose between three themes; the site shows
+  only the default, and its app screens are taken in it.
 - **The colours are the app's, palette (a), indigo and amber,** the same
   `--ls-*` names and values as the app's own set, in one block at the top of
   `story.css`. Buttons use `--ls-accent-fill` with `--ls-on-accent`; text and
