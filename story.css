@@ -24,23 +24,38 @@
 
 :root {
   color-scheme: light;
-  /* The palette: the app's tokens, to be replaced by the shared set.
-     Buttons use --ls-accent-fill; text and links use --ls-accent. */
-  --ls-page: #faf9f8;
+  /* The palette: (a) indigo and amber, shared with the app (light set,
+     from the product session's a-light.css). Buttons use --ls-accent-fill;
+     text and links use --ls-accent; --ls-highlight is only for
+     "Recommended". The dark set waits for a dark mode. */
+  --ls-page: #f8f8fb;
+  --ls-rail: #f0f0f6;
   --ls-surface: #ffffff;
-  --ls-ink: #1c1e20;
-  --ls-ink-soft: #43464a;
-  --ls-muted: #6b6e72;
-  --ls-line: #e6e4e1;
-  --ls-line-strong: #dcd9d5;
-  --ls-hover: #efedea;
-  --ls-accent: #1d7a55;
-  --ls-accent-fill: #1d7a55;
-  --ls-accent-strong: #155c40;
-  --ls-accent-soft: #eaf3ee;
-  --ls-accent-line: #c9e2d5;
+  --ls-surface-muted: #fafafd;
+  --ls-ink: #1a1b26;
+  --ls-ink-soft: #3d3f50;
+  --ls-muted: #5d6073;
+  --ls-faint: #8b8ea2;
+  --ls-line: #e3e3ec;
+  --ls-line-strong: #d3d3e0;
+  --ls-hover: #ebebf3;
+  --ls-accent: #4338ca;
+  --ls-accent-fill: #4338ca;
+  --ls-accent-strong: #3730a3;
+  --ls-accent-soft: #eceafb;
+  --ls-accent-line: #cfcbf4;
   --ls-on-accent: #ffffff;
-  --ls-shadow: rgba(28, 30, 32, 0.1);
+  --ls-highlight: #a35400;
+  --ls-highlight-fill: #f5a524;
+  --ls-highlight-soft: #fdf0d8;
+  --ls-on-highlight: #1a1b26;
+  --ls-ok: #1d7a4c;
+  --ls-ok-soft: #e5f4ec;
+  --ls-warn: #8a5a00;
+  --ls-warn-soft: #fdf3dc;
+  --ls-danger: #b3263e;
+  --ls-danger-soft: #fbe9ec;
+  --ls-shadow: rgba(26, 27, 38, 0.1);
 
   --font: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
   --gutter: 18px;

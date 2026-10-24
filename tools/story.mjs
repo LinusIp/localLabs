@@ -78,7 +78,7 @@ function page(lang) {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(t.title)}</title>
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#faf9f8">
+<meta name="theme-color" content="#f8f8fb">
 <link rel="icon" href="${r}favicon.svg" type="image/svg+xml">
 <link rel="preload" href="${r}fonts/figtree-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="${r}story.css">

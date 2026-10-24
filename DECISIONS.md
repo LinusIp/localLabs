@@ -3,6 +3,27 @@
 Why the page is the way it is, so that a later change does not undo a choice
 by accident. Newest first.
 
+## 2026-10-24: the scroll-story page, and the shared palette
+
+- **The new page tells the product in scroll steps** (hero; it reads your
+  computer; it picks the model; the card opens into the chat; privacy; the
+  end), built at `/story/` beside the live page until it replaces it. The
+  look is calm and light, with the real app screens as cards; a dark version
+  is kept for a later dark mode.
+- **The colours are the app's, palette (a), indigo and amber,** the same
+  `--ls-*` names and values as the app's own set, in one block at the top of
+  `story.css`. Buttons use `--ls-accent-fill` with `--ls-on-accent`; text and
+  links use `--ls-accent`; `--ls-accent-strong` is only a fill shade (in the
+  dark set it is too dark for text); amber is only for "Recommended".
+- **The app screens inside the cards are still the 0.2.0 green** until a
+  build with the new palette exists; they are retaken then, in one sitting.
+- **Motion has no library:** `story.js` sets one number per section as it
+  scrolls, and `story.css` turns it into the movement. With reduced motion
+  or no scripts nothing is pinned and every step is shown finished.
+- **The step with the chat answers one real picture in English, Russian and
+  Uzbek, switchable,** because no language comes first. The answers are
+  Qwen3.5 4B's, word for word, from one sitting.
+
 ## 2026-10-21: the examples retaken on Qwen3.5 4B
 
 - **The demo, the speed and the three screens come from localSpace
