@@ -74,6 +74,7 @@ const STEPS = {
       title: "Show it a photo. Ask in your language.",
       body: "One handwritten problem, answered in English, Russian and Uzbek, on the computer itself.",
       tabs: "Answer in",
+      uzNote: "The model wrote “integralsiz boʻlish”; the correct term is “boʻlaklab integrallash”. We have not changed the answer.",
       photo: "A photo of a handwritten problem on squared paper: the integral of x times e to the x, dx.",
       speed: "Qwen3.5 4B on the same laptop: it read the picture in {s} s, then wrote {t} tokens a second.",
     },
@@ -95,6 +96,7 @@ const STEPS = {
       title: "Покажите фото. Спросите на своём языке.",
       body: "Одна рукописная задача, решённая на английском, русском и узбекском — на самом компьютере.",
       tabs: "Ответ на",
+      uzNote: "Модель написала «integralsiz boʻlish», правильный термин — «boʻlaklab integrallash». Ответ мы не меняли.",
       photo: "Фото рукописной задачи на бумаге в клетку: интеграл от x, умноженного на e в степени x, по dx.",
       speed: "Qwen3.5 4B на том же ноутбуке: прочитала картинку за {s} с, потом писала {t} токена в секунду.",
     },
@@ -116,6 +118,7 @@ const STEPS = {
       title: "Rasm koʻrsating. Oʻz tilingizda soʻrang.",
       body: "Bitta qoʻlda yozilgan masala ingliz, rus va oʻzbek tillarida — kompyuterning oʻzida yechilgan.",
       tabs: "Javob tili",
+      uzNote: "Model «integralsiz boʻlish» deb yozdi, toʻgʻri atamasi «boʻlaklab integrallash». Javobni oʻzgartirmadik.",
       photo: "Katakli qogʻozdagi qoʻlda yozilgan masala surati: x ni e ning x darajasiga koʻpaytmasidan dx boʻyicha integral.",
       speed: "Oʻsha noutbukdagi Qwen3.5 4B: rasmni {s} soniyada oʻqidi, soʻng soniyasiga {t} token yozdi.",
     },
@@ -296,9 +299,10 @@ ${LANGS.map((l) => `            <button type="button" class="chip" data-tab="${l
           <div class="window-bar"><span>localSpace</span><span class="model-chip">Qwen3.5 4B</span></div>
 ${LANGS.map((l) => `          <div class="thread" data-answer="${l.code}" lang="${l.code}"${l.code === lang.code ? "" : " hidden"}>
             <div class="msg msg-you"><span class="avatar" aria-hidden="true">A</span><div><img class="photo" src="${r}shots/integral-photo.webp" width="880" height="524" alt="${esc(st.ask.photo)}" loading="lazy" decoding="async"><p>${esc(SITTING[l.code].question)}</p></div></div>
-            <div class="msg msg-model"><span class="avatar avatar-model" aria-hidden="true"></span><div class="answer">${rendered(SITTING[l.code].answer)}</div></div>
+            <div class="msg msg-model"><span class="avatar avatar-model" aria-hidden="true"></span><div><div class="answer">${rendered(SITTING[l.code].answer)}</div></div></div>
           </div>
-          <p class="speed-line" data-answer="${l.code}"${l.code === lang.code ? "" : " hidden"}>${esc(st.ask.speed.replace("{s}", speeds(SITTING[l.code].speed).read.toLocaleString(lang.code)).replace("{t}", speeds(SITTING[l.code].speed).wrote.toLocaleString(lang.code)))}</p>`).join("\n")}
+${l.code === "uz" ? `          <p class="model-note" data-answer="uz"${lang.code === "uz" ? "" : " hidden"}>${esc(st.ask.uzNote)}</p>
+` : ""}          <p class="speed-line" data-answer="${l.code}"${l.code === lang.code ? "" : " hidden"}>${esc(st.ask.speed.replace("{s}", speeds(SITTING[l.code].speed).read.toLocaleString(lang.code)).replace("{t}", speeds(SITTING[l.code].speed).wrote.toLocaleString(lang.code)))}</p>`).join("\n")}
         </div>
       </div>
     </div>

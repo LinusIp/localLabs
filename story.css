@@ -131,11 +131,11 @@ a { color: var(--ls-accent); }
   text-wrap: balance;
 }
 .lede { margin-top: 22px; max-width: 30em; font-size: clamp(18px, 1.5vw, 21px); color: var(--ls-ink-soft); }
-.ctas { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 12px; }
-.ctas .btn { flex: 1 1 100%; }
+.ctas { margin-top: 32px; display: flex; gap: 12px; }
+.ctas .btn { flex: 1 1 0; min-width: 0; padding: 8px 12px; white-space: normal; text-align: center; }
 .meta { margin-top: 14px; font-size: 14px; color: var(--ls-muted); }
 .tag { display: inline-flex; align-items: center; height: 22px; padding: 0 9px; border-radius: 999px; background: var(--ls-accent-soft); border: 1px solid var(--ls-accent-line); color: var(--ls-accent); font-size: 12.5px; font-weight: 600; vertical-align: 1px; }
-@media (min-width: 520px) { .ctas .btn { flex: 0 0 auto; } }
+@media (min-width: 520px) { .ctas .btn { flex: 0 0 auto; padding: 0 26px; white-space: nowrap; } }
 
 /* The stack: real screens from the preview build, as cards. */
 .stack { position: relative; aspect-ratio: 1080 / 925; max-width: 600px; width: 100%; justify-self: center; }
@@ -301,8 +301,9 @@ a { color: var(--ls-accent); }
 .answer ul { padding-left: 1.2em; }
 .answer hr { border: 0; border-top: 1px solid var(--ls-line); }
 .answer blockquote { padding-left: 12px; border-left: 3px solid var(--ls-accent-line); color: var(--ls-ink-soft); }
+.model-note { margin: 0; padding: 10px 18px; border-top: 1px solid var(--ls-line); background: var(--ls-highlight-soft); color: var(--ls-ink-soft); font-size: 14px; line-height: 1.5; }
 .speed-line { margin: 0; padding: 10px 18px 14px; border-top: 1px solid var(--ls-line); color: var(--ls-muted); font-size: 14px; }
-.speed-line[hidden] { display: none; }
+.speed-line[hidden], .model-note[hidden] { display: none; }
 .answer-tabs { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 8px; }
 .chip { min-height: 40px; padding: 0 16px; border-radius: 999px; border: 1.5px solid var(--ls-line-strong); background: var(--ls-surface); color: var(--ls-ink); font: 600 15px var(--font); cursor: pointer; }
 .chip[aria-pressed="true"] { background: var(--ls-accent-soft); border-color: var(--ls-accent-line); color: var(--ls-accent); }
